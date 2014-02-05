@@ -14,5 +14,8 @@ tutor: Rich FitzJohn
 * http://karthik.github.io/git_intro/
 
 1. [Why use git?](why.html)
+2. [Set-up and basic configuration](setup.html)
+3. [Getting started](basics.html)
+4. [Branching](branching.html)
 
 **Acknowledgements**: This material was adapted from ... and modified by ...
