@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Conclusions: what have we learnt
+title: "Conclusions: what have we learnt"
 tutor:
 ---
 
