@@ -117,7 +117,7 @@ Here's one returning a data frame, will use this data
 f <- function() {
 	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-FiveYearData.csv"
 	filename <- "gapminder-FiveYearData.csv"
-	if ( !file.exists(filename) )
+	if (!file.exists(filename))
     	download.file(url, filename, method = "curl")
     read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
 }
@@ -135,7 +135,7 @@ Understand better if it were named something informative:
 retrieve_data_gapminder1 <- function() {
 	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-FiveYearData.csv"
 	filename <- "gapminder-FiveYearData.csv"
-	if ( !file.exists(filename) )
+	if (!file.exists(filename))
     	download.file(url, filename, method = "curl")
     read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
 }
@@ -159,7 +159,7 @@ But you do need to know that function is working as it should.
 retrieve_data_gapminder2 <- function() {
 	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-2007.csv"
 	filename <- "gapminder-2007.csv"
-	if ( !file.exists(filename) )
+	if (!file.exists(filename))
     	download.file(url, filename, method = "curl")
     read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
 }
@@ -175,7 +175,7 @@ Can we make a single function that will work for both datasets?
 
 ```coffee
 retrieve_data_gapminder <- function(url,filename) {
-	if ( !file.exists(filename) )
+	if (!file.exists(filename))
     	download.file(url, filename, method = "curl")
     read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
 }
@@ -189,10 +189,10 @@ data1 <- retrieve_data_gapminder(url = "https://raw.github.com/nicercode/gapmind
  --> replace filename with default, give option for other file delimiters, header argument
 
 ```coffee
-retrieve_data_from_url <- function(url,filename =basename(url), sep=',', header=TRUE,...){
-	if ( !file.exists(filename) )
+retrieve_data_from_url <- function(url,filename =basename(url), sep=',', header=TRUE, ...){
+	if (!file.exists(filename))
     	download.file(url, filename, method = "curl")
-    read.table(filename, header=header, sep=sep,...)
+    read.table(filename, header=header, sep=sep, ...)
 }
 ```
 
@@ -250,9 +250,8 @@ new_data <- subset(data,i, select = c("year", "pop"))
 Now define as function
 
 ```coffee
-get_population <- function(data,country){
-	i <- data$country == country
-	subset(data,i, select = c("year", "pop"))
+get_population <- function(data, country) {
+  data[data$country == country, c("year", "pop")]
 }
 ```
 
@@ -261,6 +260,14 @@ get_population <- function(data,country){
 Yes: More readable, less code when using repeatedly --> Don't Repeat Yourself
 
 No function is too small.
+=======
+Yes: Your program becomes defined around the "what" and not the "how"
+
+```
+get_population <- function(data, country) {
+  dbAccess(data, paste("SELECT * from tblData WHERE country ==", country)
+}
+```
 
 **Qu: do we need to include data argument?**
 
@@ -283,7 +290,6 @@ Discuss scope.
 
 <blockquote class="twitter-tweet"><p>"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code</p>&mdash; Gustavo Rod. Baldera (@gbaldera) <a href="https://twitter.com/gbaldera/status/327063173721100288">April 24, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
 
 ## Exercises
 
