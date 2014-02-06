@@ -12,8 +12,6 @@ tutor: Daniel Falster
 2. Start to writing their own functions
  -->
 
-# Writing your own R functions
-
 Abstracting your code into many small functions is key for writing
 nice R code. In our experience, biologists are initially reluctant to
 use functions in their code. Where people do use functions, they don't
@@ -44,7 +42,7 @@ three key steps:
 2. Load the function into the R session,
 3. Use the function.
 
-### Defining a function
+## Defining a function
 
 Functions are defined by code with a specific format:
 
@@ -65,7 +63,7 @@ arguments. These can be any R object: numbers, strings, arrays, data
 frames, of even pointers to other functions; anything that is needed
 for the function.name function to run.
 
-**The ‘...’ argument**: The `...`, or ellipsis, element in the
+**The `...` argument**: The `...`, or ellipsis, element in the
 function definition allows for other arguments to be passed into the
 function, and passed onto to another function. This technique is often
 in plotting, but has uses in many other places.
@@ -84,6 +82,7 @@ anything, for example a function that makes a plot might not return
 anything, whereas a function that does a mathematical operation might
 return a number, or a list.
 
+
 **Some functions come with predefined arguments**
 
 Some arguments have default values specified, such as in the example below. Arguments without a default **must** have a value supplied
@@ -91,7 +90,7 @@ for the function to run. You do not need to provide a value for those
 arguments with a default, as the function will use the default value.
 
 ```coffee
-add.numbers <- function(a, b =2) {
+add.numbers <- function(a, b=2) {
     a + b
 }
 ```
@@ -148,10 +147,13 @@ Now easy to know what is happening when we run it
 data <- retrieve_data_gapminder1()
 ```
 
-**Qu: Do we need to know what is happening inside function to use it?**
+**Qu: Do we need to know how a function works to use it?**
+
+No, difference between *what* and *implementation*.
+
+But you do need to know that function is working as it should.
 
 **Qu: What if want to download another dataset?**
-
 
 ```coffee
 retrieve_data_gapminder2 <- function() {
@@ -183,7 +185,8 @@ retrieve_data_gapminder <- function(url,filename) {
 data1 <- retrieve_data_gapminder(url = "https://raw.github.com/nicercode/gapminder/master/data/gapminder-2007.csv", filename = "gapminder-2007.csv")
 ```
 
-**Further improvements - replace filename with default, give option for other file delimiters, header argument**
+**Further improvements:**
+ --> replace filename with default, give option for other file delimiters, header argument
 
 ```coffee
 retrieve_data_from_url <- function(url,filename =basename(url), sep=',', header=TRUE,...){
@@ -217,7 +220,7 @@ data1 <- retrieve_data_from_url(url, stringsAsFactors=FALSE)
 data2 <- retrieve_data_from_url(url, stringsAsFactors=TRUE)
 ```
 
-# Workflow for developing functions
+## Workflow for developing functions
 
 1. Identify what you want to achieve
 2. Code it up in global environment
@@ -253,35 +256,36 @@ get_population <- function(data,country){
 }
 ```
 
-**QU: Is this useful given it is only a one line function?**
+**Qu: Is this useful given it is only a one line function?**
 
-Yes: More readable, less code when using repeatedly --> DRY
+Yes: More readable, less code when using repeatedly --> Don't Repeat Yourself
 
-No function is too small --> ask Rich
+No function is too small.
 
-**QU: do we need to include data argument?**
+**Qu: do we need to include data argument?**
 
 Try without - does it still work?
+
 Discuss scope.
 
-# What makes for a good function?
+## What makes for a good function?
 
-### It's short
+**It's short**
 <blockquote class="twitter-tweet"><p>If you've written a function whose body is 2,996 lines of code, you're doing it wrong.</p>&mdash; M Butcher (@technosophos) <a href="https://twitter.com/technosophos/status/322392537983746049">April 11, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-### Performs a single operation
+**Performs a single operation**
 
 <blockquote class="twitter-tweet"><p>The reason for writing a function is not to reuse its code, but to name the operation it performs.</p>&mdash; Tim Ottinger (@tottinge) <a href="https://twitter.com/tottinge/status/293776089099153408">January 22, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-### Has an informative name and argument names
+**Has an informative name and argument names**
 
 <blockquote class="twitter-tweet"><p>"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code</p>&mdash; Gustavo Rod. Baldera (@gbaldera) <a href="https://twitter.com/gbaldera/status/327063173721100288">April 24, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 
-# Exercises
+## Exercises
 
 Using gap minder data set, make functions that
 
@@ -289,7 +293,7 @@ Using gap minder data set, make functions that
 2. Return a time series of year, life Expectancy, total GDP, population size for a given country
 3. Returns average life expectancy for entire population within a given continent
 
-# Concluding thoughts
+## Concluding thoughts
 
 This material written for coders with limited experience.  Program
 design is a bigger topic than could be covered in a whole course, and we
@@ -300,7 +304,7 @@ in future, but it is an essential tool.
 <blockquote class="twitter-tweet"><p>The more I write code, the more abstract it gets. And with more abstractions, the apps are easier to maintain. Been working for years...</p>&mdash; Justin Kimbrell (@justin_kimbrell) <a href="https://twitter.com/justin_kimbrell/status/329054399425019906">April 30, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-# Further reading
+## Further reading
 
 If you want to read more about function syntax, check out the following:
 
@@ -308,4 +312,5 @@ If you want to read more about function syntax, check out the following:
 - Our [intro to R guide to writing functions](http://nicercode.github.io/intro/writing-functions.html) with information for a total beginner
 - [Hadley Wickam's](https://twitter.com/hadleywickham) information on [functions for intermediate and advanced users](https://github.com/hadley/devtools/wiki/Functions).
 
-# Acknowledgements: This material was adapted from ... and modified by ...
+## Acknowledgements
+This material was developed by Daniel Falster and Rich FitzJohn.
