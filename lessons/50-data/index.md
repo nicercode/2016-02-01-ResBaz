@@ -100,27 +100,27 @@ data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 Now, what is we want to extra the list of countries by continent. So make a function to extract list of countries for a given continent
 
 ```coffee
-get_countries <- function(cont,mydata){unique(mydata[mydata$continent==cont,]$country)}
+get.countries <- function(cont,mydata){unique(mydata[mydata$continent==cont,]$country)}
 ````
 
 Now try for one continent:
 
 ```
-get_countries("Aisa", data)
+get.countries("Asia", data)
 ```
 
 Now we had better test it
 
 ```coffee
 library(testthat)
-expect_that(get_countries("Oceania", data), equals(c("Australia","New Zealand")))
+expect_that(get.countries("Oceania", data), equals(c("Australia","New Zealand")))
 ```
 
 Now apply to other continents
 
 ```
-get_countries("Africa", data)
-get_countries("Americas", data)
+get.countries("Africa", data)
+get.countries("Americas", data)
 ...
 ```
 
@@ -132,34 +132,34 @@ continents <- unique(data$continent)
 So now we can apply it to all continents:
 
 ```coffee
-countries <- lapply(continents, get_countries, data=data)
+countries <- lapply(continents, get.countries, data=data)
 names(countries) <- continents
 ```
 
 So what if we ant to extract the total population of each continent in 2007. Again, let's make a function that does it for a single continent
 
 ```coffee
-get_population <- function(cont,year, mydata){sum(mydata[mydata$continent==cont & mydata$year==year,]$pop)}
+get.population <- function(cont,year, mydata){sum(mydata[mydata$continent==cont & mydata$year==year,]$pop)}
 ```
 
 Now we had better test it
 
 ```coffee
 Asia2007 <- subset(data, continent=="Asia" & year ==2007)
-expect_that(get_population("Asia", 2007, data), equals(sum(Asia2007$pop)))
+expect_that(get.population("Asia", 2007, data), equals(sum(Asia2007$pop)))
 ```
 
 Finally, apply to entire dataset
 
 ```coffee
-populations <- sapply(continents, get_population, data=data, year=2007)
+populations <- sapply(continents, get.population, data=data, year=2007)
 ```
 
 **Your challenge**: Now find number of countries in each continent
 
 ```coffee
-get_n_countries <- function(cont,data){length(unique(data[data$continent==cont,]$country))}
-sapply(continents, get_n_countries, data=data)
+get.n.countries <- function(cont,data){length(unique(data[data$continent==cont,]$country))}
+sapply(continents, get.n.countries, data=data)
 ```
 
 OR you could use earlier result and feed that into lapply
@@ -262,7 +262,7 @@ function has many benefits:
 Write a function which makes a plot.
 
 ```coffee
-plot_pop_growth <- function(continent,  data){
+plot.pop.growth <- function(continent,  data){
   plot(c(1950, 2010),c(1,1), ylim=c(0.5,4), xlab="year", ylab="Population size", lty="dashed", type='l', main =continent, las=1)
   countries <- unique(data[data$continent ==continent,]$country)
   popSize <- lapply(countries, function(x) data[data$country == x, c("year", "pop")])
@@ -272,18 +272,20 @@ plot_pop_growth <- function(continent,  data){
 }
 ```
 
+
+
 Can now apply this to different continents
 
 ```coffee
-plot_pop_growth("Asia", data)
-plot_pop_growth("Oceania", data)
+plot.pop.growth("Asia", data)
+plot.pop.growth("Oceania", data)
 ```
 
 And finally embed in loop
 
 ```coffee
 for( cont in unique(data$continent))
-  plot_pop_growth(cont, data)
+  plot.pop.growth(cont, data)
 ```
 
 Now you have a go, see if you can modify function above, to instead of plotting population growth, plots growth in gdp.
@@ -293,7 +295,7 @@ Now you have a go, see if you can modify function above, to instead of plotting 
 Suggests two different functions wasteful, so why don't we generalise to take any variable
 
 ```coffee
-plot_growth <- function(continent, data, var="pop"){
+plot.growth <- function(continent, data, var="pop"){
   plot(c(1950, 2010),c(1,1), ylim=c(0.5,4), xlab="year", ylab=var, lty="dashed", type='l', main =continent, las=1)
   countries <- unique(data[data$continent ==continent,]$country)
   popSize <- lapply(countries, function(x) data[data$country == x, c("year", var)])
@@ -305,7 +307,7 @@ plot_growth <- function(continent, data, var="pop"){
 
 ```coffee
 for( cont in unique(data$continent))
-  plot_growth(cont, data, "pop")
+  plot.growth(cont, data, "pop")
 ```
 
 ## The split--apply--combine pattern
