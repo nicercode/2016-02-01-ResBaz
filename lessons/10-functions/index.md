@@ -24,30 +24,65 @@ functions. But what about writing your own?
 Writing functions is simple. Paste the following code into your console
 
 ```coffee
-sum.of.squares <- function(x,y) {
-  x^2 + y^2
+f <- function(x)
+  x
+```
+
+This function takes `x` as an argument and returns `x` as a value.
+
+The "body" of a function can be wrapped in curly brackets:
+
+```
+f <- function(x) {
+  x
 }
 ```
 
-You have now created a function called `sum.of.squares` which requires
-two arguments and returns the sum of the squares of these
-arguments. Since you ran the code through the console, the function is
-now available, like any of the other built-in functions within
-R. Running `sum.of.squares(3,4)` will give you the answer `25`.
+or these can be omitted for functions that are just one line long (this is a matter of taste, though there are wars between people who believe that the curly brackets belong in different places).
 
-The procedure for writing any other functions is similar, involving
-three key steps:
+The body of the function can contain any valid R expression:
+
+```
+double <- function(x) {
+  2 * x
+}
+```
+
+Whatever is used as an *argument* to this  function becomes `x` within the body of the function.  So
+
+```
+z <- 10
+double(z)
+```
+
+returns 20.  It does not matter at all if an `x` exists in the global environment
+
+```
+z <- 10
+x <- 1
+double(z) # 20
+x         # still 1
+```
+
+This is one of the main uses of functions: they isolate different variables within your program.  This makes it easier to think about what you are doing.
+
+The procedure for using functions in your work involves three key steps:
 
 1. Define the function,
 2. Load the function into the R session,
 3. Use the function.
 
-## Defining a function
+## (see exercises-1.R here for more material)
 
-Functions are defined by code with a specific format:
+```
+dat <- read.csv("data/gapminder-FiveYearData.csv",
+                stringsAsFactors=FALSE)
+```
+
+## Defining a function (more theory)
 
 ```coffee
-function.name <- function(arg1, arg2, arg3, ...) {
+function.name <- function(arg1, arg2, arg3) {
   newVar <- sin(arg1) + sin(arg2)  # do Some Useful Stuff
   newVar / arg3   # return value
 }
@@ -62,11 +97,6 @@ called `formals`. You can write a function with any number of
 arguments. These can be any R object: numbers, strings, arrays, data
 frames, of even pointers to other functions; anything that is needed
 for the function.name function to run.
-
-**The `...` argument**: The `...`, or ellipsis, element in the
-function definition allows for other arguments to be passed into the
-function, and passed onto to another function. This technique is often
-in plotting, but has uses in many other places.
 
 **Function body**: The function code between the within the `{}`
 brackets is run every time the function is called. This code might be
@@ -83,25 +113,23 @@ anything, whereas a function that does a mathematical operation might
 return a number, or a list.
 
 
-**Some functions come with predefined arguments**
+**Some functions come with default arguments**
 
-Some arguments have default values specified, such as in the example below. Arguments without a default **must** have a value supplied
+Some arguments have default values specified, such as in the example below. Arguments without a default generally need to have a value supplied
 for the function to run. You do not need to provide a value for those
 arguments with a default, as the function will use the default value.
 
 ```coffee
 add.numbers <- function(a, b=2) {
-    a + b
+  a + b
 }
 ```
 
 **R functions are objects just like anything else**
 
 * can be deleted or written over
-* By default, R function arguments are lazy - they're only evaluated if they're actually used
 * Can be passed as arguments to other functions or returned
   from other functions.
-* You can define a function inside of another function.
 
 ```coffee
 add.functions <- function(x, f1, f2) {
@@ -109,103 +137,13 @@ add.functions <- function(x, f1, f2) {
 }
 ```
 
-**R Functions can return anything, not just a number**
-
-Here's one returning a data frame, will use this data
-
-```coffee
-f <- function() {
-	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-FiveYearData.csv"
-	filename <- "gapminder-FiveYearData.csv"
-	if (!file.exists(filename))
-    	download.file(url, filename, method = "curl")
-    read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
-}
-```
-
-```coffee
-x <- f()
-```
-
-**Qu: Who understands what's happening in this function?**
-
-Understand better if it were named something informative:
-
-```coffee
-retrieve_data_gapminder1 <- function() {
-	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-FiveYearData.csv"
-	filename <- "gapminder-FiveYearData.csv"
-	if (!file.exists(filename))
-    	download.file(url, filename, method = "curl")
-    read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
-}
-```
-
-Now easy to know what is happening when we run it
-
-```coffee
-data <- retrieve_data_gapminder1()
-```
+# (see exercises-2.R here)
 
 **Qu: Do we need to know how a function works to use it?**
 
 No, difference between *what* and *implementation*.
 
 But you do need to know that function is working as it should.
-
-**Qu: What if want to download another dataset?**
-
-```coffee
-retrieve_data_gapminder2 <- function() {
-	url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-2007.csv"
-	filename <- "gapminder-2007.csv"
-	if (!file.exists(filename))
-    	download.file(url, filename, method = "curl")
-    read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
-}
-```
-
-```coffee
-data <- retrieve_data_gapminder2()
-```
-
-**Qu: What is similar and different about the two functions?**
-
-Can we make a single function that will work for both datasets?
-
-```coffee
-retrieve_data_gapminder <- function(url,filename) {
-	if (!file.exists(filename))
-    	download.file(url, filename, method = "curl")
-    read.csv(filename, header=TRUE, stringsAsFactors=FALSE)
-}
-```
-
-```coffee
-data1 <- retrieve_data_gapminder(url = "https://raw.github.com/nicercode/gapminder/master/data/gapminder-2007.csv", filename = "gapminder-2007.csv")
-```
-
-**Further improvements:**
- --> replace filename with default, give option for other file delimiters, header argument
-
-```coffee
-retrieve_data_from_url <- function(url,filename =basename(url), sep=',', header=TRUE, ...){
-	if (!file.exists(filename))
-    	download.file(url, filename, method = "curl")
-    read.table(filename, header=header, sep=sep, ...)
-}
-```
-
-Now have a generic function that can be used to load data from any delimited text file stored at any url.
-
-e.g.
-```coffee
-data <- retrieve_data_from_url("http://inundata.org/gapminderDataFiveYear.txt", sep='\t')
-```
-
-```
-file.remove("gapminderDataFiveYear.txt")
-```
 
 **A little more on the ellipsis argument**
 
@@ -235,22 +173,21 @@ Return data of year vs population growth for a given country.
 First develop in main window
 
 ```coffee
-url <- "https://raw.github.com/nicercode/gapminder/master/data/gapminder-FiveYearData.csv"
-data <- retrieve_data_from_url(url, stringsAsFactors=FALSE)
+dat <- read.csv("data/gapminder-FiveYearData.csv",
+                stringsAsFactors=FALSE)
 
-i <- data$country == "Australia"
+i <- dat$country == "Australia"
 
 country <- "Australia"
-i <- data$country == country
-new_data <- data[,i]
-new_data <- subset(data,i)
-new_data <- subset(data,i, select = c("year", "pop"))
+i <- dat$country == country
+dat.au <- dat[i,]
+dat.au <- dat[i,c("year", "pop")]
 ```
 
 Now define as function
 
 ```coffee
-get_population <- function(data, country) {
+get.population <- function(data, country) {
   data[data$country == country, c("year", "pop")]
 }
 ```
@@ -264,7 +201,7 @@ No function is too small.
 Yes: Your program becomes defined around the "what" and not the "how"
 
 ```
-get_population <- function(data, country) {
+get.population <- function(data, country) {
   dbAccess(data, paste("SELECT * from tblData WHERE country ==", country)
 }
 ```
