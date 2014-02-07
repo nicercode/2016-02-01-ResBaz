@@ -305,7 +305,7 @@ plot_growth <- function(continent, data, var="pop"){
 
 ```coffee
 for( cont in unique(data$continent))
-  plot_pop_growth(cont, data, "pop")
+  plot_growth(cont, data, "pop")
 ```
 
 ## The split--apply--combine pattern
