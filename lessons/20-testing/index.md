@@ -5,6 +5,16 @@ title: Testing your code
 tutor: Rich FitzJohn
 ---
 
+http://programmers.stackexchange.com/a/147080
+
+> Unless you are going to write code without testing it, you are always going to incur the cost of testing.
+
+> The difference between having unit tests and not having them is the difference between the cost of writing the test and the cost of running it compared to the cost of testing by hand.
+
+> If the cost of writing a unit test is 2 minutes and the cost of running the unit test is practically 0, but the cost of manually testing the code is 1 minute, then you break even when you have run the test twice.
+
+
+
 Testing is often introduced as a last-minute thing, but most scientists who write code do an informal version of testing as they develop.
 
 Software testing is a process by which one or more expected behaviours and results from a piece of software are exercised and confirmed. Well chosen tests will confirm expected code behaviour for the extreme boundaries of the input domains, output ranges, parametric combinations, and other behavioural edge cases.
