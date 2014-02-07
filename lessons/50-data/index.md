@@ -174,7 +174,7 @@ extra step here to name output, also use sapply to simplify reasult into vetcor
 nCountries <- data.frame(continents, ncountries = sapply(countries, length))
 ```
 
-This last example highlights a strneght of lapply, it's great for building analysis pipelines, where you want to repeat a series of steps on a large number of similar objects.  The way to do this is to
+This last example highlights a strength of lapply, it's great for building analysis pipelines, where you want to repeat a series of steps on a large number of similar objects.  The way to do this is to
 have a series of lapply statements, with the output of one providing the input to another.
 
 ```coffee
@@ -185,6 +185,33 @@ second.step <- lapply(first.step, next.function)
 The challenge is to identify the parts of your analysis that stay the same and
 those that differ for each call of the function. The trick to using `lapply` is
 to recognise that only one item can differ between different function calls.
+
+## The split--apply--combine pattern
+
+By now you may have recognised that most operations that involve
+looping are instances of the *split-apply-combine* strategy (this term
+and idea comes from the prolific [Hadley Wickham](http://had.co.nz/),
+who coined the term in [this
+paper](http://vita.had.co.nz/papers/plyr.html)).  You start with a
+bunch of data.  Then you then **Split** it up into many smaller
+datasets, **Apply** a function to each piece, and finally **Combine**
+the results back together.
+
+![Split apply combine](https://github.com/swcarpentry/2013-10-09-canberra/raw/master/03-data-manipulation/splitapply.png)
+
+Some data arrives already in its pieces - e.g. output files from from
+a leaf scanner or temperature machine. Your job is then to analyse
+each bit, and put them together into a larger data set.
+
+Sometimes the combine phase means making a new data frame, other times it might
+mean something more abstract, like combining a bunch of plots in a report.
+
+Either way, the challenge for you is to identify the pieces that remain the same between different runs of your function, then structure your analysis around that.
+
+## Split, apply, combine with the Dplyr package
+
+  - group_by, arrange, summarise, mutate
+
 
 ## For loops
 
@@ -259,16 +286,26 @@ function has many benefits:
 
 ### Examples
 
-Write a function which makes a plot.
+Write a function which makes a plot.  use function from previous section:
+
+```
+relative_growth_rate <- function(t, x){
+  if(any(sort(t) != t))
+    stop("time must be sorted")
+  c(diff(x)/diff(t), NA) / x
+}
+```
+
+
+Now make a plot
 
 ```coffee
-plot.pop.growth <- function(continent,  data){
-  plot(c(1950, 2010),c(1,1), ylim=c(0.5,4), xlab="year", ylab="Population size", lty="dashed", type='l', main =continent, las=1)
-  countries <- unique(data[data$continent ==continent,]$country)
-  popSize <- lapply(countries, function(x) data[data$country == x, c("year", "pop")])
-  names(popSize) <- countries
-  for(country in countries)
-    points(popSize[[country]]$year, popSize[[country]]$pop/popSize[[country]]$pop[1], type='l')
+plot.pop.growth <- function(continent, data){
+  plot(c(1950, 2010),c(1,1), ylim=c(-0.05,0.1), xlab="year", ylab="Growth rate", lty="dashed", type='l', main =continent, las=1)
+  for(thiscountry in unique(data[data$continent ==continent,]$country)){
+    data.sub <- filter(data,country==thiscountry)
+    points(data.sub$year, relative_growth_rate(data.sub$year,data.sub$pop), type='l')
+  }
 }
 ```
 
@@ -295,13 +332,12 @@ Now you have a go, see if you can modify function above, to instead of plotting 
 Suggests two different functions wasteful, so why don't we generalise to take any variable
 
 ```coffee
-plot.growth <- function(continent, data, var="pop"){
-  plot(c(1950, 2010),c(1,1), ylim=c(0.5,4), xlab="year", ylab=var, lty="dashed", type='l', main =continent, las=1)
-  countries <- unique(data[data$continent ==continent,]$country)
-  popSize <- lapply(countries, function(x) data[data$country == x, c("year", var)])
-  names(popSize) <- countries
-  for(country in countries)
-    points(popSize[[country]][["year"]], popSize[[country]][[var]]/popSize[[country]][[var]][1], type='l')
+plot.growth <- function(continent, data, var){
+  plot(c(1950, 2010),c(1,1), ylim=c(-0.05,0.1), xlab="year", ylab=paste("Growth rate,", var), lty="dashed", type='l', main =continent, las=1)
+  for(thiscountry in unique(data[data$continent ==continent,]$country)){
+    data.sub <- filter(data,country==thiscountry)
+    points(data.sub[["year"]], relative_growth_rate(data.sub[["year"]],data.sub[[var]]), type='l')
+  }
 }
 ```
 
@@ -310,41 +346,19 @@ for( cont in unique(data$continent))
   plot.growth(cont, data, "pop")
 ```
 
-## The split--apply--combine pattern
+```coffee
+for( cont in unique(data$continent))
+  plot.growth(cont, data, "lifeExp")
+```
 
-By now you may have recognised that most operations that involve
-looping are instances of the *split-apply-combine* strategy (this term
-and idea comes from the prolific [Hadley Wickham](http://had.co.nz/),
-who coined the term in [this
-paper](http://vita.had.co.nz/papers/plyr.html)).  You start with a
-bunch of data.  Then you then **Split** it up into many smaller
-datasets, **Apply** a function to each piece, and finally **Combine**
-the results back together.
+**Exercise:** Now try making that plot of gdppercap vs lifeExp from earlier, plot for different years by embedding within a function
 
-![Split apply combine](https://github.com/swcarpentry/2013-10-09-canberra/raw/master/03-data-manipulation/splitapply.png)
-
-Some data arrives already in its pieces - e.g. output files from from
-a leaf scanner or temperature machine. Your job is then to analyse
-each bit, and put them together into a larger data set.
-
-Sometimes the combine phase means making a new data frame, other times it might
-mean something more abstract, like combining a bunch of plots in a report.
-
-Either way, the challenge for you is to identify the pieces that remain the same between different runs of your function, then structure your analysis around that.
-
-## Split, apply, combine with the Dplyr package
-
-	- group_by, arrange, summarise, mutate
+..........
 
 ## Extras: How to debug a function
 
 Demonstrate how to use `browser()` function, explain about scope
 
-4. Interlude: a bit about plotting
-	- code always ugly.
-	- use functions to make do nice figures
-	- Example: blankplot, label, world map, to.pdf
-	- Showcase: nice plots we have made
 
 ## Wrap up - Principles of writing nice code (in R)
 
@@ -412,4 +426,3 @@ particular output.
 ## Acknowledgements
 
 This material was adapted from ... and modified by ...
-
