@@ -296,7 +296,7 @@ Suggests two different functions wasteful, so why don't we generalise to take an
 plot_growth <- function(continent, data, var="pop"){
   plot(c(1950, 2010),c(1,1), ylim=c(0.5,4), xlab="year", ylab=var, lty="dashed", type='l', main =continent, las=1)
   countries <- unique(data[data$continent ==continent,]$country)
-  popSize <- lapply(countries, function(x) data[data$country == x, c("year", "pop")])
+  popSize <- lapply(countries, function(x) data[data$country == x, c("year", var)])
   names(popSize) <- countries
   for(country in countries)
     points(popSize[[country]][["year"]], popSize[[country]][[var]]/popSize[[country]][[var]][1], type='l')
