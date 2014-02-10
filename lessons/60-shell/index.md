@@ -9,53 +9,36 @@ Title: The Unix Shell
 
 ## Download and open lesson material:
 
-We will spend most of our time learning about the basics of the shell
-by manipulating some experimental data. To get the data for this test, you will need internet access. Just enter the
-commands:
+We will spend most of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Just enter the commands:
 
-	cd
-    git clone https://github.com/{{page.github_username}}/{{page.bootcamp_slug}}.git
+```
+cd
+git clone https://github.com/nicercode/gapminder.git
+```
 
 Followed by:
 
-    cd {{page.bootcamp_slug}}
+```
+cd gapminder
+```
 
-These 2 commands will grab all of the data needed for this workshop from the
-internet. We will talk about `git` later in the workshop.
+These 2 commands will grab all of the data needed for this workshop from the internet. We will talk about `git` later in the workshop.
 
 ## What is the shell and how do I access it?
 
-The *shell* is a program that presents a command line interface
-which allows you to control your computer using commands entered
-with a keyboard instead of controlling graphical user interfaces
-(GUIs) with a mouse/keyboard combination.
+The *shell* is a program that presents a command line interface which allows you to control your computer using commands entered with a keyboard instead of controlling graphical user interfaces (GUIs) with a mouse/keyboard combination.
 
-A *terminal* is a program you run that gives you access to the
-shell. There are many different terminal programs that vary across
-operating systems.
+A *terminal* is a program you run that gives you access to the shell. There are many different terminal programs that vary across operating systems.
 	 
 Some important reasons to learn about the shell: 
 
-1.  It is very common to encounter the shell and
-    command-line-interfaces in scientific computing, so you will
-    probably have to learn it eventually 
+1.  It is very common to encounter the shell and command-line-interfaces in scientific computing, so you will probably have to learn it eventually;
 
-2.  The shell is a really powerful way of interacting with your
-    computer. GUIs and the shell are complementary - by knowing both
-    you will greatly expand the range of tasks you can accomplish with
-    your computer. You will also be able to perform many tasks more
-    efficiently.
-    
-3.	My reasons: access remote servers, repeatability, documentation
+2.  The shell is a really powerful way of interacting with your computer. GUIs and the shell are complementary - by knowing both you will greatly expand the range of tasks you can accomplish with your computer. You will also be able to perform many tasks more efficiently;
 
-The shell is just a program and there are many different shell
-programs that have been developed. The most common shell (and the one
-we will use) is called the Bourne-Again SHell (bash). Even if bash is
-not the default shell, it is usually installed on most systems and can be
-started by typing `bash` in the terminal. Many commands, especially a
-lot of the basic ones, work across the various shells but many things
-are different. I recommend sticking with bash and learning it well.
-([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29))
+3.	My reasons: access remote servers, repeatability, documentation.
+
+The shell is just a program and there are many different shell programs that have been developed. The most common shell (and the one we will use) is called the Bourne-Again SHell (bash). Even if bash is not the default shell, it is usually installed on most systems and can be started by typing `bash` in the terminal. Many commands, especially a lot of the basic ones, work across the various shells but many things are different. I recommend sticking with bash and learning it well. ([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29))
 
 ## Let's get started
 
@@ -154,7 +137,7 @@ cd /usr
 pwd
 ```
 
-We're now in the `usr/` directory. Now change to `bin`/
+We're now in the `usr/` directory. Now change to `bin/`
 
 ```
 cd bin
@@ -191,10 +174,11 @@ or even multiple directories at once
 ls ~ /usr
 ```
 
-Now we can start adding more options. Recall that commands can take both options (with a `-`) followed by arguments. Let's add some to ls. 
+Now we can start adding more options. Recall that commands can take both options (with a `-`) followed by arguments. Let's add some to `ls`. 
 
 ```
-cd boot-camps
+cd
+cd gapminder
 ls -l
 SCI-5052:gapminder barneche$ ls -l
 total 48
@@ -209,7 +193,7 @@ drwxr-xr-x  3 barneche  staff   102  7 Feb 15:56 figures
 -rw-r--r--  1 barneche  staff  3150  7 Feb 10:55 rich-for-functions.R
 ```
 
-By adding “-l” to the command, we changed the output to the long format.
+By adding `-l` to the command, we changed the output to the long format.
 
 Now let's add more options
 
@@ -287,8 +271,7 @@ ls --help
 
 And you also find the manual pages at many different sites online, e.g. [http://linuxmanpages.com/]().
     
-Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of
-these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
+Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
 
 **Creating an empty file**
 
@@ -442,7 +425,7 @@ The shell typically stores your most recent commands. View them by using the up 
 
 example: `!500` will execute line 500 from your history.
 
-**Short exercise 01**
+## Short exercise 01
 
 Do each of the following using a single `ls` command without navigating to a different directory.
 
@@ -593,9 +576,9 @@ which git
 
 ## Short exercise 2
 
-cd into a folder under `shell` called `messy-folder`.  
-Then create three directories: `data`, `notes`, `images`.  
-Then move the respective file types into their matching folder type.Go back to the main shell folder.
+In your `gapminder` folder, go to the directory called `messy-folder`.  
+Then create three sub-directories: `data`, `notes`, `images`.  
+Then move the respective file types into their matching folder type. Go back to the main shell folder.
 Rename (it's the same as mv command) `messy-folder` to `clean-folder`.
 
 Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
