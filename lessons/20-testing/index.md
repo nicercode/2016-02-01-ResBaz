@@ -5,15 +5,11 @@ title: Testing your code
 tutor: Rich FitzJohn
 ---
 
-http://programmers.stackexchange.com/a/147080
-
 > Unless you are going to write code without testing it, you are always going to incur the cost of testing.
 
 > The difference between having unit tests and not having them is the difference between the cost of writing the test and the cost of running it compared to the cost of testing by hand.
 
-> If the cost of writing a unit test is 2 minutes and the cost of running the unit test is practically 0, but the cost of manually testing the code is 1 minute, then you break even when you have run the test twice.
-
-
+> If the cost of writing a unit test is 2 minutes and the cost of running the unit test is practically 0, but the cost of manually testing the code is 1 minute, then you break even when you have run the test twice. ([source](http://programmers.stackexchange.com/a/147080))
 
 Testing is often introduced as a last-minute thing, but most scientists who write code do an informal version of testing as they develop.
 
@@ -69,9 +65,9 @@ library(testthat)
 In the previous section we created a function that linearly rescales values.
 
 ```coffee
-linear.rescale <- function(x, r.out, r.in=range(x)) {
-  p <- (x - r.in[[1]]) / diff(r.in)
-  r.out[[1]] + p * diff(r.out)
+rescale <- function(x, r.out) {
+  p <- (x - min(x)) / (max(x) - min(x))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
 }
 ```
 
@@ -82,14 +78,16 @@ It also means that if we depend on it, we are free to change how it is implement
 Behaving correctly
 
 * Range of rescaled data should be `r.out`
-* r.out and r.in identical (no change)
+* If `r.out` is the same as the range of the input data (`range(x)`), the data should be unchanged.
 
 Corner cases:
 
-* no x values given, no r.in given
-* r.out or r.in not sorted
-* r.out or r.in not of length 2
-* deal correctly with negative values
+* no x values given, or empty vector of values
+* no r.out given
+* r.out not of length 2
+* r.out not sorted
+* Does the function deal correctly with negative values?
+* missing values in x
 
 We already ran through some of these when developing the function the first time.
 
@@ -99,12 +97,14 @@ x <- rnorm(20)
 
 ```coffee 
 r.out <- c(0.1, 1.4)
-range(linear.rescale(x, r.out)) == r.out
+range(rescale(x, r.out)) == r.out
 ```
 
 ```coffee
-expect_that(range(linear.rescale(x, r.out)), equals(r.out))
+expect_that(range(rescale(x, r.out)), equals(r.out))
 ```
+
+Note that this does not produce output!  It will only produce output if the test fails, in which case it will appear as an error.  Alternatively, when running non-interactively, we'll see indications that individual tests have passed.
 
 That is the idea.  There are some issues around where to store the tests, but that's not hard to sort out.
 
@@ -212,18 +212,33 @@ This entire suite of tests can also be shortened.
 | expect_that(x, gives_warning(y)) |  expect_warning(x, y) |
 | expect_that(x, throws_error(y)) |  expect_error(x, y) |
 
+# See exercises.R here for more examples
+
+# Where to store things
+
+* Functions go in a script file that can be sourced (say `functions.R`).
+* Tests go in a file begining with `test-` (e.g., `test-rescale.R`).
+* At the top of the testing file, source your functions file ane load `testthat`
+* From within R, you can now do
+
+```
+library(testthat)
+test_dir(".")
+```
+
+Storing things in different directories ends up being the long-term bet, but you can run into pathname issues here.
 
 What if `r.out` is not sorted?
 
 ```
 r.out <- rev(r.out)
-plot(x, linear.rescale(x, r.out))
+plot(x, rescale(x, r.out))
 ```
 
 So, decide -- either disallow reversed ranges in the function or treat this as a feature.
 
 ```coffee
-linear.rescale <- function(x, r.out, r.in=range(x)) {
+rescale <- function(x, r.out, r.in=range(x)) {
   if (diff(r.in) <= 0) # or !is.unsorted(r.in)
     stop("r.in must be increasing")
   p <- (x - r.in[[1]]) / diff(r.in)

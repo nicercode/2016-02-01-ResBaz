@@ -1,44 +1,98 @@
-## Here's the functions from before:
-linear.rescale <- function(x, r.out, r.in=range(x)) {
-  if (length(r.out) != 2 || length(r.in) != 2)
-    stop("r.in and r.out must be length 2")
-  if (diff(r.in) <= 0)
-    stop("r.in must be increasing")
-  p <- (x - r.in[[1]]) / diff(r.in)
-  r.out[[1]] + p * diff(r.out)
-}
-
 library(testthat)
+
+## Here's the function from before:
+rescale <- function(x, r.out) {
+  p <- (x - min(x)) / (max(x) - min(x))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
+}
 
 test_that("Rescale gives expected range", {
   x <- rnorm(20)
   r.out <- sort(runif(2))
-  expect_that(range(linear.rescale(x, r.out)), equals(r.out))
-  expect_that(range(linear.rescale(x, rev(r.out))), equals(r.out))
-  expect_that(linear.rescale(x, rev(r.out)),
-              equals(sum(r.out) - linear.rescale(x, r.out)))
-  expect_that(linear.rescale(x, r.out, r.out), equals(x))
+  ## Range is expected:
+  expect_that(range(rescale(x, r.out)), equals(r.out))
+  ## Rescaling onto same range does not change the data:
+  expect_that(rescale(x, range(x)), equals(x))
+
+  ## Rescaling onto a reversed range works
+  expect_that(range(rescale(x, rev(r.out))), equals(r.out))
+  ## And the output is what was expected:
+  expect_that(rescale(x, rev(r.out)),
+              equals(sum(r.out) - rescale(x, r.out)))
 })
 
+## Defensive programming: this is what we'd like to happen:
 test_that("Bad inputs for r.out", {
   x <- rnorm(20)
-  expect_that(linear.rescale(x, numeric(0)),  throws_error())
-  expect_that(linear.rescale(x, 1),           throws_error())
-  expect_that(linear.rescale(x, 1:3),         throws_error())
-  expect_that(linear.rescale(x, c("a", "b")), throws_error())
+  expect_that(rescale(x, numeric(0)),  throws_error())
+  expect_that(rescale(x, 1),           throws_error())
+  expect_that(rescale(x, 1:3),         throws_error())
+  expect_that(rescale(x, c("a", "b")), throws_error())
 
-  expect_that(linear.rescale(x, c(1, NA)),
+  expect_that(rescale(x, c(1, NA)),
               equals(rep(NA_real_, length(x))))
 })
 
-test_that("Bad inputs for r.in", {
+## But we'll need to harden the function a bit:
+rescale <- function(x, r.out) {
+  if (length(r.out) != 2)
+    stop("Expected r.out to be length 2")
+  p <- (x - min(x)) / (max(x) - min(x))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
+}
+
+## Or:
+library(assertthat)
+rescale <- function(x, r.out) {
+  assert_that(length(r.out) == 2)
+  p <- (x - min(x)) / (max(x) - min(x))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
+}
+
+## NA values in the input:
+test_that("Rescale gives expected range", {
   x <- rnorm(20)
+  x[4] <- NA
   r.out <- sort(runif(2))
-  expect_that(linear.rescale(x, r.out, numeric(0)),  throws_error())
-  expect_that(linear.rescale(x, r.out, 1),           throws_error())
-  expect_that(linear.rescale(x, r.out, 1:3),         throws_error())
-  expect_that(linear.rescale(x, r.out, c("a", "b")), throws_error())
+  ## Range is expected:
+  expect_that(range(rescale(x, r.out)), equals(r.out))
+  ## Rescaling onto same range does not change the data:
+  expect_that(rescale(x, range(x)), equals(x))
+
+  ## Rescaling onto a reversed range works
+  expect_that(range(rescale(x, rev(r.out))), equals(r.out))
+  ## And the output is what was expected:
+  expect_that(rescale(x, rev(r.out)),
+              equals(sum(r.out) - rescale(x, r.out)))
 })
+
+## More tweaks to the function:
+rescale <- function(x, r.out) {
+  assert_that(length(r.out) == 2)
+  xr <- range(x, na.rm=TRUE)
+  p <- (x - min(xr)) / (max(xr) - min(xr))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
+}
+
+test_that("Rescale gives expected range", {
+  x <- rnorm(20)
+  x[4] <- NA
+  r.out <- sort(runif(2))
+  ## Range is expected:
+  expect_that(range(rescale(x, r.out), na.rm=TRUE), equals(r.out))
+  ## Rescaling onto same range does not change the data:
+  expect_that(rescale(x, range(x, na.rm=TRUE)), equals(x))
+
+  ## Rescaling onto a reversed range works
+  expect_that(range(rescale(x, rev(r.out)), na.rm=TRUE), equals(r.out))
+  ## And the output is what was expected:
+  expect_that(rescale(x, rev(r.out)),
+              equals(sum(r.out) - rescale(x, r.out)))
+})
+
+## What about cases where 
+
+
 
 ## Rename
 
