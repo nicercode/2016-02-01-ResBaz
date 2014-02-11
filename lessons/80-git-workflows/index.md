@@ -74,7 +74,17 @@ git checkout -b new_idea
 
 **Disadvantages:**
 
-* Extra things to keep track of
-
+* Extra things to keep track of.
 
 **Acknowledgements**: This material was adapted from ... and modified by ...
+
+# The pull request model
+
+This is basically orthogonal to the branch model, but works well for big groups where you don't trust people to randomly write to your repository.
+
+* They *fork* your repository (on github)
+* They *clone* the **forked** repository (onto their computer)
+* They make a bunch of changes (on their computer)
+* They *push* to the **forked** reposotory (on github)
+* Then they send you a pull request (via github) that will invite you to merge their changes.  You get to see the changes, comment on them, etc.  You can pull down **their forked**  repository onto your computer to run things, poke about, etc.
+* When you're happy you click a button and github does the merge for you.  Then just re-fetch/re-pull **your** repository (onto your computer).
