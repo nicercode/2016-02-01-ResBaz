@@ -48,7 +48,7 @@ My Terminal looks like this:
 
 ![](shell_prompt.png)
 
-Yours might looks different (these can be easily customized). Usually includes something like `username@machinename`, followed by the current working directory (more about that soon) and a $ sign
+Yours might look different (these can be easily customized). Usually includes something like `username@machinename`, followed by the current working directory (more about that soon) and a $ sign
 
 ## Entering commands into the shell
 
@@ -100,11 +100,11 @@ Three really imporant commands:
 * `cd` *Change directory*. Give it options for where to take you.  
 * `ls` *Short for list*. List all the files and folders in your current location.  
 
-Most operating systems have a hierarchical directory structure. The very top is called the `root directory`. Directories are often called "folders" because of how they are represented in GUIs. Directories are just listings of files. They can contain other files or (sub) directories.
+Most operating systems have a hierarchical directory structure. The very top is called the *root* or *home* directory. Directories are often called "folders" because of how they are represented in GUIs. Directories are just listings of files. They can contain other files or (sub) directories.
 
 ```
 $ pwd
-/Users/karthik
+/Users/barneche
 ```
 
 Note that I'm in my *home* directory. Whenever you start up a terminal, you will start in the home directory. Every user has their own home directory where they have full access to do whatever they want. For example, my user ID is `barneche`, the `pwd` command tells us that we are in the `/Users/barneche` directory. This is the home directory for the `barneche` user. Yours should (hopefully) look different.
@@ -126,7 +126,7 @@ cd ~
 
 Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/barneche` and I can get there two ways:
 
-`cd /Users/barneche` OR `cd ~`.
+`cd /Users/barneche` OR `cd ~` OR `cd`.
 
 **Full versus relative paths**
 
@@ -151,7 +151,7 @@ cd /usr/bin
 
 from **anywhere**.
 
-Tip: Just plain `cd` with no options should take you back home. Try it. `cd` to some place else and type in `cd` again.
+Remember: Just plain `cd` with no options should take you back home. Try it. `cd` to some place else and type in `cd` again.
 
 **List all the files in this directory**
 
@@ -207,13 +207,13 @@ Similarly you can try the following:
 
 | Option | What it does |
 | ------ | ----------- |
-| -a | List all files even those that are hidden. Files starting with a `.` are considered hidden |
-| -d | Only directories | 
-| -F | All a trailing slash to help identify folders | 
-| -h | Make file sizes human readable | 
-| -l | Long format | 
-| -S | Sort by file size | 
-| -t | Sort by modification time | 
+| -a  | List all files even those that are hidden. Files starting with a `.` are considered hidden |
+| -d  | Only directories | 
+| -F  | All a trailing slash to help identify folders | 
+| -l  | Long format | 
+| -lh | Make file sizes human readable | 
+| -S  | Sort by file size | 
+| -t  | Sort by modification time | 
 
 Try some of these. Do you see any new files that we have not discussed before? You can even combine several of these options in a single command.
 
@@ -242,11 +242,13 @@ drwxr-xr-x  3 barneche  staff   102  7 Feb 15:56 figures
 * Date an time the file was last modified  
 * Name of file.  
 
-ONe last argument for the function `ls` now.
+One last argument for the function `ls` now.
 
 ```
 $ ls -F
-Applications/    Documents/   Dropbox/     Library/     Music/       Public/      Desktop/     Downloads/         Movies/      Pictures/  
+R/    		 data/			 executable.sh*	   messy-folder/
+README.md	 dplyr.R		 figures/		   repeating.R
+analysis.R	 executable.R*   gapminder.Rproj   rich-for-functions.R
 ```
 
 The `-F` flag tells the computer to list the files in a way that shows their file type. There are (probably) several items in your home directory, notice that many have a slash at the end. This tells us that all of these items are directories as opposed to files. If a file has an asterisk at the end, it is *executable*.
@@ -278,16 +280,14 @@ Programs that are run from the shell can get extremely complicated. To see an ex
 Lets create an empty file using the `touch` command. Enter the command:
 
 ```
-$ touch testfile.txt
+$ touch testfile
 ```
 
 Then list the contents of the directory again using `ls`. You should see that a new entry, called `testfile`, exists. It does not have a slash at the end, showing that it is not a directory. The `touch` command just creates an empty file.
 
-Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls --color` instead of `ls`. Now your directories, files, and executables will have different colors.
+Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls --color` or `ls -G` instead of `ls`. Now your directories, files, and executables will have different colors.
 
-You can also use the command `ls -l` to see whether items in a directory are files or directories. `ls -l` gives a lot more information too, such as the size of the file and information about the owner. If the entry is a directory, then the first letter will be a "d". The fifth column shows you the size of the entries in bytes. Notice that `testfile` has a size of zero.
-
-Now, let's get rid of `testfile`. To remove a file, just enter the command:
+Now if you use the command `ls -l` you will notice that `testfile` has a size of zero. OK then, let's get rid of `testfile`. To remove a file, just enter the command:
 
 ```
 $ rm -i testfile 
@@ -326,7 +326,7 @@ file Location.md
 Location.md: ASCII English text
 ```
 
-Examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter to keep scrolling down and the `q` key to quit. 
+Examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit. 
 
 **Quick exercise 02**
 
@@ -361,7 +361,7 @@ prints the contents of the `/Users/barneche/gapminder/`. You can chain these tog
 ls ../../
 ```
 
-prints the contents of `/Users/barneche` which is your home directory. Finally, the special directory `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls /Users/barneche` all do exactly the same thing. These shortcuts are not necessary, they are provided for your convenience.
+prints the contents of `/Users/barneche` which is my home directory. Finally, the special directory `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls /Users/barneche` all do exactly the same thing. These shortcuts are not necessary, they are provided for your convenience.
 
 **Tab completion**
 
@@ -369,16 +369,16 @@ Bash and most other shell programs have tab completion. This means that you can 
 
 ```
 cd
-cd 2013<tab>
+cd gap<tab>
 ```
 
 What just happened?
 
-Try pressing `s`, then hitting tab?
+Try pressing `d`, then hitting tab?
 
-When you hit the first `tab`, nothing happens. The reason is that there are multiple directories in the home directory which start with `s`. Thus, the shell does not know which one to fill in. When you hit `tab` again, the shell will list the possible choices.
+When you hit the first `tab`, nothing happens. The reason is that there are multiple files and/or directories in the gapminder directory which start with `d`. Thus, the shell does not know which one to fill in. When you hit `tab` again, the shell will list the possible choices.
 
-Tab completion can also fill in the names of programs. For example, enter `e<tab><tab>`. You will see the name of every program that starts with an e. One of those is echo. If you enter `ech<tab>`` you will see that `tab` completion works.
+Tab completion can also fill in the names of programs. For example, type `e<tab><tab>`. You will see the name of every program that starts with an e. One of those is echo. If you enter `ech<tab>`` you will see that `tab` completion works.
 
 **Wildcards**
 
@@ -419,12 +419,6 @@ $ ls 3901.txt 7901.txt 9901.txt
 ```
 are exactly identical. The `ls` command cannot tell the difference between these two things.
 
-**Command history**
-
-The shell typically stores your most recent commands. View them by using the up and down arrow keys.  Typing in `history` is a great way to get a full list. Execute any (especially long commands) by referencing it with a `!`.
-
-example: `!500` will execute line 500 from your history.
-
 ## Short exercise 01
 
 Do each of the following using a single `ls` command without navigating to a different directory.
@@ -464,7 +458,7 @@ See the `man` command to get help on options you can use with these commands.
 
 Remove files with `rm`
 
-***Warning: The shell does not have a recycling bin. So any file removed with `rm` is gone forever. Use with caution.***
+***Warning: The shell does not have a recycling bin. So any file removed with `rm` is gone forever. Use with caution.Remeber the -i argument***
 
 ## Let's try out some of the commands above
 
@@ -473,16 +467,19 @@ Next create a temporary directory.
 
 
 ```
+cd
 mkdir scratchpad
 cd scratchpad
 ```
 
-Make a few directories
+Make a few directories inside `scratchpad`
 
 ```
 mkdir dir1 dir2 dir3  
-cp /etc/passwd .
+cp ../gapminder/R/*.R .
 ```
+
+What did just happened?
 
 ```
 ls -l
@@ -493,18 +490,17 @@ You can also create an entire directory structure with a single call. e.g.
 ```
 mkdir temp
 cd temp
-mkdir -p project/{data,R,inst/{doc,tests,manuscript},src}
+mkdir -p project/{R,data,output/{data,figures},doc}
 ```
 This will create a project called root with the following structure:
 
 ```
-├── R
-├── data
-├── inst
-│   ├── doc
-│   ├── manuscript
-│   └── tests
-└── src
+├── R/
+├── data/
+├── output/
+│   ├── data/
+│   ├── figures/
+└── doc/
 ```
 
 Create lots of subdirectories at once using brace expansions.
@@ -534,28 +530,31 @@ The down arrow takes your forwards in the command history.
 
 ^-C will cancel the command you are writing, and give you a fresh prompt.
 
-^-R will do a reverse-search through your command history.  This
-is very useful.
+^-R will do a reverse-search through your command history. This is very useful.
 
-You can also review your recent commands with the `history` command.  Just enter:
+You can also review your recent commands with the `history` command. Just enter:
 
-    history
+```
+history
+```
 
-to see a numbered list of recent commands, including this just issues
-`history` command.  You can reuse one of these commands directly by
-referring to the number of that command.
+to see a numbered list of recent commands, including this just issues `history` command.  You can reuse one of these commands directly by referring to the number of that command.
 
 If your history looked like this:
 
-    259  ls *!
-    260  ls boot-camp
-    261  git add .
+```
+259  cd
+260  ls gapminder
+261  history
+```
 
 then you could repeat command #260 by simply entering:
 
-    !260
+```
+!260
+```
 
-(that's an exclamation mark).
+(that's an exclamation mark, or `bang`).
 
 
 
