@@ -4,6 +4,7 @@ root: ../..
 github_username: nicercode
 bootcamp_slug: gapminder
 Title: The Unix Shell
+tutor: Diego Barneche
 ---
 **Acknowledgements: Based on material by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak. Edited by Diego Barneche**
 
