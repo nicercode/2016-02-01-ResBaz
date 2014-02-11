@@ -34,7 +34,7 @@ One of the distinguishing and great features about git is that the repo contains
 
 ## What goes in my repository? 
 
-You should establish a new repo for each project you are working on. As we [discussed previously](http://nicercode.github.io/blog/2013-04-05-projects/)) the project folder should contain everything related to a particular project, including inputs (data, images, notes), analysis scripts and outputs (figures, tables.) The content of your project will evolve over time and this will be tracked within the git repo.
+You should establish a new repo for each project you are working on. Your project folder should contain everything related to a particular project, including inputs (data, images, notes), analysis scripts and outputs (figures, tables.) The content of your project will evolve over time and this will be tracked within the git repo.
 
 But not all of your project folder contents will be stored within the git system. As a general guide, we suggest you make a folder called outputs. This is where you should save figures and other outputs from your analysis scripts. These outputs do not need to be tracked, as they can be reproduced at any time by rerunning the script. Later we'll show you how to `ignore` certain files in git.
 
@@ -59,7 +59,7 @@ Anecdotal evidence suggests experienced programmers break up their project into 
 - it's easier to recover if something goes wrong
 - you have a greater sense of achievement. 
 
-In the [software carpentry](http://software-carpentry.org/) module we attended, Greg Wilson suggested we aim for work cycle of about 1 hr.
+If you're trucking along for hours (or days) at a time without committing anything, chances are you're changing too much.  A good way of thinking about version control is like the ability to press "undo" when writing.  You don't know when you'll need to go back (and most of the time you don't need to).  But when you do, you don't want to have to have to choose between two vastly different copies of a document.  With programming it's even more important; multiple files that depend on each other are changing.
  
 You should aim to only commit once a piece of code works, so that you
 leave your code in working order:  commits serve as checkpoints where individual files or an entire project can be safely reverted to when necessary.
@@ -76,13 +76,12 @@ git init
 which will print something like
 
 ```
-Initialized empty Git repository in /Users/rich/Desktop/vc/.git/
+Initialized empty Git repository in /path/to/your/repository/.git/
 ```
 
-I have deleted the `.git` directory in the `vc` project, and
-re-initialised an empty git repository there.
+The `.git` directory is a *hidden directory*.  You can view it with `ls -a`, but it will be hidden with just `ls`.  This store some configuration settings, but you'll rarely need to edit them directly.  It also stores all the previous versions of your working directory (but does it in all sorts of clever and efficient ways).
 
-# The add-commit cycle, revisited
+# The add-commit cycle
 
 We will use a few commands.
 
@@ -102,9 +101,7 @@ The first is `git status`.  This tells you the status of all the files in your p
 nothing added to commit but untracked files present (use "git add" to track)
 ```
 
-The command `git add` does (essentially) the same thing as clicking
-the "Staged" checkbox in Rstudio:
-
+The command `git add` indicates which files we want to add:
 ```
 git add script.R
 git status
@@ -210,7 +207,9 @@ Confused?  Don't worry.  All you need to know is that the hash identifies your *
 
 ## What changed?
 
-The other thing that we could do in RStudio is see the lines of code that changed.  This is incredibly useful, and once you start thinking with version control you'll constantly look to see what has changed.  The confidence that you can always go back is what makes version control empowering.
+There are lots of ways of seeing what has changed.  Probably too many, and the options get overwhelming.  Later on, we'll look at a website that makes that a lot easier for previous versions.
+
+Being able to see what has changed is incredibly useful, and once you start thinking with version control you'll constantly look to see what has changed.  The confidence that you can always go back is what makes version control empowering.
 
 Suppose we change the `script.R` file again:
 
