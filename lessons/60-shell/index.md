@@ -490,9 +490,9 @@ You can also create an entire directory structure with a single call. e.g.
 ```
 mkdir temp
 cd temp
-mkdir -p project/{R,data,output/{data,figures},doc}
+mkdir -p test_project/{R,data,output/{data,figures},doc}
 ```
-This will create a project called root with the following structure:
+This will create a project called `test_project` with the following structure:
 
 ```
 ├── R/
