@@ -14,7 +14,7 @@ bunch of data.  Then you then **Split** it up into many smaller
 datasets, **Apply** a function to each piece, and finally **Combine**
 the results back together.
 
-![Split apply combine](https://github.com/swcarpentry/2013-10-09-canberra/raw/master/03-data-manipulation/splitapply.png)
+![Split apply combine](splitapply.png)
 
 Some data arrives already in its pieces - e.g. output files from from
 a leaf scanner or temperature machine. Your job is then to analyse
@@ -51,24 +51,22 @@ function performs:
 
 The functions are named based on which type of object they expect as input
 ([a]rray, [l]ist or [d]ata frame) and which type of data structure should be
-returned as output.
+returned as output. Note here that plyr's use of "array" is different to R's, an array in ply can include a vector or matrix.
 
 This gives us 9 core functions **ply.  There are an additional three functions
 which will only perform the split and apply steps, and not any combine step.
 They're named by their input data type and represent null output by a `_` (see
 table)
 
-|INPUT\OUTPUT|Array|Data frame|List|Discarded|
-|------------|:---:|:--------:|:--:|--------:|
-|Array|aaply|adply|alply|a_ply|
-|Data frame|daply|ddply|dlply|d_ply|
-|list|laply|ldply|llply|l_ply|
+![Full apply suite](full_apply_suite.png)
+
 
 ### Understanding xxply
 
 There are 3 key inputs to xxply:
 
-* .data - data frame to be processed • .variables - splitting variables
+* .data - data frame to be processed
+* .variables - splitting variables
 * .fun - function called on each piece
 * The first letter of the function name gives the input type and the second gives the output type.
 
