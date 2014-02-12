@@ -495,12 +495,12 @@ mkdir -p test_project/{R,data,output/{data,figures},doc}
 This will create a project called `test_project` with the following structure:
 
 ```
-├── R/
-├── data/
-├── output/
-│   ├── data/
-│   ├── figures/
-└── doc/
+* R/
+* data/
+    * output/
+    * data/
+* figures/
+* doc/
 ```
 
 Create lots of subdirectories at once using brace expansions.
