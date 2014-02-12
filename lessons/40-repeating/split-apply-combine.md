@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Repeating things -- The split--apply--combine pattern and `plyr` package
+title: Repeating things -- The split-apply-combine pattern and `plyr` package
 tutor: Daniel Falster
 ---
 
@@ -14,8 +14,6 @@ bunch of data.  Then you then **Split** it up into many smaller
 datasets, **Apply** a function to each piece, and finally **Combine**
 the results back together.
 
-![Split apply combine](splitapply.png)
-
 Some data arrives already in its pieces - e.g. output files from from
 a leaf scanner or temperature machine. Your job is then to analyse
 each bit, and put them together into a larger data set.
@@ -24,6 +22,8 @@ Sometimes the combine phase means making a new data frame, other times it might
 mean something more abstract, like combining a bunch of plots in a report.
 
 Either way, the challenge for you is to identify the pieces that remain the same between different runs of your function, then structure your analysis around that.
+
+![Split apply combine](splitapply.png)
 
 ## R's built-in library
 
@@ -41,6 +41,13 @@ through them in whatever order you like.
 While R's built in function do work, we're going to introduce you to another method for repeating things using the package [**plyr**](http://had.co.nz/plyr/). plyr is an R Package for Split-Apply-Combine workflows.  Its functional
 programming model encourages writing reusable functions which can be called
 across varied datasets and frees you from needing to manage for loop indices.
+
+You can load plyr as
+
+```coffee
+install.packages("plyr")
+library(plyr)
+```
 
 plyr has functions for operating on `lists`, `data.frames` and `arrays`.  Each
 function performs:
@@ -63,12 +70,16 @@ table)
 
 ### Understanding xxply
 
-There are 3 key inputs to xxply:
+Each of the xxply functions (`daply`, `ddply`, `llply`, `laply`,...) has the same structure and has 4 key features and structure:
 
-* .data - data frame to be processed
-* .variables - splitting variables
-* .fun - function called on each piece
+```coffee
+xxply(.data, .variables, .fun)
+```
+
 * The first letter of the function name gives the input type and the second gives the output type.
+* .data - gives the data object to be processed
+* .variables - identifies the splitting variables
+* .fun - gives the function to be called on each piece
 
 ### Example
 
@@ -108,7 +119,7 @@ Americas.n <- get.n.countries(data.new)
 n.countries <- c(Africa.n, Asia.n, Americas.n, Europe.n, Oceania.n)
 ```
 
-Alternatively, might use a for loop
+Alternatively, you might use a `for` loop
 
 ```coffee
 n.countries <- integer(0)
@@ -118,13 +129,13 @@ for(cont in unique(data$continent)){
 }
 ```
 
-So here's the equivalent in plyr:
+Now here's the equivalent in plyr:
 
 ```coffee
 daply(data, .(continent), get.n.countries)
 ```
 
-Isn't that nice?
+Isn't that nice? A single line of code, easy to read.
 
 Let's look at what happened here
 
@@ -133,15 +144,24 @@ Let's look at what happened here
 - the second argument indicates our split criteria `continent`
 - the third is the function to apply `get.n.countries`
 
-Instead of `daply` we could also use `ddply` of `dlply` --> you need to decide which is most useful to you.
+Instead of `daply` we could also use `ddply` of `dlply`. Which to use? You need to decide which type of output is most useful to you, i.e. a `list`, `array` or `data.frame`
 
-Also, can define function in place as an anonymous function:
+It's also possible to define the function in place as an [anonymous function](http://adv-r.had.co.nz/Functional-programming.html):
 
 ```coffee
 ddply(data, .(continent), function(x) length(unique(x$country)) )
 ```
 
-Now let's try another. Want to sum total population in a dataframe.
+Finally, there's several ways we can represent the split argument:
+
+- using the funky plyr notation: `daply(data, .(continent), get.n.countries)`
+- as a character: `daply(data, "continent", get.n.countries)`
+- or as a formula: `daply(data, ~continent, get.n.countries)`.
+```
+
+**Now let's try another example**.
+
+We want to sum total population in a dataframe.
 
 First write the function:
 
@@ -153,124 +173,96 @@ Then apply it using `daply`, `ddply` and `dlaply`:
 ```coffee
 ddply(data, .(continent), get.total.pop)
 ```
-Anyone notice a problem here? Total population of world is way bigger than actually is. So need to add `year` to our list of splitting criteria
+Anyone notice a problem here? Yes, the total population of the world is about 10 times to big because it's repeated every 5 years. So we need to add `year` to our list of splitting criteria
 
 ```coffee
 ddply(data, .(continent, year), get.total.pop)
 ```
 
-Next we want the maximum `gdpPercap` on each continent. You try this one yourselves.
+**You try**
+Next we want the maximum `gdpPercap` on each continent.
 
 ```coffee
 ddply(data, .(continent, year), max(gdpPercap))
 ```
 
+### An example returning a list
 
-a list of countries by continent. So want to use --> `dlply`. Have a go yourselves
+Sometimes we want to return something that doesn't fit into a dataframe or vector; in that case you should return a list. so in this case we'll want to use `dlply` because we're putting a dataframe in and getting a list out.
+
+See if you can write a function that given a dataframe, returns a vector of countries.
+
+```coffee
+get.countries <- function(x) unique(x$country))
+```
+
+Now let's apply it to the whole dataset
+
+```coffee
+get.countries(data)
+```
+
+And then to each continent using `dlpy`
 
 ```coffee
 countries <- dlply(data, .(continent), function(x) unique(x$country))
 ```
 
+### Feed data into model one-by-one returning fits to a list of models
+Ok, now it gets really run.
 
+In each year, we want to fit a model for each continent on the relationship between life expectancy and gdp per capita (as we did in functions and for section).
 
-
-```coffee
-get.countries <- function(cont,mydata){unique(mydata[mydata$continent==cont,]$country)}
-````
-
-Now try for one continent:
-
-```
-get.countries("Asia", data)
-```
-
-Now apply to other continents
-
-```
-get.countries("Africa", data)
-get.countries("Americas", data)
-...
-```
-
-
-Notice that there is only one thing varying per call -- the continent name. so now we're in a perfect position to call llply. First, let's make a variable `continents`. We have to pass in another argument, the `data` variable, but that stays the same.
-
-So now we can apply it to all continents:
+First, see if you can write a function that given a data frame `x` fits a model to data
 
 ```coffee
-countries <- dlply(data, .(continent), function(x) unique(x$country))
-
-tot.pop <- ddply(data, .(continent), function(x) sum(x$pop))
-tot.pop <- ddply(data, .(continent, year), function(x) sum(x$pop))
-```
-
-So what if we ant to extract the total population of each continent in 2007. Again, let's make a function that does it for a single continent
-
-```coffee
-get.population <- function(cont,year, mydata){sum(mydata[mydata$continent==cont & mydata$year==year,]$pop)}
-```
-
-Finally, apply to entire dataset
-
-```coffee
-populations <- sapply(continents, get.population, data=data, year=2007)
-```
-
-**Your challenge**: Now find number of countries in each continent
-
-```coffee
-get.n.countries <- function(cont,data){length(unique(data[data$continent==cont,]$country))}
-sapply(continents, get.n.countries, data=data)
-```
-
-OR you could use earlier result and feed that into lapply
-
-```coffee
-lapply(countries, length)
-```
-
-extra step here to name output, also use sapply to simplify result into vector
-
-```coffee
-nCountries <- data.frame(continents, ncountries = sapply(countries, length))
-```
-
-This last example highlights a strength of lapply, it's great for building analysis pipelines, where you want to repeat a series of steps on a large number of similar objects.  The way to do this is to
-have a series of lapply statements, with the output of one providing the input to another.
-
-```coffee
-first.step <- lapply(X, first.function)
-second.step <- lapply(first.step, next.function)
-```
-
-The challenge is to identify the parts of your analysis that stay the same and
-those that differ for each call of the function. The trick to using `lapply` is
-to recognise that only one item can differ between different function calls.
-
-
-
-# Feed data into model one-by-one returning models to a list of models.
-models <- dlply(experiment, .(site), model)
-```
-
-Now we have a list of models, we want to write another plyr expression to
-operate on that list of models and return a data frame of the slope, intercept
-and R-squared values.
-
-```{r}
-coefs <- function(model) {
-    c(coef(model), rsquare = summary(model)$r.squared)
+model <- function(x){
+  lm(lifeExp ~ log10(gdpPercap), data=x)
 }
-ldply(models, coefs)
 ```
 
+Now let's try it on a subset of data
+
+```coffee
+data.1982.asia <- data[data$year==1982 & data$continent =="Asia" ,]
+fit <- model(data.1982.asia)
+```
+Ok, so let's apply it to all continents in year 1982
+
+```coffee
+data.1982 <- data[data$year==1982,]
+fits.1982 <- dlply(data.1982, .(continent), model)
+```
+
+The output `fits.1982` is a list of fitted models, with same structure as `fit`. We can use the `coef` function to extract coefficients of a model :
+
+```coffee
+coef(fit)
+coefs.1982 <- ldply(fits.1982, coef, function(x) summary(x)$r.squared)
+names(coefs.1982)[2:3] <- c('intercept', 'slope')
+```
+
+You probably want the R2 too right?
+```coffee
+ldply(fits.1982, function(x) summary(x)$r.squared)
+```
+
+### Summarise
+
+Like `ddply`, `summarise` can be used to create a new data frame from another data frame. It's particularly useful when you want multiple outputs.
+
+For summaries of the whole dataset you can call summarise directly:
+
+```coffee
+summarise(data, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+```
+
+But if you want to split by groups, need to combine with `ddply`:
+
+```coffee
+ddply(data, .(continent, year), summarise, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+```
 
 ## Acknowledgements
 
-This material was adapted from
-
-- Karthik's intro
-- Hadley's material
-- other
-... and modified by ...
+This material was adapted from material prepared by Karthik Ram and Hadley Wickam, modified by Daniel Falster.
