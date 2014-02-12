@@ -10,7 +10,7 @@ tutor: Diego Barneche
 
 ## Download and open lesson material:
 
-We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile ([here]([https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip])) and unzip it inside your project data folder that we set up together yesterday.
+We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile ([here](https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip)) and unzip it inside your project data folder that we set up together yesterday.
 
 ## What is the shell and how do I access it?
 
