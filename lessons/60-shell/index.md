@@ -79,7 +79,13 @@ e.g. ls -l ~/
 ```
 
 ```
-command -option arguments
+command -letter 
+```
+
+**OR**
+
+```
+command --word 
 ```
 
 ## Knowing where you are and seeing whats around
