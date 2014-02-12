@@ -138,6 +138,13 @@ a[0, -2]
 #      A C
 ```
 
+When you extract a single column or row, you get a vector out.  This is not always what is wanted, so the `drop` argument comes in useful
+
+```
+a[1,,drop=FALSE]
+a[1,]
+```
+
 # Subsetting data frames
 
 ```coffee
@@ -176,6 +183,13 @@ df[, "x"]
 # [1] 1 2 3
 ```
 
+If you use the single bracket subset you get a new dataframe out.  If you use `$` or `[[` you get the contents of that column.  If the column does not exist, `$` will return `NULL` and `[[` will return an error.
 
-
-
+```
+v <- "x"
+df[[v]]
+df$v # this does not work!
+df$x # this does
+df$not_in_here # NULL
+df[["not_in_here"]] # error
+```

@@ -10,6 +10,7 @@ For the first half-hour (or perhaps a little longer), we'll go over some of the 
 1. [Data structures](data-structures.html)
 2. [Subsetting](subsetting.html)
 3. [Vectorisation](vectorisation.html)
+4. [Exercises](exercises.html)
 
 Not covered, but may be useful (written by others!)
 

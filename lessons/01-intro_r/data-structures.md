@@ -66,6 +66,7 @@ Various examples:
 ```
 x <- c(1, 2, 3)
 ```
+
 x is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add a `L` at the end.
 
 ```
@@ -78,10 +79,12 @@ You can also have logical vectors.
 y <- c(TRUE, TRUE, FALSE, FALSE)
 ```
 
+(Don't use `T` and `F`!)
+
 Finally you can have character vectors:
 
 ```coffee
-z <- c("Alec", "Dan", "Rob", "Karthik")
+z <- c("Alec", "Dan", "Rob", "Rich")
 ```
 
 **Examine your vector**
@@ -106,8 +109,7 @@ More examples of vectors
 
 ```
 x <- c(0.5, 0.7)
-x <-c (TRUE, FALSE)
-x <- c(T,F)
+x <- c(TRUE, FALSE)
 x <- c("a", "b", "c", "d", "e")
 x <- 9:100
 x <- c(i+0i, 2+4i)
@@ -151,7 +153,7 @@ Each object has an attribute. Attributes can be part of an object of R. These in
 For a vector, `length(vector_name)` is just the total number of elements.
 
 
-**What happens when you mix types?**
+**Vectors may only have one type**
 
 R will create a resulting vector that is the least common denominator. The coercion will move towards the one that's easiest to coerce to.
 
@@ -163,13 +165,16 @@ xx <- c(TRUE, 2)
 xx <- c("a", TRUE)
 ```
 
-This is called implicit coercion.  You can also coerce vectors explicitly using the `as.<class_name>`. Example
+This is called implicit coercion.
+
+The coersion rule goes `logical` -> `integer` -> `numeric` -> `complex` -> `character`.
+
+You can also coerce vectors explicitly using the `as.<class_name>`. Example
 
 ```
 as.numeric()
 as.character()
 ```
-
 
 When you coerce an existing numeric vector with `as.numeric()`, it does nothing.
 
@@ -266,7 +271,7 @@ What is the class of `x[1]`?
 how about `x[[1]]`?
 
 ```
-xlist <- list(a = "Karthik Ram", b = 1:10, data = head(iris))
+xlist <- list(a = "Rich FitzJohn", b = 1:10, data = head(iris))
 ```
 
 what is the length of this object?
@@ -433,7 +438,7 @@ check for both.
 
 NA values have a class. So you can have both an integer NA and a missing character NA.
 
-Nan is also NA. But not the other way around.
+NaN is also NA. But not the other way around.
 
 ```
 x <- c(1,2, NA, 4, 5)
@@ -451,6 +456,16 @@ x <- c(1,2, NA, NaN, 4, 5)
 
 `is.na(x)` shows 2 TRUE.
 `is.nan(x)` shows 1 TRUE
+
+Missing values are very important in R, but can be very frustrating for new users.
+
+What do these do?  What should they do?
+```
+1 == NA
+NA == NA
+```
+
+How can we do that sort of comparison?
 
 # Diagnostic functions in R
 
@@ -476,3 +491,5 @@ class(x)
 mode(x)
 str(x)
 ```
+
+This material adapted from Karthik Ram's Canberra workshop.
