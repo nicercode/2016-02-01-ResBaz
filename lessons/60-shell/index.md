@@ -126,6 +126,8 @@ Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/b
 
 `cd /Users/barneche` OR `cd ~` OR `cd`.
 
+You might be wondering why there is a **standard** shortcut for the home directory. It provides a convenient way of giving a point of access which is independent of machine and username. For instance, `~/Downloads` should work for all Mac users.
+
 **Full versus relative paths**
 
 In the command line you can use both full paths (much like someone's street address with post code) OR offer relative directions from one's current location. You can do the same here.
