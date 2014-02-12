@@ -46,6 +46,5 @@ their own strengths.
 
 We're going to look at:
 
-1. [Repeating things with the `lapply` and `sapply`](../41-repeating-lapply)
-2. [The split apply combine strategy](../45-repeating-split-apply)
-3. [Repeating things with `for loops`](../50-repeating-for)
+1. [Repeating things with `for loops`](for-loops)
+2. [The split apply combine strategy with plyr package](split-apply-combine)

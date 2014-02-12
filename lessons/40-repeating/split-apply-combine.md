@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Repeating things -- The split--apply--combine pattern
+title: Repeating things -- The split--apply--combine pattern and `plyr` package
 tutor: Daniel Falster
 ---
 
@@ -38,7 +38,7 @@ through them in whatever order you like.
 
 ## The plyr package
 
-While R's built in function do work, we're going to introduce you to another superior method for repeating things using the package [**plyr**](http://had.co.nz/plyr/). `plyr` is an R Package for Split-Apply-Combine workflows.  Its functional
+While R's built in function do work, we're going to introduce you to another method for repeating things using the package [**plyr**](http://had.co.nz/plyr/). plyr is an R Package for Split-Apply-Combine workflows.  Its functional
 programming model encourages writing reusable functions which can be called
 across varied datasets and frees you from needing to manage for loop indices.
 
@@ -72,10 +72,7 @@ There are 3 key inputs to xxply:
 * .fun - function called on each piece
 * The first letter of the function name gives the input type and the second gives the output type.
 
-### Examples
-
-
-**TODO: incorporate examples from gapminder -> plyr.R to replace content below**
+### Example
 
 For an example, let's pull up gapminder dataset as before
 
@@ -83,12 +80,100 @@ For an example, let's pull up gapminder dataset as before
 data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 ```
 
-Now, what is we want to extra the list of countries by continent. So make a function to extract list of countries for a given continent
+Now, what is we want to know is the number of countries by continent. So let's make a function that takes a dataframe as input and returns the number of countries.
 
-start: get total population size per continent
-split, apply, combine
+**Why don't you try - hint, function unique**
 
-next: list of countries [introduction to list]
+```coffee
+get.n.countries <- function(x) length(unique(x$country))
+get.n.countries(data)
+```
+
+So first do it hard way:
+
+```coffee
+data.new <- data[data$continent == "Asia",]
+Asia.n <- get.n.countries(data.new)
+
+data.new <- data[data$continent == "Africa",]
+Africa.n <- get.n.countries(data.new)
+
+data.new <- data[data$continent == "Europe",]
+Europe.n <- get.n.countries(data.new)
+
+data.new <- data[data$continent == "Oceania",]
+Oceania.n <- get.n.countries(data.new)
+
+data.new <- data[data$continent == "Americas",]
+Americas.n <- get.n.countries(data.new)
+
+n.countries <- c(Africa.n, Asia.n, Americas.n, Europe.n, Oceania.n)
+```
+
+Alternatively, might use a for loop
+
+```coffee
+n.countries <- integer(0)
+for(cont in unique(data$continent)){
+	data.new <- data[data$continent == cont,]
+	n.countries[[cont]] <- get.n.countries(data.new)
+}
+```
+
+So here's the equivalent in plyr:
+
+```coffee
+daply(data, .(continent), get.n.countries)
+```
+
+Isn't that nice?
+
+Let's look at what happened here
+
+- The `daply` function feeds in a `data.frame` (function starts with **d**) and returns an `array` (2nd letter is an **a**)
+- the first argument is the data we are operating on: `data`
+- the second argument indicates our split criteria `continent`
+- the third is the function to apply `get.n.countries`
+
+Instead of `daply` we could also use `ddply` of `dlply` --> you need to decide which is most useful to you.
+
+Also, can define function in place as an anonymous function:
+
+```coffee
+ddply(data, .(continent), function(x) length(unique(x$country)) )
+```
+
+Now let's try another. Want to sum total population in a dataframe.
+
+First write the function:
+
+```coffee
+get.total.pop <- function(x) sum(x$pop)
+```
+Then apply it using `daply`, `ddply` and `dlaply`:
+
+```coffee
+ddply(data, .(continent), get.total.pop)
+```
+Anyone notice a problem here? Total population of world is way bigger than actually is. So need to add `year` to our list of splitting criteria
+
+```coffee
+ddply(data, .(continent, year), get.total.pop)
+```
+
+Next we want the maximum `gdpPercap` on each continent. You try this one yourselves.
+
+```coffee
+ddply(data, .(continent, year), max(gdpPercap))
+```
+
+
+a list of countries by continent. So want to use --> `dlply`. Have a go yourselves
+
+```coffee
+countries <- dlply(data, .(continent), function(x) unique(x$country))
+```
+
 
 
 
