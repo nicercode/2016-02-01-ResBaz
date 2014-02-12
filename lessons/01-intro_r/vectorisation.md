@@ -12,7 +12,7 @@ Idea with vectorized operations is that things can happen in parallel without ne
 
 ```
 x <- 1:4
-y <- 6:9 
+y <- 6:9
 ```
 
 add element wise
@@ -29,7 +29,7 @@ y == 8
 
 x * y
 
-x / y 
+x / y
 ```
 
 Matrix operations are also vectorized
@@ -46,11 +46,7 @@ x / y is elementwise division.
 True matrix multiplication is:
 
 ```
-x %% y
+x %*% y
 ```
 
 Vectorized operations make code a lot simpler.
-
-
-
-

@@ -26,7 +26,7 @@ Why am I here?
 - **Who we are:** Software Carpentry is a volunteer organization supported by the Alfred P. Sloan Foundation and the Mozilla Foundation.
 - **Boot camps:** Our boot camps cover the core skills every scientist needs to get more done in less time: program construction, version control, testing, the command line, and data management. Short lessons alternate with hands-on practical sessions for two full days
 
-This boot camp promoted by Andrew Letten.
+This boot camp sponsored by Andrew Letten, thanks Andrew!
 
 ## The problem
 
@@ -43,12 +43,16 @@ In this bootcamp you will learn how to
 - make your work more transparent and reproducible
 - collaborate more effectively.
 
+Going to use R language
+
+- whose used R before: <6 months, up to 2 years, more than 2 years
+
 ## Expectations
 
 - we are volunteers
 	- not being paid
 	- we are also learning
-- this bootcamp is not
+- this boot camp is not
 	- an R workshop
 	- software engineering
 	- going to turn people into crack programmers and solve all their problems
@@ -58,7 +62,7 @@ In this bootcamp you will learn how to
 - no silver bullet
 	- hoping that after two days you'll write perfect code, you won't. We **will** show you the key ingredients
 	- after that
-- bootcamp is inclusive
+- boot camp is inclusive
 	- diverse crowd: not everything will appeal to everyone.  Some material will seem old or new, useful or useless, but bear with us.
 	- there is no dumb question
 	- anti-social behaviour not welcome
@@ -67,9 +71,7 @@ In this bootcamp you will learn how to
 ## Setup
 
 - Sticky notes for help
-- Rstudio (check with sticky notes)
-- Internet
-- Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd)
+- Rstudio & Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd) (check with sticky notes)
 - Work in pairs
 	- why?
-	- help each other
+	- help each other: Peer to peer is most efficient way of learning.

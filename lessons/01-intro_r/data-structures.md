@@ -1,7 +1,7 @@
 ---
 layout: lesson
 root: ../..
-title: Undestanding basic data types in R
+title: Understanding basic data types in R
 tutor: Rich
 ---
 
@@ -9,7 +9,7 @@ tutor: Rich
 
 * **Very Important** to understand because these are the things you will manipulate on a day-to-day basis in R. Most common source of frustration among beginners.
 
-* Everything in `R` is an object. 
+* Everything in `R` is an object.
 
 `R` has 5 basic atomic classes
 
@@ -59,7 +59,7 @@ vector("numeric", length = 10)
 vector("integer", length = 10)
 vector("logical", length = 10)
 ```
-The general pattern is `vector(class of object, length)`.  You can also create vectors by concactenating them using the `c()` function.
+The general pattern is `vector(class of object, length)`.  You can also create vectors by concatenating them using the `c()` function.
 
 Various examples:
 
@@ -72,7 +72,7 @@ x is a numeric vector. These are the most common kind. They are numeric objects 
 x1 <- c(1L, 2L, 3L)
 ```
 
-You can also have logical vectors. 
+You can also have logical vectors.
 
 ```
 y <- c(TRUE, TRUE, FALSE, FALSE)
@@ -84,7 +84,7 @@ Finally you can have character vectors:
 z <- c("Alec", "Dan", "Rob", "Karthik")
 ```
 
-**Examine your vector**  
+**Examine your vector**
 
 ```
 typeof(z)
@@ -140,7 +140,7 @@ seq(1, 10, by = 0.1)
 NaN.
 ```
 
-Each object has an attribute. Attribues can be part of an object of R. These include 
+Each object has an attribute. Attributes can be part of an object of R. These include
 
 * names
 * dimnames
@@ -158,9 +158,9 @@ R will create a resulting vector that is the least common denominator. The coerc
 **Guess what the following do without running them first**
 
 ```
-xx <- c(1.7, "a") 
-xx <- c(TRUE, 2) 
-xx <- c("a", TRUE) 
+xx <- c(1.7, "a")
+xx <- c(TRUE, 2)
+xx <- c("a", TRUE)
 ```
 
 This is called implicit coercion.  You can also coerce vectors explicitly using the `as.<class_name>`. Example
@@ -176,12 +176,12 @@ When you coerce an existing numeric vector with `as.numeric()`, it does nothing.
 ```
 x <- 0:6
 as.numeric(x)
-as.logical(x) 
+as.logical(x)
 as.character(x)
-as.complex(x) 
+as.complex(x)
 ```
 
-Sometimes coercions, especially nonsensical ones won’t work.
+Sometimes coercions, especially nonsensical ones won't work.
 
 ```
 x <- c("a", "b", "c")
@@ -203,17 +203,17 @@ as.logical(x)
 
 ## Matrix
 
-Matrices are a special vector in R. They are not a separate class of object but simply a vector but now with dimensions added on to it. Matrices have rows and columns. 
+Matrices are a special vector in R. They are not a separate class of object but simply a vector but now with dimensions added on to it. Matrices have rows and columns.
 
 ```
 m <- matrix(nrow = 2, ncol = 2)
 m
 dim(m)
-same as 
+same as
 attributes(m)
 ```
 
-Matrices are constructed columnwise. 
+Matrices are constructed columnwise.
 
 ```
 m <- matrix(1:6, nrow=2, ncol =3)
@@ -235,7 +235,7 @@ Another way is to bind columns or rows using `cbind()` and `rbind()`.
 x <- 1:3
 y <- 10:12
 cbind(x,y)
-# or 
+# or
 rbind(x,y)
 ```
 
@@ -243,7 +243,7 @@ rbind(x,y)
 
 ## List
 
-In R lists act as containers. Unlike atomic vectors, its contents are not restricted to a single mode and can encompass any data type. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors. 
+In R lists act as containers. Unlike atomic vectors, its contents are not restricted to a single mode and can encompass any data type. Lists are sometimes called recursive vectors, because a list can contain other lists. This makes them fundamentally different from atomic vectors.
 
 List is a special vector. Each element can be a different class.
 
@@ -262,7 +262,7 @@ x <- as.list(x)
 length(x)
 ```
 
-What is the class of `x[1]`?  
+What is the class of `x[1]`?
 how about `x[[1]]`?
 
 ```
@@ -284,7 +284,7 @@ Lists are extremely useful inside functions. You can "staple" together lots of d
 
 It doesn't print out like a vector. Prints a new line for each element.
 
-Elements are indexed by double brackets. Single brackets will still return a(nother) list.
+Elements are indexed by double brackets. Single brackets will still return another list.
 
 
 ---
@@ -299,7 +299,7 @@ Factors are pretty much integers that have labels on them.  While factors look (
 
 Sometimes factors can be left unordered. Example: male, female
 
-Other times you might want factors to be ordered (or ranked). Example: low, medium, high. 
+Other times you might want factors to be ordered (or ranked). Example: low, medium, high.
 
 
 Underlying it's represented by numbers 1,2,3.
@@ -320,8 +320,8 @@ x
 
 `unclass(x)` strips out the class information.
 
-In modeling functions, importnat to know whta baseline levels is.
-This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by speciying the levels.
+In modelling functions, important to know what baseline levels is.
+This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by specifying the levels.
 
 ```
 x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
@@ -370,7 +370,7 @@ df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
 
 When you combine column wise, only row numbers need to match. If you are adding a vector, it will get repeated.
 
-**Useful functions**  
+**Useful functions**
 `head()` - see first 5 rows
 `tail()` - see last 5 rows
 `dim()` - see dimensions
@@ -387,16 +387,16 @@ See that it is actually a special list:
     [1] TRUE
     > class(iris)
     [1] "data.frame"
-     > 
+     >
 --
 
-**Naming objects**  
+**Naming objects**
 
 Other R objects can also have names not just true for data.frames. Adding names is helpful since it's useful for readable code and self describing objects.
 
 ```
 x <- 1:3
-names(x) <- c("karthik", "ram", "rocks")
+names(x) <- c("rich", "daniel", "diego")
 x
 ```
 
@@ -422,7 +422,7 @@ dimnames(m) <- list(c("a", "b"), c("c", "d"))
 
 ## Missing values
 
-dennoted by `NA` and/or `NaN` for undefined mathematical operations.
+denoted by `NA` and/or `NaN` for undefined mathematical operations.
 
 ```
 is.na()
@@ -454,23 +454,23 @@ x <- c(1,2, NA, NaN, 4, 5)
 
 # Diagnostic functions in R
 
-**Super helpful functions**  
+**Super helpful functions**
 
 * `str()` Compactly display the internal structure of an R object. Perhaps the most uesful diagnostic function in R.
 * `names()` Names of elements within an object
 * `class()` Retrieves the internal class of an object
 * `mode()` Get or set the type or storage mode of an object.
-* `length()` Retrieve or set the dimension of an object.  
+* `length()` Retrieve or set the dimension of an object.
 * `dim()` Retrieve or set the dimension of an object.
 * `R --vanilla` - Allows you to start a clean session of R. A great way to test whether your code is reproducible.
-* `sessionInfo()` Print version information about R and attached or loaded packages.  
+* `sessionInfo()` Print version information about R and attached or loaded packages.
 * `options()` Allow the user to set and examine a variety of global options which affect the way in which R computes and displays its results.
 
 `str()` is your best friend
 
 `str` is short for structure. You can use it on any object. Try the following:
 
-```coffee 
+```coffee
 x <- 1:10
 class(x)
 mode(x)
