@@ -205,15 +205,13 @@ The `t` options now sorts by time.
 
 Similarly you can try the following:
 
-| Option | What it does |
-| ------ | ----------- |
-| -a  | List all files even those that are hidden. Files starting with a `.` are considered hidden |
-| -d  | Only directories | 
-| -F  | All a trailing slash to help identify folders | 
-| -l  | Long format | 
-| -lh | Make file sizes human readable | 
-| -S  | Sort by file size | 
-| -t  | Sort by modification time | 
+Some options:
+`-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;
+`-F`  All a trailing slash to help identify folders;
+`-l`  Long format;
+`-lh` Make file sizes human readable;
+`-S`  Sort by file size;
+`-t`  Sort by modification time.
 
 Try some of these. Do you see any new files that we have not discussed before? You can even combine several of these options in a single command.
 
@@ -384,12 +382,11 @@ Tab completion can also fill in the names of programs. For example, type `e<tab>
 
 One of the biggest reasons using shell is faster than ever using a GUI file manager is that it allows for wildcards. There are special characters known as wildcards. They allow you to select files based on patterns of characters.
 
-| Wildcard | what it means |
-| -------  | -----------  | 
-| * |  Matches any character | 
-| ? |  Matches any single character | 
-| [characters] |  Matches any character in this set | 
-| ![characters] |  Matches any character NOT in this set |
+Wildcard examples:
+`*`             Matches any character;
+`?`             Matches any single character;
+`[characters]`  Matches any character in this set;
+`![characters]` Matches any character NOT in this set.
 
 Navigate to the `gapminder/data/example` directory. This directory contains examples of sequencing data. If we type `ls`, we will see that there are a bunch of files which are just four digit numbers, a few files called `NOTES`, and a folder called `sequencing_data`. By default, `ls` lists all of the files in a given directory. The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
 
