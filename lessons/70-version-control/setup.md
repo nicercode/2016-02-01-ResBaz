@@ -22,16 +22,20 @@ git config user.name
 
 ## Configure your text editor
 
+The simple editor `nano` is likely to be the simplest thing to use (at least on a Mac).
+
 
 ```coffee
-git config --global core.editor "gedit -w -s" 
+git config --global core.editor "nano --tempfile" 
 ```
 
-Default is `vi`.
+The default is `vi`.  If anyone ends up with a screen does not seem to respond to anything they type, you may have activated vi.  Put your hand up and we'll help you out.
+
+
 Other options:
-    "nano --tempfile" 
-    "kate"
-    "subl -n -w' for Sublime Text 2.
+* "gedit -w -s" 
+* "kate"
+* "subl -n -w' for Sublime Text 2.
 
 ###  Other editors 
 

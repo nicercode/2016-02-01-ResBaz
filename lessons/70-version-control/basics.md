@@ -102,6 +102,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 ```
 
 The command `git add` indicates which files we want to add:
+
 ```
 git add script.R
 git status
@@ -276,3 +277,12 @@ git diff --cached
 
 which compares the contents of the staged changes with the previous version.
 
+
+# Looking at the history
+
+Lots of different ways of looking at the history.  A very few useful ones:
+
+* git log --oneline --topo-order --graph --decorate
+* git diff --since=1week --until=1day
+* git diff --stat --since=1week --until=1day
+* git diff -3 # last three commits

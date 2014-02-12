@@ -5,6 +5,10 @@ title: Branching
 tutor: Rich FitzJohn
 ---
 
+**Cue:**
+
+* [git branching](http://pcottle.github.io/learnGitBranching/?NODEMO)
+
 A linear history is fine, but that is often not how science progresses.
 
 Suppose that you've got your project working, but want to get tidy it up a bit in a way that requires major surgery and you want to be able to get back to where you were.
@@ -373,8 +377,6 @@ destroy.  If they help you structure your work, you should use them!
 
 There is an incredible
 [Git branching demo](http://pcottle.github.io/learnGitBranching/?NODEMO)
-that is useful to work through learning about git branches.  It has a
+that is useful to work through learning about git branches.  It also has a
 [tutorial mode](http://pcottle.github.io/learnGitBranching/) with lots
-of lessons, and a
-[demo mode](http://pcottle.github.io/learnGitBranching/?demo) with a
-dizzying array of crazy history-altering moves.
+of lessons.
