@@ -10,11 +10,7 @@ tutor: Diego Barneche
 
 ## Download and open lesson material:
 
-We will spend most of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the files at
-
-[to be decided]
-
-and save it inside your project data folder.
+We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile at [https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip]() and unzip it inside your project data folder that we set up together yesterday.
 
 ## What is the shell and how do I access it?
 
@@ -28,7 +24,7 @@ Some important reasons to learn about the shell:
 
 2.  The shell is a really powerful way of interacting with your computer. GUIs and the shell are complementary - by knowing both you will greatly expand the range of tasks you can accomplish with your computer. You will also be able to perform many tasks more efficiently;
 
-3.	My reasons: access remote servers, repeatability, documentation.
+3.	More reasons: access remote servers, repeatability, documentation.
 
 The shell is just a program and there are many different shell programs that have been developed. The most common shell (and the one we will use) is called the Bourne-Again SHell (bash). Even if bash is not the default shell, it is usually installed on most systems and can be started by typing `bash` in the terminal. Many commands, especially a lot of the basic ones, work across the various shells but many things are different. I recommend sticking with bash and learning it well. ([Here is a link for more information](http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29))
 
@@ -40,7 +36,7 @@ My Terminal looks like this:
 
 ![](shell_prompt.png)
 
-Yours might look different (these can be easily customized). Usually includes something like `username@machinename`, followed by the current working directory (more about that soon) and a $ sign
+Yours might look different (these can be easily customized). Usually includes something like `username@machinename`, followed by the current working directory (more about that soon) and a `$` sign
 
 ## Entering commands into the shell
 
@@ -56,10 +52,10 @@ If you enter a command that shell doesn't recognize, it will just report an erro
 
 ```
 $ gobbeltdfsf
-bash: gobbeltdfsf: command not found
+-bash: gobbeltdfsf: command not found
 ```
 
-Now let's enter something useful. Let's navigate to the Desktop of your computer (more on navigation very shortly)
+Now let's enter something useful. Let's navigate to the home directory of your computer (more on navigation very shortly)
 
 ```
 cd ~
@@ -88,7 +84,7 @@ command -letter
 command --word 
 ```
 
-## Knowing where you are and seeing whats around
+## Knowing where you are and seeing what's around
 
 The first thing you want to do when you're somewhere new is get a map or figure out how to obtain directions. Since you're new to the shell, we're going to do just that. This is really easy to do using a GUI (just click on things). Once you learn the basic commands, you'll see that it is really easy to do in the shell too. 
 
@@ -105,7 +101,7 @@ $ pwd
 /Users/barneche
 ```
 
-Note that I'm in my *home* directory. Whenever you start up a terminal, you will start in the home directory. Every user has their own home directory where they have full access to do whatever they want. For example, my user ID is `barneche`, the `pwd` command tells us that we are in the `/Users/barneche` directory. This is the home directory for the `barneche` user. Yours should (hopefully) look different.
+Note that I'm in my *home* directory. Whenever you start up a terminal, you will start in the home directory. Every user has their own home directory where they have full access to do whatever they want. For example, my user ID is `barneche`, the `pwd` command tells me that I am in the `/Users/barneche` directory. This is the home directory for the `barneche` user. Yours should (hopefully) look different.
 
 **Changing Directories**
 
@@ -122,7 +118,7 @@ Now change back to your home again
 cd ~
 ```
 
-Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/barneche` and I can get there two ways:
+Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/barneche` and I can get there three ways:
 
 `cd /Users/barneche` OR `cd ~` OR `cd`.
 
@@ -151,8 +147,6 @@ cd /usr/bin
 
 from **anywhere**.
 
-Remember: Just plain `cd` with no options should take you back home. Try it. `cd` to some place else and type in `cd` again.
-
 **List all the files in this directory**
 
 ```
@@ -174,7 +168,7 @@ or even multiple directories at once
 ls ~ /usr
 ```
 
-Now we can start adding more options. Recall that commands can take both options (with a `-`) followed by arguments. Let's add some to `ls`. 
+Now we can start adding more options. Recall that commands can take both options (with a `-` or `--`) followed by arguments. Let's add some to `ls`. 
 
 ```
 cd
@@ -205,7 +199,7 @@ The `t` options now sorts by time.
 
 Similarly you can try the following:
 
-Some options:
+Some options:  
 `-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;  
 `-F`  All a trailing slash to help identify folders;  
 `-l`  Long format;  
@@ -233,7 +227,7 @@ drwxr-xr-x  3 barneche  staff   102  7 Feb 15:56 figures
 * Files begin with a `-` and directories with a `d`.  
 * Followed by permissions for the user, group, and everyone.   
 * Permissions are in the order of read, write, and execute. If any * group is missing a permission, you'll see a `-`.  
-* Ignore field 3 for now (it's the number of links to the file)  
+* Ignore second column for now (it's the number of links to the file)  
 * The owner of the file  
 * What group this person belongs to  
 * Size of file in bytes  (Quick question: How do you change this?)  
@@ -299,6 +293,8 @@ $ y
 
 The `rm` command can be used to remove files. The `-i` adds the "are you sure?" message. If you enter `ls` again, you will see that `testfile` is gone.
 
+***Warning: The shell does not have a recycling bin. So any file removed with `rm` is gone forever. Use with caution. Remember the -i argument***
+
 **Quick exercise 01**
 
 1. Change into your HOME (or wherever you downloaded the **gapminder** folder). Then into `data`. List the contents of this folder. Then change back into your home again.
@@ -359,7 +355,7 @@ prints the contents of the `/Users/barneche/gapminder/`. You can chain these tog
 ls ../../
 ```
 
-prints the contents of `/Users/barneche` which is my home directory. Finally, the special directory `.` always refers to your current directory. So, `ls`, `ls .`, and `ls ././././.` all do the same thing, they print the contents of the current directory. To summarize, the commands `ls ~`, `ls ~/.`, `ls ../../`, and `ls /Users/barneche` all do exactly the same thing. These shortcuts are not necessary, they are provided for your convenience.
+prints the contents of `/Users/barneche` which is my home directory. Finally, the special directory `.` always refers to your current directory. So, `ls` and `ls .` do the same thing, they print the contents of the current directory. To summarize, the commands `ls ~`, `ls ~/.` and `ls /Users/barneche` all do exactly the same thing. These shortcuts are not necessary, they are provided for your convenience.
 
 **Tab completion**
 
@@ -455,8 +451,6 @@ See the `man` command to get help on options you can use with these commands.
 
 Remove files with `rm`
 
-***Warning: The shell does not have a recycling bin. So any file removed with `rm` is gone forever. Use with caution.Remeber the -i argument***
-
 ## Let's try out some of the commands above
 
 First go home `cd`.  
@@ -481,12 +475,25 @@ What did just happened?
 ls -l
 ```
 
+Now try and remove scratchpad
+
+```
+rm scratchpad
+```
+
+What did just happened? If you want to remove everything within scratchpad no matter what, you will need to add the `-r` argument to function `rm`
+
+```
+rm -r scratchpad
+```
+
 You can also create an entire directory structure with a single call. e.g.
 
 ```
 mkdir temp
 cd temp
 mkdir -p test_project/{R,data,output/{data,figures},doc}
+rm -r test_project/
 ```
 
 This will create a project called `test_project` with the following structure:
@@ -514,6 +521,7 @@ cd temp
 ls
 mkdir dir-{0..10}
 ls
+rm -r temp
 ```
 
 
@@ -562,11 +570,6 @@ e.g.
 ```
 which git
 ``` 
-
-* See the manual for any program with `man <program_name>`  
-* Get help on a command with `<program_name> --help`  
-
-
 
 ## Short exercise 2
 
