@@ -10,7 +10,7 @@ tutor: Diego Barneche
 
 ## Download and open lesson material:
 
-We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile at [https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip]() and unzip it inside your project data folder that we set up together yesterday.
+We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile [here][id] and unzip it inside your project data folder that we set up together yesterday.
 
 ## What is the shell and how do I access it?
 
@@ -378,7 +378,7 @@ Tab completion can also fill in the names of programs. For example, type `e<tab>
 
 One of the biggest reasons using shell is faster than ever using a GUI file manager is that it allows for wildcards. There are special characters known as wildcards. They allow you to select files based on patterns of characters.
 
-Wildcard examples:
+Wildcard examples:  
 `*`             Matches any character;  
 `?`             Matches any single character;  
 `[characters]`  Matches any character in this set;  
@@ -490,9 +490,9 @@ rm -r scratchpad
 You can also create an entire directory structure with a single call. e.g.
 
 ```
-mkdir temp
-cd temp
+cd
 mkdir -p test_project/{R,data,output/{data,figures},doc}
+ls test_project/
 rm -r test_project/
 ```
 
@@ -579,3 +579,5 @@ Then move the respective file types into their matching folder type. Go back to 
 Rename (it's the same as mv command) `messy-folder` to `clean-folder`.
 
 Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
+
+[id]: [https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip]
