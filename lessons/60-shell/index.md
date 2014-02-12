@@ -388,7 +388,7 @@ Wildcard examples:
 `[characters]`  Matches any character in this set;  
 `![characters]` Matches any character NOT in this set.  
 
-Navigate to the `gapminder/data/example` directory. This directory contains examples of sequencing data. If we type `ls`, we will see that there are a bunch of files which are just four digit numbers, a few files called `NOTES`, and a folder called `sequencing_data`. By default, `ls` lists all of the files in a given directory. The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
+Navigate to the `gapminder/data` directory. This directory contains examples of sequencing data. If we type `ls`, we will see that there are a bunch of files which are just four digit numbers. By default, `ls` lists all of the files in a given directory. The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
 
 ```
 $ ls *1.txt
