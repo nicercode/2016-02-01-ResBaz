@@ -10,20 +10,11 @@ tutor: Diego Barneche
 
 ## Download and open lesson material:
 
-We will spend most of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Just enter the commands:
+We will spend most of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the files at
 
-```
-cd
-git clone https://github.com/nicercode/gapminder.git
-```
+[to be decided]
 
-Followed by:
-
-```
-cd gapminder
-```
-
-These 2 commands will grab all of the data needed for this workshop from the internet. We will talk about `git` later in the workshop.
+and save it inside your project data folder.
 
 ## What is the shell and how do I access it?
 
