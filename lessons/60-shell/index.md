@@ -283,7 +283,7 @@ $ touch testfile
 
 Then list the contents of the directory again using `ls`. You should see that a new entry, called `testfile`, exists. It does not have a slash at the end, showing that it is not a directory. The `touch` command just creates an empty file.
 
-Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls --color` or `ls -G` instead of `ls`. Now your directories, files, and executables will have different colors.
+Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls -G` instead of `ls`. Now your directories, files, and executables will have different colors.
 
 Now if you use the command `ls -l` you will notice that `testfile` has a size of zero. OK then, let's get rid of `testfile`. To remove a file, just enter the command:
 
