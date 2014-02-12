@@ -92,7 +92,7 @@ Three really imporant commands:
 * `cd` *Change directory*. Give it options for where to take you.  
 * `ls` *Short for list*. List all the files and folders in your current location.  
 
-Most operating systems have a hierarchical directory structure. The very top is called the *root* or *home* directory. Directories are often called "folders" because of how they are represented in GUIs. Directories are just listings of files. They can contain other files or (sub) directories.
+Most operating systems have a hierarchical directory structure. The very top is called the *home* directory. Directories are often called "folders" because of how they are represented in GUIs. Directories are just listings of files. They can contain other files or (sub) directories.
 
 ```
 $ pwd
