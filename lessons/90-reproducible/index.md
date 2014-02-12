@@ -271,6 +271,13 @@ Organizing code and data is an art, and a room of 100 scientists will give you
 - ensures data is not lost( [Scientists losing data at a rapid rate. Nature.]( http://doi.org/10.1038/nature.2013.14416)
 - speeds up science by giving someone to build on [radical openness](http://vimeo.com/38260970)
 
+## Examples of reproducible research we know of
+
+* The code to create the supplementary figures in [this paper](http://dx.doi.org/10.1111/j.2041-210X.2012.00234.x) are 
+[here](https://github.com/richfitz/diversitree/blob/master/pub/example/primates.Rnw) -- the compiled version is [here](http://onlinelibrary.wiley.com/store/10.1111/j.2041-210X.2012.00234.x/asset/supinfo/mee3234_sm_diversitree-suppl.pdf?v=1&s=0e50af3b4e692c5e9f87abdcb9a2346de1463842) (starts on p 15).
+* This [supporting material](http://rspb.royalsocietypublishing.org/content/281/1778/20132570/suppl/DC1) is completely reproducible.
+* This [paper](http://www.g3journal.org/content/early/2013/10/30/g3.113.008565/suppl/DC1) is completely reproducible
+
 ## More reading
 
 * Victoria Stodden has written extensively about the
