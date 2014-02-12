@@ -46,6 +46,9 @@ In this bootcamp you will learn how to
 Going to use R language
 
 - whose used R before: <6 months, up to 2 years, more than 2 years
+- who has used a different language (e.g., Python)
+- who is hoping just to improve their own workflow?
+- who is hoping to develop code that *someone else* will use
 
 ## Expectations
 
