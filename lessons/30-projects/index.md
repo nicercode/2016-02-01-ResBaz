@@ -55,8 +55,8 @@ proj/
 |-- R/
 |-- data/
 |-- output/
-|   |-- data/
-|   |-- figures/
+|-- |-- data/
+|-- |-- figures/
 |-- doc/
 ```
 
@@ -88,8 +88,8 @@ proj/
 |-- R/
 |-- data/
 |-- output/
-|   |-- data/
-|   |-- figures/
+|-- |-- data/
+|-- |-- figures/
 |-- doc/
 |-- analysis.R
 ```
