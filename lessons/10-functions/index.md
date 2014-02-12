@@ -66,7 +66,15 @@ double(z) # 20
 x         # still 1
 ```
 
-This is one of the main uses of functions: they isolate different variables within your program.  This makes it easier to think about what you are doing.
+This is one of the main uses of functions: they isolate different variables within your program.  This makes it easier to think about what you are doing.  It also lets you forget about things you don't want to think about - we could have implemented `double` differently:
+
+```
+double <- function(x) {
+  x + x
+}
+```
+
+but this detail is abstracted away.
 
 The procedure for using functions in your work involves three key steps:
 
