@@ -47,7 +47,7 @@ Yours might look different (these can be easily customized). Usually includes so
 You can just enter commands directly into the shell.
 
 ```
-echo Morning Canberra
+echo Morning Kensington
 ```
 
 We just used a command called `echo` and gave it an argument called `Morning Canberra`.
