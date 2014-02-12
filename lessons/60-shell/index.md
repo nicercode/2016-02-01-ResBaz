@@ -6,7 +6,6 @@ bootcamp_slug: gapminder
 Title: The Unix Shell
 tutor: Diego Barneche
 ---
-**Acknowledgements: Based on material by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak. Edited by Diego Barneche**
 
 ## Download and open lesson material:
 
@@ -498,12 +497,12 @@ rm -r test_project/
 
 This will create a project called `test_project` with the following structure:
 
-* R/  
-* data/  
-    * output/  
-    * data/  
-* figures/  
-* doc/  
+|-- R/
+|-- data/
+|-- output/
+|-- |-- data/
+|-- |-- figures/
+|-- doc/
 
 Create lots of subdirectories at once using brace expansions.
 
@@ -579,3 +578,5 @@ Then move the respective file types into their matching folder type. Go back to 
 Rename (it's the same as mv command) `messy-folder` to `clean-folder`.
 
 Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
+
+**Acknowledgements: Based on material by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak. Edited by Diego Barneche**
