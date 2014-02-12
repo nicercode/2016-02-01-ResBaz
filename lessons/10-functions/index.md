@@ -88,7 +88,7 @@ As a simple starting point, let's re-implement some functions that are already i
 
 **NB**: This material is designed to teach *functions*, not necessarily the best way of doing this analysis.  In some cases there are existing functions that would be much nicer to use in place of those that we will write.  But the universe of functions in R is absolutely *massive*, so you'll often find yourself rewriting things that exist in some package, or even in the base system.  One nice thing about having written things as functions though, is that it is then easy to swap out your version for a better version (sometimes involving some wrapping).
 
-We're going to use some data
+We're going to use some data from gapminder - download from [here](https://github.com/nicercode/gapminder/archive/d4f943d8ca15c2f6572ec52c74987e0f1971e64c.zip) and unzip into the directory that you are using.
 
 ```
 dat <- read.csv(gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
