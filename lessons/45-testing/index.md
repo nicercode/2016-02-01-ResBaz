@@ -111,33 +111,26 @@ That is the idea.  There are some issues around where to store the tests, but th
 ### Expectations
 
 
-**1. `equals()` Equality with a numerical tolerence**
+* **`equals()` Equality with a numerical tolerence**
+
 ````
-# passes
-expect_that(10, equals(10))
-# passes
-expect_that(10, equals(10 + 1e-7))
-# Fails
-expect_that(10, equals(10 + 1e-6))
-# Definitely fails!
-expect_that(10, equals(11))
+expect_that(10, equals(10)) # passes
+
+expect_that(10, equals(10 + 1e-7)) # passes
+
+expect_that(10, equals(10 + 1e-6)) # fails
+
+expect_that(10, equals(11)) # fails
 ```
 
-**2. `is_identical_to`:  Exact quality with identical**
+* **`is_identical_to`:  Exact quality with identical** (this can be surprising with decimal numbers)
 
 ```
 expect_that(10, is_identical_to(10))
 expect_that(10, is_identical_to(10 + 1e-10))
 ```
 
-**3. `is_equivalent_to()` is a more relaxed version of equals()**
-
-```
-# ignores attribute names
-expect_that(c("one" = 1, "two" = 2), is_equivalent_to(1:2))
-```
-
-**4. `is_a()` checks that an object inherit()s from a specified class**  
+* **`is_a()` checks that an object inherit()s from a specified class**  
 
 ```
 model <- lm(mpg ~ cyl, mtcars)
@@ -145,7 +138,7 @@ expect_that(model, is_a("lm"))
 ```
 
 
-**5. `matches()` matches a character vector against a regular expression.**
+* **`matches()` matches a character vector against a "regular expression".**
 
 ```
 string <- "Testing is fun!"
@@ -153,7 +146,7 @@ string <- "Testing is fun!"
 expect_that(string, matches("Testing"))
 ```
 
-**6. `prints_text()` matches the printed output from an expression against a regular expression**
+* **`prints_text()` matches the printed output from an expression against a regular expression**
 
 ```
 a <- list(1:10, letters)
@@ -163,15 +156,14 @@ expect_that(str(a), prints_text("List of 2"))
 expect_that(str(iris), prints_text("data.frame"))
 ```
 
-
-**7. `shows_message()` checks that an expression shows a message**
+* **`shows_message()` checks that an expression shows a message**
 
 ```
 expect_that(library(mgcv),
 shows_message("This is mgcv"))
 ```
 
-**8. `gives_warning()` expects that you get a warning**
+* **`gives_warning()` expects that you get a warning**
 
 ```
 expect_that(log(-1), gives_warning())
@@ -181,7 +173,7 @@ expect_that(log(-1),
 expect_that(log(0), gives_warning())
 ```
 
-**9. `throws_error()` verifies that the expression throws an error. You can also supply a regular expression which is applied to the text of the error**
+* **`throws_error()` verifies that the expression throws an error. You can also supply a regular expression which is applied to the text of the error**.  This one is *very* useful.
 
 ```
 expect_that(1 / 2, throws_error())
@@ -189,30 +181,12 @@ expect_that(seq_along(1:NULL), throws_error())
 ```
 
 
-**10. `is_true()` is a useful catchall if none of the other expectations do what you want -it checks that an expression is true**
+* **`is_true()` is a useful catchall if none of the other expectations do what you want -it checks that an expression is true**
 
 ```
-x <- require(ggplot2)
+x <- require(plyr)
 expect_that(x, is_true())
 ```
-
-This entire suite of tests can also be shortened.
-
-| Long form | Short form |
-| -------   | ---------  | 
-| expect_that(x, is_true()) | expect_true(), expect_false() |
-| expect_that(x, is_true()) | expect_true(), expect_false() |
-| expect_that(x, is_a(y)) | expect_is(x, y) |
-| expect_that(x, equals(y)) | expect_equal(x, y) |
-| expect_that(x, is_equivalent_to(y)) | expect_equivalent(x, y) |
-| expect_that(x, is_identical_to(y)) | expect_identical(x, y) |
-| expect_that(x, matches(y)) |  expect_matches(x, y) |
-| expect_that(x, prints_text(y)) | expect_output(x, y)  |
-| expect_that(x, shows_message(y)) | expect_message(x, y) |
-| expect_that(x, gives_warning(y)) |  expect_warning(x, y) |
-| expect_that(x, throws_error(y)) |  expect_error(x, y) |
-
-# See exercises.R here for more examples
 
 # Where to store things
 
@@ -228,38 +202,27 @@ test_dir(".")
 
 Storing things in different directories ends up being the long-term bet, but you can run into pathname issues here.
 
-What if `r.out` is not sorted?
+# Exercises
 
-```
-r.out <- rev(r.out)
-plot(x, rescale(x, r.out))
-```
-
-So, decide -- either disallow reversed ranges in the function or treat this as a feature.
+Start with the `rescale` function from before:
 
 ```coffee
-rescale <- function(x, r.out, r.in=range(x)) {
-  if (diff(r.in) <= 0) # or !is.unsorted(r.in)
-    stop("r.in must be increasing")
-  p <- (x - r.in[[1]]) / diff(r.in)
-  r.out[[1]] + p * diff(r.out)
+rescale <- function(x, r.out) {
+  p <- (x - min(x)) / (max(x) - min(x))
+  r.out[[1]] + p * (r.out[[2]] - r.out[[1]])
 }
 ```
 
+Write tests to check that
 
+* The function does rescale onto the correct range.
+* Deals with bad input for `r.out` (wrong length, wrong type)
+* Deals with missing values in the input (this will likely require rewriting the function a bit).
 
-
-
-
-
-
-
-
-
-
-
-
+**Instructors:** Code that works through this is available in exercises.R
 
 **Acknowledgements**: This material was adapted from ... and modified by ...
 
 Katy Huff, Rachel Slaybaugh, and Anthony Scopatz (canberra/07-testing/README.md, looks based on thw-testing/testing-orig.md)
+
+Karthik's material on testing from Canberra.
