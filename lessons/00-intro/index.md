@@ -45,17 +45,31 @@ In this bootcamp you will learn how to
 
 ## Expectations
 
-- not an R workshop
-- not software engineering
-- not going to turn people into crack programmers and solve all their problems
-- tools vs concepts: emphasising concepts
-- brief tour through some useful concepts and ideas that are not widely used in academic programmers
-- diverse crowd: not everything will appeal to everyone.  Some material will seem old or new, useful or useless, but bear with us.
+- we are volunteers
+	- not being paid
+	- we are also learning
+- this bootcamp is not
+	- an R workshop
+	- software engineering
+	- going to turn people into crack programmers and solve all their problems
+- It is
+	- about concepts not tools
+	- brief tour through some useful concepts and ideas that are not widely used in academic programmers
+- no silver bullet
+	- hoping that after two days you'll write perfect code, you won't. We **will** show you the key ingredients
+	- after that
+- bootcamp is inclusive
+	- diverse crowd: not everything will appeal to everyone.  Some material will seem old or new, useful or useless, but bear with us.
+	- there is no dumb question
+	- anti-social behaviour not welcome
+	- everyone has complimentary skills --> use these to help each other
 
 ## Setup
 
-- Stickies
-- Rstudio
+- Sticky notes for help
+- Rstudio (check with sticky notes)
 - Internet
 - Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd)
 - Work in pairs
+	- why?
+	- help each other
