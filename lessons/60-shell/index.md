@@ -296,7 +296,11 @@ The `rm` command can be used to remove files. The `-i` adds the "are you sure?" 
 
 **Quick exercise 01**
 
-1. Change into your HOME (or wherever you downloaded the **gapminder** folder). Then into `data`. List the contents of this folder. Then change back into your home again.
+1. Change into your home directory;  
+2. Then go to the directory where you saved your project setup following the project setup lesson;  
+3. Then into the `data` directory;  
+4. List the contents of this directory;  
+5. Then change back into your home again.  
 
 ---
 ## Exploring your file system
@@ -323,12 +327,12 @@ Examine files with the `less` command. Keeps the content from scrolling of the s
 
 **Quick exercise 02**
 
-1. cd `HOME`
-2. cd into a given directory
-3. List directory contents with `ls -l`
-4. Pick any file that looks interesting to you
-5. find out what it is using `file`
-6. then view it's contents using `less`
+1. cd `HOME`;  
+2. cd into a given directory;  
+3. List directory contents with `ls -l`;  
+4. Pick any file that looks interesting to you;  
+5. find out what it is using `file`;  
+6. then view it's contents using `less`.  
 
 ---
 
