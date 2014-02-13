@@ -34,7 +34,7 @@ R also has many data structures. These include
 * list
 * matrix
 * data frame
-* factors
+* factors (we will avoid these, but they have their uses)
 * tables
 
 
