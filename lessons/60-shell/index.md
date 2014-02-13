@@ -572,13 +572,13 @@ which git
 
 ## Short exercise 2
 
-Go to your home directory;
-Create a new directory called `shell_exercise_2`
-Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and save it to the `shell_exercise_2` directory;
-Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`.  
-Then move the respective file types into their matching directory type following yesterday's project setup.
-Go back to the `shell_exercise_2` directory.
-Rename (it's the same as mv command) it to `clean-folder`.
+Go to your home directory;  
+Create a new directory called `shell_exercise_2`;  
+Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and save it to the `shell_exercise_2` directory;  
+Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`;  
+Then move the respective file types into their matching directory type following yesterday's project setup;  
+Go back to the `shell_exercise_2` directory;  
+Rename (it's the same as mv command) it to `clean-folder`.  
 
 Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
 
