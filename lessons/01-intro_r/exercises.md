@@ -1,3 +1,10 @@
+---
+layout: lesson
+root: ../..
+title: Intro to R - exercises
+tutor: Rich
+---
+
 Please try out these exercises from now until the break. Feel free to break if you're done with the exercise and don't flag us down if you're stuck and need any help.
 
 # Exercise for session 01
@@ -32,4 +39,4 @@ mtcars[mtcars$cyl == 4 | 6, ]
 mod <- lm(mpg ~ wt, data = mtcars)
 ```
 
-Extract the residual degrees of freedom. 
+Extract the residual degrees of freedom.
