@@ -574,7 +574,7 @@ which git
 
 Go to your home directory;  
 Create a new directory called `shell_exercise_2`;  
-Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and save it to the `shell_exercise_2` directory;  
+Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and unzip it to the `shell_exercise_2` directory (ake sure you remove the .zip version afterwards);  
 Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`;  
 Then move the respective file types into their matching directory type following yesterday's project setup;  
 Go back to the `shell_exercise_2` directory;  
