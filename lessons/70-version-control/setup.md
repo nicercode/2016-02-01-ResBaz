@@ -13,11 +13,26 @@ git config --global user.email "rich.fitzjohn@gmail.com"
 git config --global color.ui "auto"
 ```
 
+
 Please replace my name/email with yours before pasting it into a terminal. If it returns no errors, then verify that these settings were saved into your configuration file (`.gitconfig`) by running:
 
 ```coffee
 git config --list
 git config user.name
+```
+
+## Line endings
+
+Different operating systems have different ideas about line endings.  To avoid headaches, on Windows run this:
+
+```
+git config --global core.autocrlf "true"
+```
+
+and on mac / linux type this:
+
+```
+git config --global core.autocrlf "input"
 ```
 
 ## Configure your text editor
