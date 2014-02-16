@@ -7,18 +7,7 @@ tutor: Rich
 
 ## Why are we here?
 
-Why are you here?
-
-Why am I here?
-
-<!-- Hype
-
-- anyone can code: https://www.youtube.com/watch?v=qYZF6oIZtfc&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q
-- Obama asks you to learn to code: https://www.youtube.com/watch?v=6XvmhE1J9PY&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q
-- code, the new literacy: https://www.youtube.com/watch?v=MwLXrN0Yguk&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q
-- what most schools don't teach: https://www.youtube.com/watch?v=nKIu9yen5nc&feature=c4-overview-vl&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q
-- why I want to write nice R code: http://nicercode.github.io/blog/2013-04-05-why-nice-code/
- -->
+Why are you here? Why am I here?
 
 [Software carpentry](http://www.software-carpentry.org/)
 
@@ -78,3 +67,22 @@ Going to use R language
 - Work in pairs
 	- why?
 	- help each other: Peer to peer is most efficient way of learning.
+
+## Interesting links
+
+Learning to code and need inspiration ?
+
+- [Anyone can code](https://www.youtube.com/watch?v=qYZF6oIZtfc&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q)
+- [Obama says you should learn to code](https://www.youtube.com/watch?v=6XvmhE1J9PY&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q)
+- [Coding is the new literacy](https://www.youtube.com/watch?v=MwLXrN0Yguk&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q)
+- [What most schools don't teach](https://www.youtube.com/watch?v=nKIu9yen5nc&feature=c4-overview-vl&list=PLzdnOPI1iJNe1WmdkMG-Ca8cLQpdEAL7Q)
+- when coding saves you time, [from XKCD](http://xkcd.com/1205/)
+
+Why good code matters
+
+- [Why I want to write nice R code](http://nicercode.github.io/blog/2013-04-05-why-nice-code/)
+- [Problems with scientific computingg](http://www.nature.com/news/2010/101013/full/467775a.html)
+- [Science has a credibility problem](http://www.economist.com/news/leaders/21588069-scientific-research-has-changed-world-now-it-needs-change-itself-how-science-goes-wrong)
+- Things can go badly go wrong
+	- [Patriot missile failure](http://www.ima.umn.edu/~arnold/disasters/patriot.html)
+	- [Scientists nightmare - retractions due to bad code](http://www.sciencemag.org/content/314/5807/1856.summary)
