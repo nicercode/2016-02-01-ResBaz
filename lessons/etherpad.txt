@@ -1,0 +1,163 @@
+WELCOME TO SOFTWARE CARPENTRY UNSW 2014.02.13 Day 2
+http://rspb.royalsocietypublishing.org/content/281/1778/20132570/suppl/DC1
+Like yesterday, LUNCH provided downstairs in the courtyard!!!
+We'll be working with the same data as yesterday:
+https://raw.github.com/nicercode/gapminder/master/gapminder-FiveYearData.csv
+You can check you have it with this command (from RStudio)
+file.exists("gapminder-FiveYearData.csv")
+rm(list=ls())
+# Two functions from yesterday that we'll use this morning:
+variance <- function(x) {
+  mean_x <- mean(x)
+  n <- length(x)
+  1/(n - 1) * sum((x - mean_x)^2)
+}
+linear.rescale <- function(x, range) {
+  p <- (x - min(x)) /
+    (max(x) - min(x))
+  range[[1]] + p * (range[[2]] - range[[1]])
+}
+# Data that we will use.
+dat <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+dat.1982 <- dat[dat$year == 1982,]
+library(testthat)
+test_file("test-swc.R")
+# Put this in test-swc.R
+set.seed(1)
+x<-runif(10)
+expect_that(variance(x), equals(var(x)))
+----- more notes from Day 1 below here ----
+col <- colour.by.category(dat.1982$continent, col.table)
+cex <- linear.rescale(sqrt(dat.1982$pop), range=c(0.2, 10))
+plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col)
+add.trend.line <- function(x, y, d) {
+  fit <- lm(d[[y]] ~ log10(d[[x]]))
+  abline(fit)
+}
+add.trend.line("gdpPercap", "lifeExp", dat.1982)
+plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col)
+for (continent in unique(dat.1982$continent)) {
+  add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == continent,])
+}
+my.plot <- function(year, data, cols) {
+  dat.year <- data[data$year == year,]
+  col <- colour.by.category(dat.year$continent, cols)
+  cex <- linear.rescale(sqrt(dat.year$pop), range=c(0.2, 10))
+  plot(lifeExp ~ gdpPercap, dat.year, log="x", cex=cex, col=col)
+  for (continent in unique(dat.year$continent)) {
+    add.trend.line("gdpPercap", "lifeExp",
+                   d=dat.year[dat.year$continent == continent,],
+                   col=cols[[continent]])
+  }
+}
+for (i in unique(dat$year)) {
+  my.plot(i, dat, col.table)
+}
+---------------PLYR---------------------------
+rm(list=ls())
+dat <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+library(plyr)
+get.n.countries <- function(x){
+  a<- unique(x$country)
+  length(a)
+}
+get.n.countries(dat)
+dat.asia <- dat[dat$continent == "Asia",]
+asia.n <- get.n.countries(dat.asia)
+model <- function(x){
+  fit <- lm(lifeExp ~ log10(gdpPercap), data=x)
+  c(n=length(x$lifeExp), r2= summary(fit)$r.squared, a= coef(fit)[[1]], b= coef(fit)[[2]])
+}
+out <- ddply(dat, .(continent,year), model)
+##ALTERNATIVE PROJECT SET-UPS
+http://carlboettiger.info/2012/05/06/research-workflow.html
+http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424
+UNZIP this
+https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip
+## Quick exercise 01
+Change into your home directory;
+Then go to the directory where you saved your project setup yesterday;
+Then into `data`;
+List the contents of this directory;
+Then change back into your home again.
+## Short exercise 02
+Go to your home directory;
+Create a new directory called `shell_exercise_2`;
+Dowload this zip file here:
+https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip
+And unzip it to the `shell_exercise_2` directory (make sure you remove the .zip version afterwards);
+Then create sub-directories in `shell_exercise_2`: `data`, `docs`, `output/data`, `output/figures` and `R`;
+Then move the respective file types into their matching directory type following yesterday's project setup;
+Go back to the `shell_exercise_2` directory;
+Rename (it's the same as mv command) it to `clean-folder`.
+Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
+mkdir
+mv wrong.name right.name
+cp
+mkdir -p shell_exercise_2/{R,data,outuput/{data,figures},docs}
+mkdir -p R,data,output/{data,figures},docs
+mv
+ls
+*
+This worked for me on windows/git
+mkdir -p shell_exercise2/{'data','docs','output'/{'data','figures'}}
+Links with keyboard shortcuts for bash
+http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29
+http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/
+###########GIT###############
+git config --global user.name "Daniel Falster"
+git config --global user.email "daniel.falster@mq.edu.au"
+git config --global color.ui "auto"
+git config --list
+git config --global core.autocrlf "true"  #windows
+git config --global core.autocrlf "input"  #mac
+If you get an error in windows saying terminal not fully functional type the following into shell:
+TERM=msys
+git add day1.R
+git commit -m "added code from first day"
+git add day2.R
+git commit -m "added code from second day"
+git log
+touch .gitignore
+#open .gitignore in Rstduio and add these lines
+.Rdata
+.Rhistory
+.DS_Store
+git add .gitignore
+git commit -m "Ignore R files that we don't want to track"
+git add data
+git commit -m "Added data"
+git status
+#EXERCISE
+1. Commit an R file to your project
+2. Make some changes to the R file
+3. Use git status to see if file has been modified (it should be)
+4. Use git diff to look at and review changes
+5. Use git add and git commit to commit the changes
+6. Use git status to check that  file  no longer listed as modified
+draw.heart<-function(){
+     dat<- data.frame(t=seq(0, 2*pi, by=0.1) )
+    xhrt <- function(t) 16*sin(t)^3
+    yhrt <- function(t) 13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t)
+    dat$y=yhrt(dat$t)
+    dat$x=xhrt(dat$t)
+    plot(dat$x,dat$y, type="n")
+     polygon(dat$x, dat$y, col="hotpink")
+     }
+happy.v.day<-function(name){
+    draw.heart()
+    text.to.plot<-paste("Happy Valentine's Day",name)
+    text(0,7,text.to.plot,col='red',cex=2.5)
+
+}
+https://github.com/richfitz/gapminder
+### Reproducible research ###########
+library(plyr)
+source("R/figures_functions.R")
+data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+# For each year, fit linear model to life expectancy vs gdp by continent
+fitted.linear.model <- dlply(data, .(continent, year), function(x)lm(lifeExp ~ log10(gdpPercap), data=x))
+model.summary <- function(x){
+    data.frame(r2=summary(x)$r.squared, n=length(x$model$lifeExp), a=coef(x)[[1]], b=coef(x)[[2]])}
+model.data <- ldply(fitted.linear.model,model.summary)
+
