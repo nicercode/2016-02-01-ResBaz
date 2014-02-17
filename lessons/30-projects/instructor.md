@@ -10,7 +10,10 @@ tutor: Diego Barneche
 * [why organize your project](https://twitter.com/vsbuffalo/statuses/323638476153167872)  
 * [messy folders](http://nicercode.github.io/2014-02-13-UNSW/lessons/30-projects/bad_layout.png)    
 
-# Copy to the etherpad:
+# Copy to the etherpad:  
+
+* [Carl Boettiger project setup](http://carlboettiger.info/2012/05/06/research-workflow.html)
+* [PLoS Computational Biology article](http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424)
 
 ## Exercise
 1. In your project lesson folder, create 6 new folders: `R`, `data`, `output` (`data`, `figures`), `docs`;  
