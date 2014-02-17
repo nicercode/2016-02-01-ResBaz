@@ -1,4 +1,6 @@
+```{r,echo=FALSE}
 opts_chunk$set(tidy=FALSE)
+```
 
 # Examples from lesson number 1 - Intro to R - presented by Rich FitzJohn  
 
@@ -49,7 +51,7 @@ It returned exactly the same thing. In this case, `something` took the value of 
 ## Downloading the gapminder data
 We have to download a .csv file that we will use for the rest of our course. Right-click this [link][id] and save it to some new directory. Let's play with it now. 
 ```{r}
-dat  <-  read.csv('/Users/barneche/gapminder/gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
+dat  <-  read.csv('/Users/barneche/gapminder/data/gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
 head(dat) #try the function tail() instead, what happened?
 
 #subset the data for year 1982 only
