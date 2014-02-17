@@ -16,8 +16,8 @@ We will spend some of our time learning about the basics of the shell by manipul
 The *shell* is a program that presents a command line interface which allows you to control your computer using commands entered with a keyboard instead of controlling graphical user interfaces (GUIs) with a mouse/keyboard combination.
 
 A *terminal* is a program you run that gives you access to the shell. There are many different terminal programs that vary across operating systems.
-	 
-Some important reasons to learn about the shell: 
+
+Some important reasons to learn about the shell:
 
 1.  It is very common to encounter the shell and command-line-interfaces in scientific computing, so you will probably have to learn it eventually;
 
@@ -74,24 +74,24 @@ e.g. ls -l ~/
 ```
 
 ```
-command -letter 
+command -letter
 ```
 
 **OR**
 
 ```
-command --word 
+command --word
 ```
 
 ## Knowing where you are and seeing what's around
 
-The first thing you want to do when you're somewhere new is get a map or figure out how to obtain directions. Since you're new to the shell, we're going to do just that. This is really easy to do using a GUI (just click on things). Once you learn the basic commands, you'll see that it is really easy to do in the shell too. 
+The first thing you want to do when you're somewhere new is get a map or figure out how to obtain directions. Since you're new to the shell, we're going to do just that. This is really easy to do using a GUI (just click on things). Once you learn the basic commands, you'll see that it is really easy to do in the shell too.
 
 Three really imporant commands:
 
-* `pwd` *Acronym for print working directory*. Tell you where you are.  
-* `cd` *Change directory*. Give it options for where to take you.  
-* `ls` *Short for list*. List all the files and folders in your current location.  
+* `pwd` *Acronym for print working directory*. Tell you where you are.
+* `cd` *Change directory*. Give it options for where to take you.
+* `ls` *Short for list*. List all the files and folders in your current location.
 
 Most operating systems have a hierarchical directory structure. The very top is called the *home* directory. Directories are often called "folders" because of how they are represented in GUIs. Directories are just listings of files. They can contain other files or (sub) directories.
 
@@ -107,8 +107,8 @@ Note that I'm in my *home* directory. Whenever you start up a terminal, you will
 You can change the working directory at any time using the `cd` command.
 
 ```
-cd /usr/bin 
-pwd 
+cd /usr/bin
+pwd
 ls
 ```
 Now change back to your home again
@@ -150,7 +150,7 @@ from **anywhere**.
 
 ```
 $ ls
-Applications    Documents   Dropbox     Library     Music       Public      Desktop     Downloads         Movies      Pictures  
+Applications    Documents   Dropbox     Library     Music       Public      Desktop     Downloads         Movies      Pictures
 ```
 
 When you enter the `ls` command lists the contents of the current directory. `ls` is extremely useful both for beginners and experts. `ls` can not only list the current directory contents but also contents from anywhere without changing working directories.
@@ -167,7 +167,7 @@ or even multiple directories at once
 ls ~ /usr
 ```
 
-Now we can start adding more options. Recall that commands can take both options (with a `-` or `--`) followed by arguments. Let's add some to `ls`. 
+Now we can start adding more options. Recall that commands can take both options (with a `-` or `--`) followed by arguments. Let's add some to `ls`.
 
 ```
 cd
@@ -198,13 +198,13 @@ The `t` options now sorts by time.
 
 Similarly you can try the following:
 
-Some options:  
-`-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;  
-`-F`  All a trailing slash to help identify folders;  
-`-l`  Long format;  
-`-lh` Make file sizes human readable;  
-`-S`  Sort by file size;  
-`-t`  Sort by modification time.  
+Some options:
+`-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;
+`-F`  All a trailing slash to help identify folders;
+`-l`  Long format;
+`-lh` Make file sizes human readable;
+`-S`  Sort by file size;
+`-t`  Sort by modification time.
 
 Try some of these. Do you see any new files that we have not discussed before? You can even combine several of these options in a single command.
 
@@ -223,15 +223,15 @@ drwxr-xr-x  3 barneche  staff   102  7 Feb 15:56 figures
 -rw-r--r--  1 barneche  staff   204  7 Feb 10:55 gapminder.Rproj
 -rw-r--r--  1 barneche  staff  3150  7 Feb 10:55 rich-for-functions.R
 ```
-* Files begin with a `-` and directories with a `d`.  
-* Followed by permissions for the user, group, and everyone.   
-* Permissions are in the order of read, write, and execute. If any * group is missing a permission, you'll see a `-`.  
-* Ignore second column for now (it's the number of links to the file)  
-* The owner of the file  
-* What group this person belongs to  
-* Size of file in bytes  (Quick question: How do you change this?)  
-* Date an time the file was last modified  
-* Name of file.  
+* Files begin with a `-` and directories with a `d`.
+* Followed by permissions for the user, group, and everyone.
+* Permissions are in the order of read, write, and execute. If any * group is missing a permission, you'll see a `-`.
+* Ignore second column for now (it's the number of links to the file)
+* The owner of the file
+* What group this person belongs to
+* Size of file in bytes  (Quick question: How do you change this?)
+* Date an time the file was last modified
+* Name of file.
 
 One last argument for the function `ls` now.
 
@@ -263,7 +263,7 @@ ls --help
 ```
 
 And you also find the manual pages at many different sites online, e.g. [http://linuxmanpages.com/]().
-    
+
 Programs that are run from the shell can get extremely complicated. To see an example, open up the manual page for the `find` program, which we will use later this session. No one can possibly learn all of these arguments, of course. So you will probably find yourself referring back to the manual page frequently.
 
 **Creating an empty file**
@@ -281,7 +281,7 @@ Some terminals can color the directory entries in this very convenient way. In t
 Now if you use the command `ls -l` you will notice that `testfile` has a size of zero. OK then, let's get rid of `testfile`. To remove a file, just enter the command:
 
 ```
-$ rm -i testfile 
+$ rm -i testfile
 ```
 
 When prompted, type:
@@ -296,11 +296,11 @@ The `rm` command can be used to remove files. The `-i` adds the "are you sure?" 
 
 **Quick exercise 01**
 
-1. Change into your home directory;  
-2. Then go to the directory where you saved your project setup following the project setup lesson;  
-3. Then into the `data` directory;  
-4. List the contents of this directory;  
-5. Then change back into your home again.  
+1. Change into your home directory;
+2. Then go to the directory where you saved your project setup following the project setup lesson;
+3. Then into the `data` directory;
+4. List the contents of this directory;
+5. Then change back into your home again.
 
 ---
 ## Exploring your file system
@@ -323,16 +323,16 @@ file Location.md
 Location.md: ASCII English text
 ```
 
-Examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit. 
+Examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit.
 
 **Quick exercise 02**
 
-1. cd `HOME`;  
-2. cd into a given directory;  
-3. List directory contents with `ls -l`;  
-4. Pick any file that looks interesting to you;  
-5. find out what it is using `file`;  
-6. then view it's contents using `less`.  
+1. cd `HOME`;
+2. cd into a given directory;
+3. List directory contents with `ls -l`;
+4. Pick any file that looks interesting to you;
+5. find out what it is using `file`;
+6. then view it's contents using `less`.
 
 ---
 
@@ -346,7 +346,7 @@ There are some shortcuts which you should know about. Dealing with the home dire
 $ ls ~
 ```
 
-This prints the contents of your home directory, without you having to type the absolute path. The shortcut `..` always refers to the directory above your current directory. If I'm located at `/Users/barneche/gapminder/data/`, thus: 
+This prints the contents of your home directory, without you having to type the absolute path. The shortcut `..` always refers to the directory above your current directory. If I'm located at `/Users/barneche/gapminder/data/`, thus:
 
 ```
 ls ..
@@ -381,11 +381,11 @@ Tab completion can also fill in the names of programs. For example, type `e<tab>
 
 One of the biggest reasons using shell is faster than ever using a GUI file manager is that it allows for wildcards. There are special characters known as wildcards. They allow you to select files based on patterns of characters.
 
-Wildcard examples:  
-`*`             Matches any character;  
-`?`             Matches any single character;  
-`[characters]`  Matches any character in this set;  
-`![characters]` Matches any character NOT in this set.  
+Wildcard examples:
+`*`             Matches any character;
+`?`             Matches any single character;
+`[characters]`  Matches any character in this set;
+`![characters]` Matches any character NOT in this set.
 
 Navigate to the `gapminder/data` directory. This directory contains examples of sequencing data. If we type `ls`, we will see that there are a bunch of files which are just four digit numbers. By default, `ls` lists all of the files in a given directory. The `*` character is a shortcut for "everything". Thus, if you enter `ls *`, you will see all of the contents of a given directory. Now try this command:
 
@@ -419,10 +419,10 @@ are exactly identical. The `ls` command cannot tell the difference between these
 
 Do each of the following using a single `ls` command without navigating to a different directory.
 
-List all of the files in `/bin` that start with the letter `c`  
-List all of the files in `/bin` that contain the letter `a`  
-List all of the files in `/bin` that end in `o`  
-BONUS: List all of the files in `/bin` that contain the letter `a` or the letter `t`  
+List all of the files in `/bin` that start with the letter `c`
+List all of the files in `/bin` that contain the letter `a`
+List all of the files in `/bin` that end in `o`
+BONUS: List all of the files in `/bin` that contain the letter `a` or the letter `t`
 
 ## Manipulating the file system
 
@@ -456,7 +456,7 @@ Remove files with `rm`
 
 ## Let's try out some of the commands above
 
-First go home `cd`.  
+First go home `cd`.
 Next create a temporary directory.
 
 ```
@@ -468,7 +468,7 @@ cd scratchpad
 Make a few directories inside `scratchpad`
 
 ```
-mkdir dir1 dir2 dir3  
+mkdir dir1 dir2 dir3
 cp ../gapminder/R/*.R .
 ```
 
@@ -572,18 +572,18 @@ e.g.
 
 ```
 which git
-``` 
+```
 
 ## Short exercise 2
 
-Go to your home directory;  
-Create a new directory called `shell_exercise_2`;  
-Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and unzip it to the `shell_exercise_2` directory (ake sure you remove the .zip version afterwards);  
-Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`;  
-Then move the respective file types into their matching directory type following yesterday's project setup;  
-Go back to the `shell_exercise_2` directory;  
-Rename (it's the same as mv command) it to `clean-folder`.  
+Go to your home directory;
+Create a new directory called `shell_exercise_2`;
+Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and unzip it to the `shell_exercise_2` directory (ake sure you remove the .zip version afterwards);
+Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`;
+Then move the respective file types into their matching directory type following yesterday's project setup;
+Go back to the `shell_exercise_2` directory;
+Rename (it's the same as mv command) it to `clean-folder`.
 
 Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
 
-**Acknowledgements: Based on material by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak. Edited by Diego Barneche**
+**Acknowledgements:** This material was developed by  Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.

@@ -1,11 +1,11 @@
 ---
 layout: lesson
 root: ../..
-title: Principles of writing nice code (in R)
+title: Some principles for writing nice code (in R)
 tutor: Daniel Falster
 ---
 
-Conclusion to day 1, wrapping up core messages about code development.
+Let's look at what we've learnt so far about code development.
 
 Discuss with students how some  of the things they have learnt  will help improve their code.
 
@@ -63,6 +63,4 @@ particular output.
 
 ### Remember to be stylish
 
-## Acknowledgements
-
-This material was adapted from ... and modified by ...
+Applying consistent style to your code, such as that recommended in the [google's R style guide](https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml), makes your code more readable.

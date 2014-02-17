@@ -30,7 +30,3 @@ git config --list
 # Mac users: please run
 git config --global core.editor "nano --tempfile"
 ```
-
-
-
-
