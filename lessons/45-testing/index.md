@@ -37,19 +37,19 @@ The three right answers are:
 
 -   **ALWAYS!**
 -   **EARLY!**
--   **OFTEN!**    
+-   **OFTEN!**
 
 The longer answer is that testing either before or after your software is written will improve your code, but testing after your program is used for something important is too late.
 
 ## Why testing is important?
 
-**Seems like extra work but will save you time**  
+**Seems like extra work but will save you time**
 * Decreased frustration. Bugs appear very close to hard deadlines.  Testing allows to quickly identify where the problem is and fix it.
 
-**More confidence in the code**  
+**More confidence in the code**
 * Better code structure. Code that is easy to test is usually better designed. Tests sometimes make you see large complicated functions and break them down into smaller, more manageable chunks.
 
-**Make changes or updates without worrying too much**  
+**Make changes or updates without worrying too much**
 * Make changes confidently because you know your tests will catch any issues.
 
 Getting more serious about testing has totally changed my approach towards software development over the last year.  I find that I now write programs that are better separated into component parts, that define their roles more clearly, that have fewer bugs or unexpected behaviours and that are easier to modify as I go along.
@@ -95,7 +95,7 @@ We already ran through some of these when developing the function the first time
 x <- rnorm(20)
 ```
 
-```coffee 
+```coffee
 r.out <- c(0.1, 1.4)
 range(rescale(x, r.out)) == r.out
 ```
@@ -130,7 +130,7 @@ expect_that(10, is_identical_to(10))
 expect_that(10, is_identical_to(10 + 1e-10))
 ```
 
-* **`is_a()` checks that an object inherit()s from a specified class**  
+* **`is_a()` checks that an object inherit()s from a specified class**
 
 ```
 model <- lm(mpg ~ cyl, mtcars)
@@ -219,10 +219,6 @@ Write tests to check that
 * Deals with bad input for `r.out` (wrong length, wrong type)
 * Deals with missing values in the input (this will likely require rewriting the function a bit).
 
-**Instructors:** Code that works through this is available in exercises.R
+**Instructors:** Code that works through this is available in [exercises.R](exercises.R)
 
-**Acknowledgements**: This material was adapted from ... and modified by ...
-
-Katy Huff, Rachel Slaybaugh, and Anthony Scopatz (canberra/07-testing/README.md, looks based on thw-testing/testing-orig.md)
-
-Karthik's material on testing from Canberra.
+**Acknowledgements**: This material was developed by Rich FitzJohn, drawing on from material developed by Katy Huff, Rachel Slaybaugh, Anthony Scopatz and Karthik Ram.
