@@ -90,12 +90,11 @@ Let's say we have a table of values from
 
 ```coffee
 library(plyr)
+source("R/functions.R")
 data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+
 # For each year, fit linear model to life expectancy vs gdp by continent
-fitted.linear.model <- dlply(data, .(continent, year), function(x)lm(lifeExp ~ log10(gdpPercap), data=x))
-model.summary <- function(x){
-  data.frame(r2=summary(x)$r.squared, n=length(x$model$lifeExp), a=coef(x)[[1]], b=coef(x)[[2]])}
-model.data <- ldply(fitted.linear.model,model.summary)
+model.data <- ddply(data, .(continent,year), fit.model, x="lifeExp", y="gdpPercap")
 ```
 
 Now we just want to write this table to file:
@@ -130,24 +129,21 @@ dev.off()
 ```
 
 
-Hopefully your figure code is stored as a function, so that you can type
+Hopefully your figure code is stored as a function, so that you can type something like
 
 ```
-fig.trend() # generates figure
+library(plyr)
+source("R/functions.R")
+data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+data.1982 <- data[data$year == 1982,]
+myplot(data.1982,"gdpPercap","lifeExp", main =1982)
 ```
 
-to make your figure, or
+to make your figure.  Now you can type
 
 ```
-source("R/figures.R") # refresh file that defines fig.trend
-fig.trend()
-```
-
-Now you can type
-
-```
-pdf("figures/trend.pdf", width=6, height=8)
-fig.trend()
+pdf("output/my-plot.pdf", width=6, height=4)
+myplot(data.1982,"gdpPercap","lifeExp", main =1982)
 dev.off()
 ```
 
@@ -155,19 +151,9 @@ However, this still gets a bit unweildly when you have a large number
 of figures to make (especially for talks where you might make 20 or 30
 figures).
 
-```
-pdf("figures/trend.pdf", width=6, height=4)
-fig.trend()
-dev.off()
-
-pdf("figures/other.pdf", width=6, height=4)
-fig.other()
-dev.off()
-```
-
 A better approach [proposed by Rich](http://nicercode.github.io/blog/2013-07-09-figure-functions/) is to use a little function called `to.pdf`:
 
-```
+```coffee
 to.pdf <- function(expr, filename, ..., verbose=TRUE) {
   if ( verbose )
     cat(sprintf("Creating %s\n", filename))
@@ -180,9 +166,8 @@ to.pdf <- function(expr, filename, ..., verbose=TRUE) {
 Which can be used like so:
 
 
-```
-to.pdf(fig.trend(), "figures/trend.pdf", width=6, height=4)
-to.pdf(fig.other(), "figures/other.pdf", width=6, height=4)
+```coffee
+to.pdf(myplot(data.1982,"gdpPercap","lifeExp", main=1982), "output/1982.pdf", width=6, height=4)
 ```
 
 A couple of nice things about this approach:
@@ -203,7 +188,7 @@ A couple of nice things about this approach:
 For talks, I often build up figures piece-by-piece.  This can be done
 by adding an option to your function (for a two-part figure)
 
-```
+```coffee
 fig.progressive <- function(with.trend=FALSE) {
   set.seed(10)
   x <- runif(100)
@@ -221,14 +206,14 @@ fig.progressive <- function(with.trend=FALSE) {
 
 Now -- if run with as
 
-```
+```coffee
 fig.progressive(FALSE)
 ```
 
 just the data are plotted, and if run as
 
 
-```
+```coffee
 fig.progressive(TRUE)
 ```
 
@@ -236,12 +221,28 @@ the trend line and legend are included.  Then with the `to.pdf`
 function, we can do:
 
 
-```
-to.pdf(fig.progressive(TRUE),  "figures/progressive-1.pdf", width=6, height=4)
-to.pdf(fig.progressive(FALSE), "figures/progressive-2.pdf", width=6, height=4)
+```coffee
+to.pdf(fig.progressive(TRUE),  "output/progressive-1.pdf", width=6, height=4)
+to.pdf(fig.progressive(FALSE), "output/progressive-2.pdf", width=6, height=4)
 ```
 
 which will generate the two figures. The general idea can be expanded to more devices, such as png (see this [blog post](http://nicercode.github.io/blog/2013-07-09-figure-functions/) for details).
+
+We can use a similar approach to export figures in png format
+
+```coffee
+
+to.dev <- function(expr, dev, filename, ..., verbose=TRUE) {
+  if ( verbose )
+    cat(sprintf("Creating %s\n", filename))
+  dev(filename, ...)
+  on.exit(dev.off())
+  eval.parent(substitute(expr))
+}
+
+to.dev(myplot(data.1982, "gdpPercap","lifeExp", main=1982), png, "output/1982.png", width=600, height=400)
+
+```
 
 
 ## Reproducible reports with knitr

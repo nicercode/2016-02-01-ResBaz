@@ -274,9 +274,9 @@ We could also alter our model function to return the desired output then call `d
 ```coffee
 model <- function(x){
   fit <- lm(lifeExp ~ log10(gdpPercap), data=x)
-  c(n=length(x$lifeExp), r2=summary(fit)$r.squared, a=coef(fit)[[1]], b=coef(fit)[[2]])
+  data.frame(n=length(x$lifeExp), r2=summary(fit)$r.squared, a=coef(fit)[[1]], b=coef(fit)[[2]])
 }
-ddply(dat, .(continent,year), model)
+ddply(data, .(continent,year), model)
 ```
 
 As a final extension, we could add the variables we want to fit to the function definition, so that we could fit other combinations.
@@ -284,10 +284,10 @@ As a final extension, we could add the variables we want to fit to the function 
 ```coffee
 model <- function(d, x, y) {
   fit <- lm( d[[y]] ~ log10(d[[x]]) )
-  c(n=length(d[[y]]), r2=summary(fit)$r.squared,a=coef(fit)[1],b=coef(fit)[2])
+  data.frame((n=length(d[[y]]), r2=summary(fit)$r.squared,a=coef(fit)[1],b=coef(fit)[2])
 }
-ddply(dat, .(continent,year), model, y="lifeExp", x="gdpPercap")
-ddply(dat, .(continent,year), model, y="lifeExp", x="pop")
+ddply(data, .(continent,year), model, y="lifeExp", x="gdpPercap")
+ddply(data, .(continent,year), model, y="lifeExp", x="pop")
 ```
 
 So there you have it - in just 6 lines we can fit about 120 linear models and return two tables summarising these models. That's why plyr rocks!
@@ -308,6 +308,9 @@ But we still had to run all this code to fit lines to each continent:
 ```coffee
 data.1982 <- data[data$year == 1982,]
 
+col.table <- c(Asia="tomato", Europe="chocolate4", Africa="dodgerblue2", Americas="darkgoldenrod1", Oceania="green4")
+
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=rescale(sqrt(data.1982$pop), c(0.2, 10)), col= colour.by.category(data.1982$continent, col.table), pch=21)
 plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
 add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Asia",], col=col.table["Asia"])
 add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Africa",], col=col.table["Africa"])
@@ -334,7 +337,7 @@ d_ply(data.1982, .(continent), function(x) add.trend.line("gdpPercap", "lifeExp"
 Plyr really shines when there are many things to deal with at once.  For example, we plotted relative population growth by country for three countries before:
 
 ```coffee
-pop.by.country.relative <- function(country, dat, base.year=1952) {
+pop.by.country.relative <- function(country, data, base.year=1952) {
   dsub <- data[data$country == country, c("year", "pop")]
   dsub$pop.rel <- dsub$pop / dsub$pop[dsub$year == base.year]
   dsub
@@ -364,7 +367,7 @@ And we could use the same approach to make plots for the entire world, colouring
 
 ```coffee
 plot(NA, type="n", xlim=range(data$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
-d_ply(dat, .(country), function(x) add.growth.line(x, 1952, col=col.table[x$continent]))
+d_ply(data, .(country), function(x) add.growth.line(x, 1952, col=col.table[x$continent]))
 ```
 
 ![plot of chunk growth_world](figure/growth_world.png)
@@ -383,21 +386,21 @@ Like `ddply`, `summarise` can be used to create a new data frame from another da
 For summaries of the whole dataset you can call summarise directly:
 
 ```coffee
-summarise(dat, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+summarise(data, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
 ```
 
 But if you want to split by groups, need to combine with `ddply`. All the functions you want to call are simply listed at the end as extra arguments:
 
 ```coffee
-ddply(dat, .(continent, year), summarise, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+ddply(data, .(continent, year), summarise, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
 ```
 
 However, notice that the format of the functions is slightly different to if we were calling each directly with ddply:
 
 ```coffee
-ddply(dat, .(continent, year),  function(x) sum(x$pop))
-ddply(dat, .(continent, year),  function(x) var(x$pop))
-ddply(dat, .(continent, year),  function(x) max(x$pop))
+ddply(data, .(continent, year),  function(x) sum(x$pop))
+ddply(data, .(continent, year),  function(x) var(x$pop))
+ddply(data, .(continent, year),  function(x) max(x$pop))
 ```
 
 ## For loops - when the order of operation is important
