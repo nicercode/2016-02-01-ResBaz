@@ -27,6 +27,6 @@ tutor: Diego Barneche
 9. Make sure you adjust the file path to your data in order to read it: `data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)`
 9. Drag the last part of your `analysis.R` file (making plot) to the `figures.R` file;  
 10. In `figures.R` file, make sure you source the functions files the same way you just did in your `analysis.R` file. Also make sure you clean the console on your first line using: `rm(list=ls())`
-11. Create a new line between the sourced files and the actual code in order to read your data: 'data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)'
+11. Create two new lines between the sourced files and the actual code in order to read and modify your data: `data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)` and `data.1982  <-  data[data$year == 1982, ]`;  
 12. Finally, quit RStudio and reopen it from the `projects.Rproj` file in your project root directory;
-13. Open `analysis.R` and run the entire script at once;
+13. Open `analysis.R` and `figures.R` and run each script entirely at once;
