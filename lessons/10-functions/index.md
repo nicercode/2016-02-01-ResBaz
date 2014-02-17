@@ -5,8 +5,6 @@ title: Writing functions in R
 tutor: Daniel Falster
 ---
 
-**Cue**: Gapminder set (scroll down)
-
 <!-- # Goals
 
 1. Understand R's function syntax (argument lists, defaults, return
@@ -26,51 +24,36 @@ functions. But what about writing your own?
 Writing functions is simple. Paste the following code into your console
 
 ```coffee
-f <- function(x)
-  x
-```
-
-This function takes `x` as an argument and returns `x` as a value.
-
-The "body" of a function can be wrapped in curly brackets:
-
-```
-f <- function(x) {
-  x
+double <- function(number) {
+  2 * number
 }
 ```
 
-or these can be omitted for functions that are just one line long (this is a matter of taste, though there are wars between people who believe that the curly brackets belong in different places).
+This function takes `number` as an argument and returns twice `number` as a value (i.e., it doubles a number.
 
-The body of the function can contain any valid R expression:
+The bit in the brackets is the "body" of the function; it is evaluted every time that the function is called.  The body of the function can contain any valid R expression.
 
-```
-double <- function(x) {
-  2 * x
-}
-```
-
-Whatever is used as an *argument* to this  function becomes `x` within the body of the function.  So
+Whatever is used as an *argument* to this  function becomes `value` within the body of the function.  So
 
 ```
 z <- 10
 double(z)
 ```
 
-returns 20.  It does not matter at all if an `x` exists in the global environment
+returns 20.  It does not matter at all if a variable called `value` exists in the global environment
 
 ```
-z <- 10
-x <- 1
+z     <- 10
+value <- 1
 double(z) # 20
-x         # still 1
+value     # still 1
 ```
 
 This is one of the main uses of functions: they isolate different variables within your program.  This makes it easier to think about what you are doing.  It also lets you forget about things you don't want to think about - we could have implemented `double` differently:
 
 ```
-double <- function(x) {
-  x + x
+double <- function(value) {
+  value + value
 }
 ```
 
