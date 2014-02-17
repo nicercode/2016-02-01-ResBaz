@@ -206,7 +206,7 @@ ddply(data, .(continent, year), get.total.pop)
 Next we want the maximum `gdpPercap` on each continent.
 
 ```coffee
-ddply(data, .(continent, year), max(gdpPercap))
+ddply(data, .(continent, year), function(x) max(x$gdpPercap))
 ```
 
 ### An example returning a list
@@ -225,7 +225,7 @@ Now let's apply it to the whole dataset
 get.countries(data)
 ```
 
-And then to each continent using `dlpy`
+And then apply to each continent using `dlpy`
 
 ```coffee
 countries <- dlply(data, .(continent), function(x) unique(x$country))
@@ -260,10 +260,11 @@ The output `fitted.linear.model` is a list of fitted models, with same structure
 
 ```coffee
 coef(fitted.linear.model[[1]])
-coefs <- ldply(fitted.linear.model, coef)
+ldply(fitted.linear.model, coef)
 ```
 
 You probably want the R2 too right?
+
 ```coffee
 ldply(fitted.linear.model, function(x) summary(x)$r.squared)
 ```
@@ -305,14 +306,14 @@ add.trend.line <- function(x, y, d, ...) {
 But we still had to run all this code to fit lines to each continent:
 
 ```coffee
-dat.1982 <- dat[dat$year == 1982,]
+data.1982 <- data[data$year == 1982,]
 
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Asia",], col=col.table["Asia"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Africa",], col=col.table["Africa"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Europe",], col=col.table["Europe"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Americas",], col=col.table["Americas"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Oceania",], col=col.table["Oceania"])
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Asia",], col=col.table["Asia"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Africa",], col=col.table["Africa"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Europe",], col=col.table["Europe"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Americas",], col=col.table["Americas"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Oceania",], col=col.table["Oceania"])
 ```
 
 That's a lot of typing that is really very similar, and the sort of thing that is (a) boring to type, (b) prone to errorsm, and (c) hard to change (e.g. if we wanted to run it on a different data set, or change which continents we ran it over etc).
@@ -323,8 +324,8 @@ One way to avoid repetition is to pass the `add.trend.line` function into `d_ply
 
 
 ```coffee
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
-d_ply(dat.1982, .(continent), function(x) add.trend.line("gdpPercap", "lifeExp", x, col=col.table[x$continent]))
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
+d_ply(data.1982, .(continent), function(x) add.trend.line("gdpPercap", "lifeExp", x, col=col.table[x$continent]))
 ```
 
 ![plot of chunk repeating_ply](figure/repeating_plyr.png)
@@ -334,7 +335,7 @@ Plyr really shines when there are many things to deal with at once.  For example
 
 ```coffee
 pop.by.country.relative <- function(country, dat, base.year=1952) {
-  dsub <- dat[dat$country == country, c("year", "pop")]
+  dsub <- data[data$country == country, c("year", "pop")]
   dsub$pop.rel <- dsub$pop / dsub$pop[dsub$year == base.year]
   dsub
 }
@@ -354,7 +355,7 @@ add.growth.line <- function(x, base.year,...){
 We can then feed this into `d_ply` to generate  a plot for all countries
 
 ```coffee
-plot(NA, type="n", xlim=range(dat$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
+plot(NA, type="n", xlim=range(data$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
 d_ply( data[data$continent =="Asia" ,], .(country), function(x) add.growth.line(x, 1952))
 ```
 ![plot of chunk growth_ply](figure/growth_ply.png)
@@ -362,11 +363,12 @@ d_ply( data[data$continent =="Asia" ,], .(country), function(x) add.growth.line(
 And we could use the same approach to make plots for the entire world, colouring by continent
 
 ```coffee
-plot(NA, type="n", xlim=range(dat$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
+plot(NA, type="n", xlim=range(data$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
 d_ply(dat, .(country), function(x) add.growth.line(x, 1952, col=col.table[x$continent]))
 ```
 
 ![plot of chunk growth_world](figure/growth_world.png)
+
 ### Summarise
 
 Above we showed you how you can apply a function to your dataframe using the plyr package. But what if you want to apply a whole bunch of functions? For example, what if you want to find the `min`, `max`, `mean`, and `var` of each group - surely we don't have to run each one of these separately?
