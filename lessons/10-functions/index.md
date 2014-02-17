@@ -110,7 +110,7 @@ args(colSums)
 produces
 
 ```
-function(x, na.rm = FALSE, dims = 1L) 
+function(x, na.rm = FALSE, dims = 1L)
 NULL
 ```
 
@@ -141,15 +141,15 @@ return a number, or a list.  There is a `return` function in R, but it is typica
 * Can be passed as arguments to other functions or returned
   from other functions.
 
-# Functions make life a lot easier
+## Functions make life a lot easier
 
-The gapminder data.  This is [a nice plot](http://www.gapminder.org/world/#$majorMode=chart$is;shi=t;ly=2003;lb=f;il=t;fs=11;al=54;stl=t;st=t;nsl=t;se=t$wst;tts=C$ts;sp=5.59290322580644;ti=1983$zpv;v=0$inc_x;mmid=XCOORDS;iid=phAwcNAVuyj1jiMAkmq1iMg;by=ind$inc_y;mmid=YCOORDS;iid=phAwcNAVuyj2tPLxKvvnNPA;by=ind$inc_s;uniValue=8.21;iid=phAwcNAVuyj0XOoBL_n5tAQ;by=ind$inc_c;uniValue=255;gid=CATID0;by=grp$map_x;scale=log;dataMin=283;dataMax=110808$map_y;scale=lin;dataMin=18;dataMax=87$map_s;sma=75;smi=2.65$cd;bd=0$inds=;modified=75) that we're going to work towards recreating this in R.
+Now we're going to use data from the gapminder project, which gathers together a wide arrange of metrics for countries of the world. We're going to use a subset of data from this project which includes average life expectancy and GDP per capita on 5-year intervals from last 50 years. This is [a nice plot of the data](http://www.gapminder.org/world/#$majorMode=chart$is;shi=t;ly=2003;lb=f;il=t;fs=11;al=54;stl=t;st=t;nsl=t;se=t$wst;tts=C$ts;sp=5.59290322580644;ti=1983$zpv;v=0$inc_x;mmid=XCOORDS;iid=phAwcNAVuyj1jiMAkmq1iMg;by=ind$inc_y;mmid=YCOORDS;iid=phAwcNAVuyj2tPLxKvvnNPA;by=ind$inc_s;uniValue=8.21;iid=phAwcNAVuyj0XOoBL_n5tAQ;by=ind$inc_c;uniValue=255;gid=CATID0;by=grp$map_x;scale=log;dataMin=283;dataMax=110808$map_y;scale=lin;dataMin=18;dataMax=87$map_s;sma=75;smi=2.65$cd;bd=0$inds=;modified=75) that we're going to work towards recreating in R.
 
 ```r
 plot(lifeExp ~ gdpPercap, dat.1982, log="x")
 ```
 
-![plot of chunk plain](figure/plain.png) 
+![plot of chunk plain](figure/plain.png)
 
 
 Plot the points so that their radius is proportional to population size:
@@ -164,7 +164,7 @@ cex <- 0.2 + p * (10 - 0.2)
 plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
 ```
 
-![plot of chunk scaled_manually](figure/scaled_manually.png) 
+![plot of chunk scaled_manually](figure/scaled_manually.png)
 
 
 It might be nicer if we scaled against square-root of population size, so that area became proportional to population size:
@@ -178,7 +178,7 @@ cex <- 0.2 + p * (10 - 0.2)
 plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
 ```
 
-![plot of chunk scaled_manually_sqrt](figure/scaled_manually_sqrt.png) 
+![plot of chunk scaled_manually_sqrt](figure/scaled_manually_sqrt.png)
 
 
 By this point, it's probably apparent that if we have lots of things like that flopping around in our code, things are going to messy and hard to read quickly.  Some way of taking a vector of numbers and *rescaling* them to lie within some new range is called for.
@@ -200,7 +200,7 @@ cex <- rescale(sqrt(dat.1982$pop), c(0.2, 10))
 plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
 ```
 
-![plot of chunk scaled_function](figure/scaled_function.png) 
+![plot of chunk scaled_function](figure/scaled_function.png)
 
 
 In the original [gapminder plots](http://www.gapminder.org/world/#$majorMode=chart$is;shi=t;ly=2003;lb=f;il=t;fs=11;al=54;stl=t;st=t;nsl=t;se=t$wst;tts=C$ts;sp=5.59290322580644;ti=1983$zpv;v=0$inc_x;mmid=XCOORDS;iid=phAwcNAVuyj1jiMAkmq1iMg;by=ind$inc_y;mmid=YCOORDS;iid=phAwcNAVuyj2tPLxKvvnNPA;by=ind$inc_s;uniValue=8.21;iid=phAwcNAVuyj0XOoBL_n5tAQ;by=ind$inc_c;uniValue=255;gid=CATID0;by=grp$map_x;scale=log;dataMin=283;dataMax=110808$map_y;scale=lin;dataMin=18;dataMax=87$map_s;sma=75;smi=2.65$cd;bd=0$inds=;modified=75), countries are coloured by continent.  The continent definitions are different in the data set that we have, but we can do basically the same thing.
@@ -245,7 +245,7 @@ cex <- rescale(sqrt(dat.1982$pop), c(0.2, 10))
 plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21, lwd=2.5)
 ```
 
-![plot of chunk scaled_coloured](figure/scaled_coloured.png) 
+![plot of chunk scaled_coloured](figure/scaled_coloured.png)
 
 
 Let's say we want to add a linear trendline to the plot.
@@ -268,7 +268,7 @@ add.trend.line("gdpPercap", "lifeExp", dat.1982, lwd=2)
 add.trend.line("gdpPercap", "lifeExp", dat.1982, lwd=2, lty=2, col="blue")
 ```
 
-![plot of chunk with_trend_line](figure/with_trend_line.png) 
+![plot of chunk with_trend_line](figure/with_trend_line.png)
 
 
 Now that we have this function, we can do all sorts of fun things with it:
@@ -283,7 +283,7 @@ add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Americas"
 add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Oceania",], col=col.table["Oceania"])
 ```
 
-![plot of chunk with_trend_lines](figure/with_trend_lines.png) 
+![plot of chunk with_trend_lines](figure/with_trend_lines.png)
 
 
 Which still looks a bit ugly.  Could be nicer with another function:
@@ -305,7 +305,7 @@ add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Americas", col.table
 add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Oceania", col.table)
 ```
 
-![plot of chunk with_trend_lines_function](figure/with_trend_lines_function.png) 
+![plot of chunk with_trend_lines_function](figure/with_trend_lines_function.png)
 
 
 For throwaways like this we might use *global variables* but beware here.  This is only OK when you use the function immediately upon creation and never again:
@@ -322,7 +322,7 @@ f("Americas")
 f("Oceania")
 ```
 
-![plot of chunk with_trend_lines_function_throwaway](figure/with_trend_lines_function_throwaway.png) 
+![plot of chunk with_trend_lines_function_throwaway](figure/with_trend_lines_function_throwaway.png)
 
 
 One of the nice things about this sort of approach is that we've not really specified *how* things have happened.  So we're free to swap out the details.
@@ -351,12 +351,12 @@ f("Americas")
 f("Oceania")
 ```
 
-![plot of chunk with_trend_lines_function_reimplement](figure/with_trend_lines_function_reimplement.png) 
+![plot of chunk with_trend_lines_function_reimplement](figure/with_trend_lines_function_reimplement.png)
 
 
 We will revisit this when it comes time to repeat things nicely.
 
-# Population growth over time.
+## Another example - population growth over time.
 
 ```r
 pop.by.country.relative <- function(country, dat, base.year=1952) {
@@ -375,10 +375,10 @@ lines(pop.rel ~ year, pop.by.country.relative("Australia", dat), type="o", col="
 lines(pop.rel ~ year, pop.by.country.relative("China", dat), type="o", col="red")
 ```
 
-![plot of chunk growth1](figure/growth1.png) 
+![plot of chunk growth1](figure/growth1.png)
 
 
-# General points:
+## General points:
 
 **Qu: Do we need to know how a function works to use it?**
 
@@ -386,53 +386,18 @@ No, difference between *what* and *implementation*.
 
 But you do need to know that function is working as it should.
 
-## Workflow for developing functions
+**Workflow for developing functions**
 
 1. Identify what you want to achieve
 2. Code it up in global environment
 3. Move into function
 4. Debug
 
-**Qu: what is something we want to do with this dataset?**
-Have a look at variables.
-
-Return data of year vs population growth for a given country.
-
-First develop in main window
-
-```coffee
-dat <- read.csv("data/gapminder-FiveYearData.csv",
-                stringsAsFactors=FALSE)
-
-i <- dat$country == "Australia"
-
-country <- "Australia"
-i <- dat$country == country
-dat.au <- dat[i,]
-dat.au <- dat[i,c("year", "pop")]
-```
-
-Now define as function
-
-```coffee
-get.population <- function(data, country) {
-  data[data$country == country, c("year", "pop")]
-}
-```
-
-**Qu: Is this useful given it is only a one line function?**
+**Qu: My function is only one line - is this useful?**
 
 Yes: More readable, less code when using repeatedly --> Don't Repeat Yourself
 
-**No function is too small.**
-
-Yes: Your program becomes defined around the "what" and not the "how".  It might be that you move to using some sort of database and the implementation does something like:
-
-```
-get.population <- function(data, country) {
-  dbAccess(data, paste("SELECT * from tblData WHERE country ==", country))
-}
-```
+Yes: Your program becomes defined around the "what" and not the "how".  It might be that you move to using some other implementation, but your function will still work.
 
 ## What makes for a good function?
 
@@ -449,14 +414,6 @@ get.population <- function(data, country) {
 
 <blockquote class="twitter-tweet"><p>"The name of a variable, function, or class, should answer all the big questions." - Uncle Bob Martin, Clean Code</p>&mdash; Gustavo Rod. Baldera (@gbaldera) <a href="https://twitter.com/gbaldera/status/327063173721100288">April 24, 2013</a></blockquote>
 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-## Extra exercises
-
-Using gap minder data set, make functions that
-
-1. Calculate total GDP for a given year and location --> use this to make a new variable giving total GDP per country
-2. Return a time series of year, life Expectancy, total GDP, population size for a given country
-3. Returns average life expectancy for entire population within a given continent
 
 ## Concluding thoughts
 
