@@ -250,33 +250,36 @@ Another approach for making reproducible outputs is to combine plots, tables, co
 
 Diego....
 
-## My ideal paper
+## An ideal paper
+
+Here is what my ideal paper would look like
 
 * All analyses and data in git repository
 	- open on github (some journal now host git repos)
 * Publication version of code archived with paper as supplementary material
 * Raw data also available with article, hosted in open repository, e.g. [DRYAD](datadryad.org).
-* Code modified to run directly from online data repo
-	- anyone (including me) can rerun my analyses at any time.
-* Anyone can build on your research.
+* Code modified to run directly from online data repo so  anyone (including you) can rerun analyses at any time.
+* key analyses embedded within a knitr script which produces a nice document for supplementary material.
+* Anyone can build on your research with a few clicks of their mouse.
 
-The workflow that we're following here is just a suggestion.
+The work flow that we're following here is just a suggestion.
 Organizing code and data is an art, and a room of 100 scientists will give you
 101 opinions about how to do it best. Consider this material a useful place to get started, and don't hesitate to tinker and branch out as you get a better feel for this process.
 
-**Qu: What are some of barriers to achieving this workflow?**
+**Some good examples of reproducible research we know of**
 
-**Qu: What are the additional benefits of this workflow**
-
-- ensures data is not lost( [Scientists losing data at a rapid rate. Nature.]( http://doi.org/10.1038/nature.2013.14416)
-- speeds up science by giving someone to build on [radical openness](http://vimeo.com/38260970)
-
-## Examples of reproducible research we know of
-
-* The code to create the supplementary figures in [this paper](http://dx.doi.org/10.1111/j.2041-210X.2012.00234.x) are 
+* The code to create the supplementary figures in [this paper](http://dx.doi.org/10.1111/j.2041-210X.2012.00234.x) are
 [here](https://github.com/richfitz/diversitree/blob/master/pub/example/primates.Rnw) -- the compiled version is [here](http://onlinelibrary.wiley.com/store/10.1111/j.2041-210X.2012.00234.x/asset/supinfo/mee3234_sm_diversitree-suppl.pdf?v=1&s=0e50af3b4e692c5e9f87abdcb9a2346de1463842) (starts on p 15).
 * This [supporting material](http://rspb.royalsocietypublishing.org/content/281/1778/20132570/suppl/DC1) is completely reproducible.
 * This [paper](http://www.g3journal.org/content/early/2013/10/30/g3.113.008565/suppl/DC1) is completely reproducible
+
+**Qu: What are some of the additional benefits of this workflow**
+
+- ensures data is not lost( [Scientists losing data at a rapid rate. Nature.]( http://doi.org/10.1038/nature.2013.14416)
+- speeds up science by giving everyone [something to build on](http://vimeo.com/38260970)
+
+**Qu: What are some of barriers to achieving this workflow?**
+
 
 ## More reading
 
@@ -287,7 +290,6 @@ of her papers](http://www.stanford.edu/~vcs/Papers.html) for reference.
 * Greg Wilson's paper on [Best Practices for Scientific Computing](http://doi.org/10.1371/journal.pbio.1001745)
 
 
-## Acknowledgements: This material was adapted from ... and modified by ...
+## Acknowledgements
 
-Benefited from points raised in discussion [across swc community](https://github.com/swcarpentry/bc/issues/199)
-
+This material presented here was adapted from swc by Daniel Falster, incorporating new material from Rich FitzJohn and also views presented by a wide range of people across the twittersphere and [within the swc community](https://github.com/swcarpentry/bc/issues/199)
