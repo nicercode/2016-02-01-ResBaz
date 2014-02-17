@@ -154,6 +154,13 @@ which will print
  create mode 100644 vc.Rproj
 ```
 
+To clarify what is going on, look at this figure
+
+![](git-info.png)
+
+
+You use `git add` to tell git what content you want it to track (new files, or changes to files that it already knows about) and then `git commit` to add that content to the repository.  (Don't worry about the last section, push yet, but that lets you keep the content of your local repository in sync with a repository on another computer, or on a hosting website like [http://github.com](GitHub).)
+
 To see the history
 
 ```
