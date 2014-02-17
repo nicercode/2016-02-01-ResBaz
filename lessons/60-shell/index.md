@@ -7,9 +7,15 @@ Title: The Unix Shell
 tutor: Diego Barneche
 ---
 
-## Download and open lesson material:
+## Initial setup (for Windows users only):
 
-We will spend some of our time learning about the basics of the shell by manipulating some experimental data. To get the data for this test, you will need internet access. Download the zipfile ([here](https://www.dropbox.com/s/wadwoyxvup9a1fc/shell_exercise_files.zip)) and unzip it inside your project data folder that we set up together yesterday.
+Open your Terminal and type the following command:
+
+```
+echo "export TERM=msys" >> ~/.bashrc
+```
+
+then restart your machine.  
 
 ## What is the shell and how do I access it?
 
@@ -42,10 +48,10 @@ Yours might look different (these can be easily customized). Usually includes so
 You can just enter commands directly into the shell.
 
 ```
-echo Morning Kensington
+echo Morning People
 ```
 
-We just used a command called `echo` and gave it an argument called `Morning Canberra`.
+We just used a command called `echo` and gave it an argument called `Morning People`.
 
 If you enter a command that shell doesn't recognize, it will just report an error
 
@@ -107,8 +113,9 @@ Note that I'm in my *home* directory. Whenever you start up a terminal, you will
 You can change the working directory at any time using the `cd` command.
 
 ```
-cd /usr/bin
-pwd
+cd
+cd /usr/bin 
+pwd 
 ls
 ```
 Now change back to your home again
@@ -256,10 +263,11 @@ $ man ls
 
 This will open the manual page for `ls`. Use the space key to go forward and b to go backwards. When you are done reading, just hit `q` to exit.
 
-Unfortunately Git Bash for Windows does not have the `man` command. Instead, try using the `--help` flag after the command you want to learn about.
+Unfortunately GitBash for Windows does not have the `man` command. Instead, try using the `--help` flag after the command you want to learn about. For internal bahs commands such as `cd` and  `pwd` you will be able to access the help file by typing `help function`.  
 
 ```
 ls --help
+help cd
 ```
 
 And you also find the manual pages at many different sites online, e.g. [http://linuxmanpages.com/]().
@@ -276,7 +284,7 @@ $ touch testfile
 
 Then list the contents of the directory again using `ls`. You should see that a new entry, called `testfile`, exists. It does not have a slash at the end, showing that it is not a directory. The `touch` command just creates an empty file.
 
-Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls -G` instead of `ls`. Now your directories, files, and executables will have different colors.
+Some terminals can color the directory entries in this very convenient way. In those terminals, use `ls -G` instead of `ls` if you are on a Mac or `ls --color` if you run on Windows. Now your directories, files, and executables will have different colors.
 
 Now if you use the command `ls -l` you will notice that `testfile` has a size of zero. OK then, let's get rid of `testfile`. To remove a file, just enter the command:
 
@@ -294,14 +302,6 @@ The `rm` command can be used to remove files. The `-i` adds the "are you sure?" 
 
 ***Warning: The shell does not have a recycling bin. So any file removed with `rm` is gone forever. Use with caution. Remember the -i argument***
 
-**Quick exercise 01**
-
-1. Change into your home directory;
-2. Then go to the directory where you saved your project setup following the project setup lesson;
-3. Then into the `data` directory;
-4. List the contents of this directory;
-5. Then change back into your home again.
-
 ---
 ## Exploring your file system
 
@@ -309,6 +309,7 @@ Other really important commands
 
 * `file`
 * `less`
+* `head`
 
 **Determining file type**
 
@@ -323,16 +324,22 @@ file Location.md
 Location.md: ASCII English text
 ```
 
-Examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit.
+Notice that the function `file` is unfortunately not defined in GitBash. Alternatively, Windows users can have a quick look at the file to see the contents of its first lines using the function `head`
 
-**Quick exercise 02**
+```
+head <filename>
+```
 
-1. cd `HOME`;
-2. cd into a given directory;
-3. List directory contents with `ls -l`;
-4. Pick any file that looks interesting to you;
-5. find out what it is using `file`;
-6. then view it's contents using `less`.
+you can also fully examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit. 
+
+**Quick exercise 01**
+
+Change into your home directory;  
+Then go to Desktop and then to the shell material folder;  
+Then into `data`;  
+List the contents of this directory;  
+Choose one file to examine with the function `head`;  
+Then change back into your home directory again.  
 
 ---
 
@@ -340,7 +347,7 @@ Examine files with the `less` command. Keeps the content from scrolling of the s
 
 **Shortcuts**
 
-There are some shortcuts which you should know about. Dealing with the home directory is very common. So, in the shell the tilde character, `~`, is a shortcut for your home directory. Navigate to the `data` directory, then enter the command:
+There are some shortcuts which you should know about. Dealing with the home directory is very common. So, in the shell the tilde character, `~`, is a shortcut for your home directory. Navigate to the `data` directory in your shell lesson material directory, then enter the command:
 
 ```
 $ ls ~
@@ -417,12 +424,12 @@ are exactly identical. The `ls` command cannot tell the difference between these
 
 ## Short exercise 01
 
-Do each of the following using a single `ls` command without navigating to a different directory.
-
-List all of the files in `/bin` that start with the letter `c`
-List all of the files in `/bin` that contain the letter `a`
-List all of the files in `/bin` that end in `o`
-BONUS: List all of the files in `/bin` that contain the letter `a` or the letter `t`
+Got to your home directory: `cd`  
+Do each of the following using a single ls command without navigating to a different directory;  
+List all of the files in shell material folder that start with the number 4;  
+List all of the files in shell material folder that contain the number 01 (together and in this order);  
+List all of the files in  in shell material folder that end with the number 0;  
+BONUS: List all of the files in  in shell material folder that contain the number 2 or the number 3.  
 
 ## Manipulating the file system
 
@@ -501,14 +508,14 @@ rm -r test_project/
 
 This will create a project called `test_project` with the following structure:
 
-|-- R/
-|-- data/
-|-- output/
-|-- |-- data/
-|-- |-- figures/
-|-- doc/
+|-- R/  
+|-- data/  
+|-- output/  
+|-- |-- data/  
+|-- |-- figures/  
+|-- doc/  
 
-Create lots of subdirectories at once using brace expansions.
+One could also create lots of subdirectories at once using curly brackets expansions.  
 
 ```
 echo Experiment-{A,B,C}-master
@@ -517,6 +524,7 @@ echo {01..15}
 echo a{A{1,2},B{3,4}}b
 ```
 
+Notice that this shortcut using curly brackets does not work in GitBash. 
 
 ```
 mkdir temp
@@ -530,15 +538,12 @@ rm -r temp
 
 ## Command History
 
-You can easily access previous commands.  Hit the up arrow.
-Hit it again.  You can step backwards through your command history.
-The down arrow takes your forwards in the command history.
+You can easily access previous commands.  Hit the up arrow. Hit it again.  You can step backwards through your command history. The down arrow takes your forwards in the command history.
 
-^-C will cancel the command you are writing, and give you a fresh prompt.
+* ^-C will cancel the command you are writing, and give you a fresh prompt;  
+* ^-R will do a reverse-search through your command history. This is very useful.  
 
-^-R will do a reverse-search through your command history. This is very useful.
-
-You can also review your recent commands with the `history` command. Just enter:
+You can also review your recent commands with the `history` command. Just enter:  
 
 ```
 history
@@ -576,14 +581,11 @@ which git
 
 ## Short exercise 2
 
-Go to your home directory;
-Create a new directory called `shell_exercise_2`;
-Dowload this ([zip file](https://www.dropbox.com/s/ccrb1qrmsb7hm6n/shell_exercise_2.zip)) and unzip it to the `shell_exercise_2` directory (ake sure you remove the .zip version afterwards);
-Then create four sub-directories in `shell_exercise_2`: `data`, `docs`, `output/{data, figures}`, `R`;
-Then move the respective file types into their matching directory type following yesterday's project setup;
-Go back to the `shell_exercise_2` directory;
-Rename (it's the same as mv command) it to `clean-folder`.
+Go to your shell material directory;  
+Move all files in directory `data` to a subdirectory `data/exercise`;  
+Back in your shell material directory create the following folders: `docs`, `output/data`, `output/figures` and `R`;  
+From within your shell material directory, move the respective file types into their matching directory type following the ([project setup](http://nicercode.github.io/2014-02-13-UNSW/lessons/30-projects/)) lesson;  
 
-Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
+Hints: You can combine several steps into one. Tab completion and wildcards are your friends.  
 
-**Acknowledgements:** This material was developed by  Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.
+**Acknowledgements:** This material was developed by  Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.  
