@@ -51,7 +51,7 @@ It returned exactly the same thing. In this case, `something` took the value of 
 ## Downloading the gapminder data
 We have to download a .csv file that we will use for the rest of our course. Right-click this [link][id] and save it to some new directory. Let's play with it now. 
 ```{r}
-data  <-  read.csv('/Users/barneche/gapminder/data/gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
+data  <-  read.csv('gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
 head(data) #try the function tail() instead, what happened?
 
 #subset the data for year 1982 only
