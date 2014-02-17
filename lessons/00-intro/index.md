@@ -7,19 +7,19 @@ tutor: Rich
 
 ## Why are we here?
 
-Why are you here? Why am I here?
-
-[Software carpentry](http://www.software-carpentry.org/)
+[About Software carpentry](http://www.software-carpentry.org/)
 
 - **Mission**: [Software Carpentry] helps researchers be more productive by teaching them basic computing skills. We run boot camps at dozens of sites around the world, and also provide open access material online for self-paced instruction. The benefits are more reliable results and higher productivity: a day a week is common, and a ten-fold improvement isn't rare.
 - **Who we are:** Software Carpentry is a volunteer organization supported by the Alfred P. Sloan Foundation and the Mozilla Foundation.
 - **Boot camps:** Our boot camps cover the core skills every scientist needs to get more done in less time: program construction, version control, testing, the command line, and data management. Short lessons alternate with hands-on practical sessions for two full days
 
-This boot camp sponsored by Andrew Letten, thanks Andrew!
+This boot camp was organised by Andrew Letten and sponsored by Richard Kingsford, thanks Andrew and Richard!
 
 ## The problem
 
-- the big mess
+Writing code is fast becoming a key - if not the most important - skill for doing research in the 21st century. As scientists, we live in extraordinary times. The amount of data (information) available to us is increasing exponentially, allowing for rapid advances in our understanding of the world around us. This information is driving many researchers to start coding.
+
+Yet, most researchers have no or limited formal training in computer science, and thus struggle to write nice code ([Merali 2010](http://doi.org/10.1038/467775a)). Most of us are self-taught, having used a mix of books, advice from other amateur coders, internet posts, and lots of trial and error. Soon after have we written our first R script, our hard drives explode with large bodies of barely readable code that we only half understand, that also happens to be full of bugs and is generally difficult to use. Not surprisingly, many researchers find writing code to be a relatively painful process, involving lots of trial and error and, inevitably, frustration.
 
 ## The solution
 
@@ -35,27 +35,27 @@ In this bootcamp you will learn how to
 Going to use R language
 
 - whose used R before: <6 months, up to 2 years, more than 2 years
-- who has used a different language (e.g., Python)
+- who has used a different language (e.g. Python)
 - who is hoping just to improve their own workflow?
 - who is hoping to develop code that *someone else* will use
 
 ## Expectations
 
-- we are volunteers
+- We are volunteers
 	- not being paid
 	- we are also learning
-- this boot camp is not
+- This boot camp is not
 	- an R workshop
 	- software engineering
 	- going to turn people into crack programmers and solve all their problems
 - It is
 	- about concepts not tools
-	- brief tour through some useful concepts and ideas that are not widely used in academic programmers
-- no silver bullet
-	- hoping that after two days you'll write perfect code, you won't. We **will** show you the key ingredients
-	- after that
-- boot camp is inclusive
-	- diverse crowd: not everything will appeal to everyone.  Some material will seem old or new, useful or useless, but bear with us.
+	- a brief tour through some useful concepts and ideas that are not widely used in academic programmers
+- There's no silver bullet
+	- If you are hoping that after two days you'll write perfect code, you won't. We **will** show you the key ingredients
+	- after that it's up to you to practice
+- The boot camp is inclusive
+	- it's a diverse crowd: not everything will appeal to everyone.  Some material will seem old or new, useful or useless, but bear with us.
 	- there is no dumb question
 	- anti-social behaviour not welcome
 	- everyone has complimentary skills --> use these to help each other
@@ -63,10 +63,17 @@ Going to use R language
 ## Setup
 
 - Sticky notes for help
-- Rstudio & Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd) (check with sticky notes)
 - Work in pairs
 	- why?
 	- help each other: Peer to peer is most efficient way of learning.
+- Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd) (check with sticky notes)
+
+Use Rstudio
+
+- open up Rstudio
+- explain about console window, editor,
+- R projects and working directories
+- Download materials for bootcamp.
 
 ## Interesting links
 
@@ -86,3 +93,6 @@ Why good code matters
 - Things can go badly go wrong
 	- [Patriot missile failure](http://www.ima.umn.edu/~arnold/disasters/patriot.html)
 	- [Scientists nightmare - retractions due to bad code](http://www.sciencemag.org/content/314/5807/1856.summary)
+
+## Acknowledgements
+This material was developed by Daniel Falster and Rich FitzJohn, incorporating examples and techniques (sticky notes, coding in pairs) from Greg Wilson.
