@@ -327,7 +327,7 @@ plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
 d_ply(dat.1982, .(continent), function(x) add.trend.line("gdpPercap", "lifeExp", x, col=col.table[x$continent]))
 ```
 
-![plot of chunk repeating_ply](figure/repeating_ply.png)
+![plot of chunk repeating_ply](figure/repeating_plyr.png)
 
 **Another example**
 Plyr really shines when there are many things to deal with at once.  For example, we plotted relative population growth by country for three countries before:
