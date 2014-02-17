@@ -21,7 +21,7 @@ tutor: Diego Barneche
 6. From your file `analysis.R` drag all the 'plotting functions' into `R/figures_functions.R`;  
 7. At the very beginning of your `analysis.R` file, `source` the new files with functions that you just created in the `R` folder and add the necessary libraries for it to work (in this case it's only `plyr`);  
 8. Remove any other `library()` lines from your `analysis.R` file;  
-9. Make sure you adjust the file path to your data in order to read it: `dat <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)`
+9. Make sure you adjust the file path to your data in order to read it: `data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)`
 9. Drag the last part of your `analysis.R` file (making plot) to the `figures.R` file;  
 10. In `figures.R` file, make sure you source the functions files the same way you just did in your `analysis.R` file. Also make sure you clean the console on your first line using: `rm(list=ls())`
 11. Create a new line between the sourced files and the actual code in order to read your data: 'data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)'
