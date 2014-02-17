@@ -74,13 +74,13 @@ As a simple starting point, let's re-implement some functions that are already i
 We're going to use some data from gapminder - download from [here](https://github.com/nicercode/gapminder/archive/d4f943d8ca15c2f6572ec52c74987e0f1971e64c.zip) and unzip into the directory that you are using.
 
 ```
-dat <- read.csv(gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+data <- read.csv(gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 ```
 
 This is pretty big, so grab just the data from 1982:
 
 ```
-dat.1982 <- dat[dat$year == 1982,]
+data.1982 <- data[data$year == 1982,]
 ```
 
 **Exercise**: Write a function that computes the mean of the data, and use it to compute the mean of the `gdpPercap` column and the `pop` column.  Perhaps call this function `average` to avoid colliding with the R function `mean`.
@@ -146,7 +146,7 @@ return a number, or a list.  There is a `return` function in R, but it is typica
 Now we're going to use data from the gapminder project, which gathers together a wide arrange of metrics for countries of the world. We're going to use a subset of data from this project which includes average life expectancy and GDP per capita on 5-year intervals from last 50 years. This is [a nice plot of the data](http://www.gapminder.org/world/#$majorMode=chart$is;shi=t;ly=2003;lb=f;il=t;fs=11;al=54;stl=t;st=t;nsl=t;se=t$wst;tts=C$ts;sp=5.59290322580644;ti=1983$zpv;v=0$inc_x;mmid=XCOORDS;iid=phAwcNAVuyj1jiMAkmq1iMg;by=ind$inc_y;mmid=YCOORDS;iid=phAwcNAVuyj2tPLxKvvnNPA;by=ind$inc_s;uniValue=8.21;iid=phAwcNAVuyj0XOoBL_n5tAQ;by=ind$inc_c;uniValue=255;gid=CATID0;by=grp$map_x;scale=log;dataMin=283;dataMax=110808$map_y;scale=lin;dataMin=18;dataMax=87$map_s;sma=75;smi=2.65$cd;bd=0$inds=;modified=75) that we're going to work towards recreating in R.
 
 ```r
-plot(lifeExp ~ gdpPercap, dat.1982, log="x")
+plot(lifeExp ~ gdpPercap, data.1982, log="x")
 ```
 
 ![plot of chunk plain](figure/plain.png)
@@ -157,11 +157,11 @@ Plot the points so that their radius is proportional to population size:
 
 ```r
 ## Scale on to [0,1]
-p <- (dat.1982$pop - min(dat.1982$pop)) /
-  (max(dat.1982$pop) - min(dat.1982$pop))
+p <- (data.1982$pop - min(data.1982$pop)) /
+  (max(data.1982$pop) - min(data.1982$pop))
 ## Convert to [0.2, 10]
 cex <- 0.2 + p * (10 - 0.2)
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex)
 ```
 
 ![plot of chunk scaled_manually](figure/scaled_manually.png)
@@ -171,11 +171,11 @@ It might be nicer if we scaled against square-root of population size, so that a
 
 
 ```r
-tmp <- sqrt(dat.1982$pop)
+tmp <- sqrt(data.1982$pop)
 p <- (tmp - min(tmp)) /
   (max(tmp) - min(tmp))
 cex <- 0.2 + p * (10 - 0.2)
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex)
 ```
 
 ![plot of chunk scaled_manually_sqrt](figure/scaled_manually_sqrt.png)
@@ -196,8 +196,8 @@ This code now does exactly the same thing as the previous block, but captures mo
 
 
 ```r
-cex <- rescale(sqrt(dat.1982$pop), c(0.2, 10))
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex)
+cex <- rescale(sqrt(data.1982$pop), c(0.2, 10))
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex)
 ```
 
 ![plot of chunk scaled_function](figure/scaled_function.png)
@@ -220,8 +220,8 @@ There are at least two ways of doing the map:
 
 
 ```r
-cols <- unname(col.table[match(dat.1982$continent, names(col.table))])
-cols <- unname(col.table[dat.1982$continent])
+cols <- unname(col.table[match(data.1982$continent, names(col.table))])
+cols <- unname(col.table[data.1982$continent])
 ```
 
 
@@ -240,9 +240,9 @@ captures intent better.
 
 
 ```r
-col <- colour.by.category(dat.1982$continent, col.table)
-cex <- rescale(sqrt(dat.1982$pop), c(0.2, 10))
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21, lwd=2.5)
+col <- colour.by.category(data.1982$continent, col.table)
+cex <- rescale(sqrt(data.1982$pop), c(0.2, 10))
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21, lwd=2.5)
 ```
 
 ![plot of chunk scaled_coloured](figure/scaled_coloured.png)
@@ -262,10 +262,10 @@ add.trend.line <- function(x, y, d, ...) {
 ```
 
 ```r
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21, lwd=2.5)
-add.trend.line("gdpPercap", "lifeExp", dat.1982)
-add.trend.line("gdpPercap", "lifeExp", dat.1982, lwd=2)
-add.trend.line("gdpPercap", "lifeExp", dat.1982, lwd=2, lty=2, col="blue")
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21, lwd=2.5)
+add.trend.line("gdpPercap", "lifeExp", data.1982)
+add.trend.line("gdpPercap", "lifeExp", data.1982, lwd=2)
+add.trend.line("gdpPercap", "lifeExp", data.1982, lwd=2, lty=2, col="blue")
 ```
 
 ![plot of chunk with_trend_line](figure/with_trend_line.png)
@@ -275,12 +275,12 @@ Now that we have this function, we can do all sorts of fun things with it:
 
 
 ```r
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Asia",], col=col.table["Asia"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Africa",], col=col.table["Africa"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Europe",], col=col.table["Europe"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Americas",], col=col.table["Americas"])
-add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == "Oceania",], col=col.table["Oceania"])
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Asia",], col=col.table["Asia"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Africa",], col=col.table["Africa"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Europe",], col=col.table["Europe"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Americas",], col=col.table["Americas"])
+add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Oceania",], col=col.table["Oceania"])
 ```
 
 ![plot of chunk with_trend_lines](figure/with_trend_lines.png)
@@ -297,12 +297,12 @@ add.continent.trend.line <- function(x, y, d, continent, col.table, ...)
 
 
 ```r
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
-add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Asia", col.table)
-add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Africa", col.table)
-add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Europe", col.table)
-add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Americas", col.table)
-add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, "Oceania", col.table)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
+add.continent.trend.line("gdpPercap", "lifeExp", data.1982, "Asia", col.table)
+add.continent.trend.line("gdpPercap", "lifeExp", data.1982, "Africa", col.table)
+add.continent.trend.line("gdpPercap", "lifeExp", data.1982, "Europe", col.table)
+add.continent.trend.line("gdpPercap", "lifeExp", data.1982, "Americas", col.table)
+add.continent.trend.line("gdpPercap", "lifeExp", data.1982, "Oceania", col.table)
 ```
 
 ![plot of chunk with_trend_lines_function](figure/with_trend_lines_function.png)
@@ -313,8 +313,8 @@ For throwaways like this we might use *global variables* but beware here.  This 
 
 ```r
 f <- function(continent)
-  add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, continent, col.table)
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
+  add.continent.trend.line("gdpPercap", "lifeExp", data.1982, continent, col.table)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
 f("Africa")
 f("Asia")
 f("Europe")
@@ -342,8 +342,8 @@ When we rerun this, we now get nicely clipped lines; but we didn't change anythi
 
 ```r
 f <- function(continent)
-  add.continent.trend.line("gdpPercap", "lifeExp", dat.1982, continent, col.table)
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col, pch=21)
+  add.continent.trend.line("gdpPercap", "lifeExp", data.1982, continent, col.table)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
 f("Africa")
 f("Asia")
 f("Europe")
@@ -359,8 +359,8 @@ We will revisit this when it comes time to repeat things nicely.
 ## Another example - population growth over time.
 
 ```r
-pop.by.country.relative <- function(country, dat, base.year=1952) {
-  dsub <- dat[dat$country == country, c("year", "pop")]
+pop.by.country.relative <- function(country, data, base.year=1952) {
+  dsub <- data[data$country == country, c("year", "pop")]
   dsub$pop.rel <- dsub$pop / dsub$pop[dsub$year == base.year]
   dsub
 }

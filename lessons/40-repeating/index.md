@@ -424,7 +424,7 @@ All it's doing is making a plot! Compare that to something like this
 
 ```coffee
 for (i in unique(Raw$SPP))
-  makePlot(i, dat = Raw)
+  makePlot(i, data = Raw)
 ```
 
 That's much nicer! It's obvious what the loop does, and no new variables are

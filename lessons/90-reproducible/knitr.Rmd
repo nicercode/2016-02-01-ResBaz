@@ -51,20 +51,20 @@ It returned exactly the same thing. In this case, `something` took the value of 
 ## Downloading the gapminder data
 We have to download a .csv file that we will use for the rest of our course. Right-click this [link][id] and save it to some new directory. Let's play with it now. 
 ```{r}
-dat  <-  read.csv('/Users/barneche/gapminder/data/gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
+data <-  read.csv('/Users/barneche/gapminder/data/gapminder-FiveYearData.csv', header=TRUE, stringsAsFactors=FALSE)
 head(dat) #try the function tail() instead, what happened?
 
 #subset the data for year 1982 only
-dat.1982  <-  dat[dat$year == 1982, ]
+data.1982  <-  data[data$year == 1982, ]
 
 #let's create a function to compute the arithmetic average of a vector
 average  <-  function(x) {
     sum(x) / length(x)
 }
 
-average(dat.1982$gdpPercap)
-#same as 
-sum(dat.1982$gdpPercap) / length(dat.1982$gdpPercap)
+average(data.1982$gdpPercap)
+#same as
+sum(data.1982$gdpPercap) / length(data.1982$gdpPercap)
 ```
 Notice that repeating things may be problematic; first because it increases your chances of typos; second, if for some reason you change the name of your columns in `dat`, you will have to manually change all these names, which will be quite annoying.  
 
@@ -85,14 +85,14 @@ add.trend.line  <-  function(x, y, d, col) {
 }
 
 my.plot  <-  function(year, data, cols) {
-    dat.year  <-  data[data$year == year, ]
-    col       <-  colour.by.category(dat.year$continent, cols)
-    cex       <-  linear.rescale(sqrt(dat.year$pop), range=c(0.2,10))
-    plot(lifeExp ~ gdpPercap, dat.year, las=1, xlab='GDP per capta', ylab='Life expectancy', cex=cex, col='black', bg=col, pch=21, log="x", xlim=c(240,114000), ylim=c(20,85), main=unique(dat.year$year))
-    
-    for(continent in unique(dat.year$continent)) {
+    data.year  <-  data[data$year == year, ]
+    col       <-  colour.by.category(data.year$continent, cols)
+    cex       <-  linear.rescale(sqrt(data.year$pop), range=c(0.2,10))
+    plot(lifeExp ~ gdpPercap, data.year, las=1, xlab='GDP per capta', ylab='Life expectancy', cex=cex, col='black', bg=col, pch=21, log="x", xlim=c(240,114000), ylim=c(20,85), main=unique(data.year$year))
+
+    for(continent in unique(data.year$continent)) {
         add.trend.line("gdpPercap", "lifeExp",
-                       d=dat.year[dat.year$continent == continent,],
+                       d=data.year[data.year$continent == continent,],
                        col=cols[[continent]])
     }
 }
@@ -104,8 +104,8 @@ col.table  <-  c(Asia='tomato',
                  Americas='darkgoldenrod1',
                  Oceania='green4')
 
-for (year in unique(dat$year))
-    my.plot(year, dat, col.table)
+for (year in unique(data$year))
+    my.plot(year, data, col.table)
 
 ```
 

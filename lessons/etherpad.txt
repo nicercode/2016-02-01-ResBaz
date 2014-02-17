@@ -18,8 +18,8 @@ linear.rescale <- function(x, range) {
   range[[1]] + p * (range[[2]] - range[[1]])
 }
 # Data that we will use.
-dat <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
-dat.1982 <- dat[dat$year == 1982,]
+data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+data.1982 <- data[data$year == 1982,]
 library(testthat)
 test_file("test-swc.R")
 # Put this in test-swc.R
@@ -27,48 +27,48 @@ set.seed(1)
 x<-runif(10)
 expect_that(variance(x), equals(var(x)))
 ----- more notes from Day 1 below here ----
-col <- colour.by.category(dat.1982$continent, col.table)
-cex <- linear.rescale(sqrt(dat.1982$pop), range=c(0.2, 10))
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col)
+col <- colour.by.category(data.1982$continent, col.table)
+cex <- linear.rescale(sqrt(data.1982$pop), range=c(0.2, 10))
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col)
 add.trend.line <- function(x, y, d) {
   fit <- lm(d[[y]] ~ log10(d[[x]]))
   abline(fit)
 }
-add.trend.line("gdpPercap", "lifeExp", dat.1982)
-plot(lifeExp ~ gdpPercap, dat.1982, log="x", cex=cex, col=col)
-for (continent in unique(dat.1982$continent)) {
-  add.trend.line("gdpPercap", "lifeExp", dat.1982[dat.1982$continent == continent,])
+add.trend.line("gdpPercap", "lifeExp", data.1982)
+plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col)
+for (continent in unique(data.1982$continent)) {
+  add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == continent,])
 }
 my.plot <- function(year, data, cols) {
-  dat.year <- data[data$year == year,]
-  col <- colour.by.category(dat.year$continent, cols)
-  cex <- linear.rescale(sqrt(dat.year$pop), range=c(0.2, 10))
-  plot(lifeExp ~ gdpPercap, dat.year, log="x", cex=cex, col=col)
-  for (continent in unique(dat.year$continent)) {
+  data.year <- data[data$year == year,]
+  col <- colour.by.category(data.year$continent, cols)
+  cex <- linear.rescale(sqrt(data.year$pop), range=c(0.2, 10))
+  plot(lifeExp ~ gdpPercap, data.year, log="x", cex=cex, col=col)
+  for (continent in unique(data.year$continent)) {
     add.trend.line("gdpPercap", "lifeExp",
-                   d=dat.year[dat.year$continent == continent,],
+                   d=data.year[data.year$continent == continent,],
                    col=cols[[continent]])
   }
 }
-for (i in unique(dat$year)) {
-  my.plot(i, dat, col.table)
+for (i in unique(data$year)) {
+  my.plot(i, data, col.table)
 }
 ---------------PLYR---------------------------
 rm(list=ls())
-dat <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 library(plyr)
 get.n.countries <- function(x){
   a<- unique(x$country)
   length(a)
 }
 get.n.countries(dat)
-dat.asia <- dat[dat$continent == "Asia",]
-asia.n <- get.n.countries(dat.asia)
+data.asia <- data[data$continent == "Asia",]
+asia.n <- get.n.countries(data.asia)
 model <- function(x){
   fit <- lm(lifeExp ~ log10(gdpPercap), data=x)
   c(n=length(x$lifeExp), r2= summary(fit)$r.squared, a= coef(fit)[[1]], b= coef(fit)[[2]])
 }
-out <- ddply(dat, .(continent,year), model)
+out <- ddply(data, .(continent,year), model)
 ##ALTERNATIVE PROJECT SET-UPS
 http://carlboettiger.info/2012/05/06/research-workflow.html
 http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424
@@ -136,13 +136,13 @@ git status
 5. Use git add and git commit to commit the changes
 6. Use git status to check that  file  no longer listed as modified
 draw.heart<-function(){
-     dat<- data.frame(t=seq(0, 2*pi, by=0.1) )
+     data<- data.frame(t=seq(0, 2*pi, by=0.1) )
     xhrt <- function(t) 16*sin(t)^3
     yhrt <- function(t) 13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t)
-    dat$y=yhrt(dat$t)
-    dat$x=xhrt(dat$t)
-    plot(dat$x,dat$y, type="n")
-     polygon(dat$x, dat$y, col="hotpink")
+    data$y=yhrt(data$t)
+    data$x=xhrt(data$t)
+    plot(data$x,data$y, type="n")
+     polygon(data$x, data$y, col="hotpink")
      }
 happy.v.day<-function(name){
     draw.heart()
