@@ -7,7 +7,7 @@ tutor: Diego Barneche
 
 # Things to cue up:
 
-* [Wikipedia](http://en.wikipedia.org/wiki/Bash_(Unix_shell))  
+* [Wikipedia]('http://en.wikipedia.org/wiki/Bash_(Unix_shell)')  
 * [Bash keyboard shortcuts](http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/)  
 
 # Copy to the etherpad:
