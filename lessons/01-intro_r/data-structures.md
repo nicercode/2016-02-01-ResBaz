@@ -491,5 +491,3 @@ class(x)
 mode(x)
 str(x)
 ```
-
-This material adapted from Karthik Ram's Canberra workshop.

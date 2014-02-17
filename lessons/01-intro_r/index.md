@@ -16,3 +16,6 @@ Not covered, but may be useful (written by others!)
 
 * [Getting started with RStudio](rstudio-basics.html)
 * [Seeking help](seeking-help.html)
+
+
+**Acknowledgements:** This material was adapted from material presented by Karthik Ram at ANU in 2013 and modified by Rich FitzJohn.
