@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Getting help
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 There are various ways to seek help on R.

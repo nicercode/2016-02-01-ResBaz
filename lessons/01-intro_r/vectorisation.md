@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Some notes on vectorization
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 

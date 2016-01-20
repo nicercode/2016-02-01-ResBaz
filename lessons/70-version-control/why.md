@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Why use version control?
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 There are many reasons to use version control, and some of these may only become apparent after you have incorporated it into your workflow (it's a bit like "why use R" or "why document your code").  However, we can immediately  identify a set of advantages that are very common.

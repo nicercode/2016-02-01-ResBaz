@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Understanding basic data types in R
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 * To make the best of the R language, you'll need a strong understanding of the basic data types and data structures and how to operate on those.

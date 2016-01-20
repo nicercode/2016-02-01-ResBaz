@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Very quick tour of R
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 For the first half-hour (or perhaps a little longer), we'll go over some of the fundamentals of the R language. Some or all of these topics might be a refresher for you depending on your experience.

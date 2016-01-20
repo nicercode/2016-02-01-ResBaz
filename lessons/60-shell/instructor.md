@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: git instructor notes
-tutor: Diego Barneche
+tutor: Joshua Madin
 ---
 
 # Things to cue up:

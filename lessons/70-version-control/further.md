@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Further reading
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 There is no way that we can cover everything that you need to get started with git.  I recommend that you work through the first two chapters of the [git book](http://git-scm.org/book) (free and online!).  It won't take long and you can skim through sections.  This is 95% of what you need to know to use git by yourself.  If you read the third chapter you know 99% of what you need to use git in a collaborative team.

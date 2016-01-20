@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Setting up git
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 ## Basic git configuration

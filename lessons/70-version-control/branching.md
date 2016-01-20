@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Branching
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 **Cue:**

@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Exercises
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 # Exercises for the git bit

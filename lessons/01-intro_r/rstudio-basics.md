@@ -5,7 +5,7 @@ title: Getting started with RStudio
 tutor: Rich
 ---
 
-*Note: Most of this intro to RStudio was written by Jenny Bryan. I will not go through this material separately but please feel free to review in your own time.*
+*Note: Most of this intro to RStudio was written by Jenny Bryan and updated by Rich FitzJohn. I will not go through this material separately but please feel free to review in your own time.*
 
 
 RStudio is a free and open source R integrated development environment. It provides a built in editor, works on all platforms (including on servers) and provides many advantages such as integration with version control and project management.

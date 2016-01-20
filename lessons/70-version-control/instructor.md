@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: git instructor notes
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 Things to cue up:

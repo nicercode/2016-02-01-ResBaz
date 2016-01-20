@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: function instructor notes
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 Start with these lines copied into an Rstudio tab.

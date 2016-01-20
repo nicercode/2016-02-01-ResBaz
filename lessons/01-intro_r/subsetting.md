@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Subsetting data
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 R has many powerful subset operators and mastering them will allow you to easily perform complex operation on any kind of dataset. Allows you to manipulate data very succinctly.

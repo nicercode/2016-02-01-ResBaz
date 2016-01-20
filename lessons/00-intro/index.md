@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Welcome to software carpentry
-tutor: Rich
+tutor: Daniel Falster
 ---
 
 ## Why are we here?

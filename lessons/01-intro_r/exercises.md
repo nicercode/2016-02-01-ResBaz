@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Intro to R - exercises
-tutor: Rich
+tutor: Joshua Madin
 ---
 
 Please try out these exercises from now until the break. Feel free to break if you're done with the exercise and don't flag us down if you're stuck and need any help.

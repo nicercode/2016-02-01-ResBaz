@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Writing functions in R
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 <!-- # Goals

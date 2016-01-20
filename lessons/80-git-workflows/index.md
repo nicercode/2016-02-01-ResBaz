@@ -2,7 +2,7 @@
 layout: lesson
 root: ../..
 title: Git workflows
-tutor: Rich FitzJohn
+tutor: Daniel Falster
 ---
 
 In this lesson, moving out from the basic branching that we had people do earlier and towards being able to use git collaboratively.  Check that everyone has github installed first, perhaps.
