@@ -1,0 +1,319 @@
+
+WELCOME TO SOFTWARE CARPENTRY UTS 2014.02.18
+
+Please download this file and put it somewhere on your computer (e.g. the desktop) and unzip it.  We'll be working in various subdirectories here today.
+https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip
+
+Notes from day 1 on etherpad are available here: http://nicercode.github.io/2014-02-18-UTS/lessons/Etherpad-day1.txt and https://etherpad.mozilla.org/ep/pad/view/SWC-Syd/dwadHLxogo
+
+
+Notes from day 2: February 19th 2014
+
+Google style guide:
+   https://google-styleguide.googlecode.com/svn/trunk/Rguide.xml
+   note that this differs strongly from most R code - it's designed to match google's in-house styles for other languages.
+Discussion of R style over time:
+   http://cran.r-project.org/web/packages/rockchalk/vignettes/Rstyle.pdf
+Another style guide:
+  http://csgillespie.wordpress.com/2010/11/23/r-style-guide/
+Moar from Hadley Wickham (strongly pro-underscore)
+  http://adv-r.had.co.nz/Style.html
+Programmers care *way* too much about these things:
+  http://en.wikipedia.org/wiki/Indent_style
+The important thing starting out is to match the styles that you see commonly around you, and to *be consistent*.  From the google guide:
+ * "The point of having style guidelines is to have a common vocabulary of coding so people can concentrate on what you are saying, rather than on how you are saying it. We present global style rules here so people know the vocabulary. But local style is also important. If code you add to a file looks drastically different from the existing code around it, the discontinuity will throw readers out of their rhythm when they go to read it. Try to avoid this."
+
+not sure what a terminal command does ? try typing man followed by the command eg :
+ man ls
+(that works on OS X or linux/ Unix systems)
+
+Some shell tricks that people may have been running up against:
+
+ * Spaces in filenames are tricky for the shell: they need to be escaped.  Rather than 'cd My Documents', do 'cd My\ Documents'
+ * Use tab completion and save typing.
+
+Relevant to yesterday: "Beginner R: formatting and subsetting data in R"
+http://lizmartinresearch.wordpress.com/2014/02/19/beginners-r-formatting-and-subsetting-data/
+
+Powershell is an alternative command line on Windows that works natively rather than emulating a Unix environment.  You can do all the things you want to do in the bash shell through this, including using git.  Thanks Tim!
+
+Exercise 02
+In data folder:
+List all of the files in shell material folder that start with the number 4;
+List all of the files in shell material folder that contain the number 1;
+List all of the files in  in shell material folder that end with the number 0;
+BONUS: List all of the files in  in shell material folder that contain the number 2 or the number 3.
+
+check out Intersect for some great tutorials on Unix command line and related topics :  http://www.intersect.org.au/content/learning-development
+
+More on Bash
+http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29
+Keyboard shortcuts
+http://www.skorks.com/2009/09/bash-shortcuts-for-maximum-productivity/
+
+
+
+
+##################### Version control with git ################
+# Enter these three lines at the console, but replace the dummy name/email with yours.
+
+git config --global user.name "Apprentice carpenter"
+git config --global user.email "gitrock@gmail.com"
+git config --global color.ui "auto"
+
+# Check that this has worked by running this:
+
+git config --list
+
+# (you should see your name and email here, and may see a few other things, but don't worry).
+
+# Mac users: please run
+git config --global core.editor "nano --tempfile"
+
+If you got a warning, type this on your GitBash Terminal
+export TERM=msys
+
+To make the warnings disappear for good
+echo "export TERM=msys" >> ~/.bashrc
+git config --global core.autocrlf "false"
+
+# Initialise empty git repository
+git init
+
+# check status
+ git status
+
+# add Rstudio project
+ git add version_control.Rproj
+ git commit -m "import Rstudio project"
+
+# add data
+git add data
+git commit -m "Add gapminder data"
+
+# add analysis
+git add analysis.R
+git commit -m "First version of analysis"
+
+# see log of all changes
+git log
+
+# see log of changes on file analysis.R
+git log analysis.R
+
+# To escape from vim type ":wq"
+# To change editor see here http://git-scm.com/book/en/Customizing-Git-Git-Configuration
+
+# To see what files are being followed
+git ls-files
+
+# To look at contents of a file in shell (and type q to quit)
+less analysis.R
+
+# Rename a file
+git mv analysis.R gapminder.R
+git commit -m "More informative name for analysis file"
+
+# to get help on git
+git help   # lsit of all command
+git add --help # help on specific command (use space to scroll and press `q` to exit)
+
+# see what changed in different commits
+git whatchanged
+
+# to check out old version
+git whatchanged  # choose a version and copy the big long ugly string
+git checkout bdce6674cc3e422db36373594ed376d5a793cf45  # checkout old version (replace my big long ugly string with yours)
+git checkout master  # back to present
+
+# change a file and save it
+git diff # shows you what changed in all files
+git diff gapminder.R # shows you what changed in this file
+git diff data # shows you all changes in directory `data`
+
+git add gapminder.R  # add modified file
+git commit -m "Simplified analysis of gapminder data" # tell git what you did
+
+# Tell git to ignore some files
+touch .gitignore # make a new file called .gitgnore
+ls -a # see files in directory, including hidden files
+# open Rstudio edit .gitignore then save--> add anything you don't want to track, e.g. .Rproj.user
+git add .gitignore   # tell git to track .gitignore
+git commit -m "Ignore some files we don't want to track"  # commit file
+
+# Exercise
+Make sure all your files are added to git and committed, *or* listed in the .gitignore as above.  When you type "git status" you should see:
+# On branch master
+nothing to commit, working directory clean
+
+Step back in time  :-)
+http://www.youtube.com/watch?v=NsMzM49OIII&feature=kp
+
+Set up git for Rstudio on windows:
+
+Tools -> Global options
+Bottom of the ribbon: Git/SVN
+If the path to git is blank, click Browse, and go to c:/Program Files (x86)/Git/bin/git.exe
+
+Everyone:
+Quit Rstudio and re open your project.  There should be a "git" tab in the top right corner.
+
+http://pcottle.github.io/learnGitBranching/?NODEMO
+
+# Command line version of the history
+git log  --graph --decorate --pretty=oneline --abbrev-commit
+
+# Set up your remote on github
+git remote add origin https://github.com/richfitz/learning_version_control.git
+git push -u origin master
+
+In a new directory on your computer (NOT your repository)
+git clone https://github.com/emadin/learning_version_contol
+Go into the folder that this creates (cd learning_version_contol)
+Type "git pull"
+This updates the changes
+
+#Irreproducible Research
+
+An example of reproducing (someone else's) research using R, knitr and Github:
+https://github.com/timchurches/meta-analyses/blob/master/benefits-of-reproducible-research/reproducing-bicycle-helmet-research.md
+
+
+#Reproducible research
+
+dir.create("output")
+write.csv(model.data, file="output/table1.csv")
+
+names(model.data) <- c("Continent", "Year", "N", "R2", "Intercept", "Slope")
+write.csv(format(model.data, digits=2,trim=TRUE), file="output/table1.csv", quote=FALSE, row.names=FALSE)
+
+pdf("output/Fig1.pdf", height=6, width=8)
+myplot(data.1982,"gdpPercap","lifeExp", main =1982)
+dev.off()
+
+# a better way
+to.pdf(myplot(data.1982,"gdpPercap","lifeExp", main =1982), filename="output/Fig1.pdf", height=6, width=8)
+
+
+
+plot.year <-function(data, year){
+  data.new <- data[data$year == year,]
+  myplot(data.new,"gdpPercap","lifeExp", main =year)
+}
+
+plot.year(data,1982)
+
+for(year in unique(data$year))
+  to.pdf(plot.year(data, year), filename=paste0("output/Fig-",year,".pdf"), height=6, width=8)
+
+Extreme Knitr supporting material
+http://rspb.royalsocietypublishing.org/content/281/1778/20132570/suppl/DC1 (download the pdf) or here https://www.dropbox.com/s/zkygq6p6fv7022o/rspb20132570supp1.pdf
+
+Download Diego's knitr example here:
+  http://www.zoology.ubc.ca/~fitzjohn/90-reproducible.zip
+(sorry, I don't have dropbox)
+Unzip the file, open the Rproj within.  Open the file "knitr.Rmd" - there will be a little button saying "Knit HTML" on the toolbar.  Click that and watch the magic.
+
+
+
+What worked well
+* plyr
+* etherpad
+* Rstudio with git
+* git bsh first before gui
+
+
+What didn't work
+* cheat sheets
+* make sure all code in etherpad, nice break for people to implement
+* Second projector
+* Shell - better defaults for coloring input and output
+
+
+
+Here's James's notes on Shell and Git
+
+SHELL
+
+commands:
+    cd - returns to home directory
+        ~ is home directory, e.g. ~/AppData
+        pwd - gives path
+
+        echo - prints line
+        rm - remove file
+        ls -l - gives long list format
+        ls -l --color (for windows)
+        ls -l -g (for mac, gives colour)
+        ls -l *.dat (returns list of .dat files)
+        ls -l *[46]* returns anything with a 4 or a 6 in the name (look up regular expressions if you want to learn how to do more of this stuff)
+        man(ls) - gives help for ls (mac), type q to exit screen
+        ls --help (on windows) - if that doesn't work, then try 'help cd'
+        touch creates a text file e.g. touch text.txt'
+        start (win) or open (mac) text.txt (if Rstudio is set up as default in mac, then it will open in Rstudio, or use "open -a Rstudio")
+        mkdir - creates directory, mkdir project project 1 - separate directories by space
+        cd -    goes back to the previous directory
+        history - shows command line history. can use history !n where n is a number given to the line, to rerun a command
+        which - returns the path of something in your global path thingy
+
+keyboard shortcuts:
+        ctrl-l - clears everything
+        ctrl-c cancels your line without evaluating it
+        ctrl-r recursive find, finds last time you used a command or wrote something. e.g. mkdir or whatever
+
+misc:
+        drwxr - xr - r (groups - and - permissions)
+
+
+
+GIT
+
+        git init - tells git to track a directory
+                creates hidden file (.git)
+                ls -a  will show hidden files
+                applies to all subdirectories
+        git add version_control.Rproj
+                export TERM=msys   - fixes the warning we got
+        git status
+        git commit -m "Import the Rstudio project" (need to make a commit after any change)
+                git config --global core.autoconf "false  (makes line endings warning disappear - consequence of importing mac generated txt file to win)
+        git log   - gives us the commit log
+        git log FILE  - gives us the commit log for a given file. can pass all sorts of arguments to filter the output of log
+
+                export EDITOR=nano
+                or git config --global core.editor "nano"
+                to get out of vim, :wq
+
+        git ls-files   - to see what files are being followed
+        less analysis.R  - to look at contents of a file in shell (type q to quit)
+        git mv analysis.R gapminder.R   - rename a file
+        git help
+        git checkout FIRST 6 CHARACTERS OF VERSION YOU WANT TO CHECKOUT
+                then we're back in time to look around, but we haven't actually made any commits
+                if you want to get a file that was deleted or changed etc. etc. then the easiest way is to copy it to another folder, return to current version and copy it in and commit
+        git checkout master   - goes back to the current version
+        git diff   - shows differences between old files and files that have changed since the last commit
+        git diff analysis.R   - shows diffs for analysis.R
+
+                make a file called .gitignore and list names of files or patterns of names of files (i.e. figures generated by project) that we want git to ignore
+
+        ## any time you make changes to a file you have to git add before git commit
+
+
+
+        # to push something up to github
+        git push -u origin master
+
+        # to clone someone's repository from github
+        git clone https://github.com/emadin/learning_version_contol
+
+        # to pull down the latest changes
+        git pull https://github.com/emadin/learning_version_contol
+
+
+Index of all lessons:
+http://nicercode.github.io/2014-02-18-UTS/lessons/
+
+
+
+

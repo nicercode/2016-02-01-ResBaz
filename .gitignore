@@ -1,4 +1,8 @@
 *~
 *.pyc
 .DS_Store
+.ipynb_checkpoints
 _site
+output
+figures
+.Rproj.user
