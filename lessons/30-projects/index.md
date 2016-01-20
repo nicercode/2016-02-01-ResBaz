@@ -51,7 +51,7 @@ the project, who else is collaborating on that project.
 Here are a couple of different ideas for laying a project out.  This
 is the basic structure that I tend to use:
 
-```
+~~~
 proj/
 |-- R/
 |-- data/
@@ -59,7 +59,7 @@ proj/
 |-- |-- data/
 |-- |-- figures/
 |-- doc/
-```
+~~~
 
 * The `R` directory contains various files with function definitions
   (but *only* function definitions - no code that actually runs).
@@ -84,7 +84,7 @@ proj/
 In this set up, I usually have the R script files that *do* things in
 the project root:
 
-```
+~~~
 proj/
 |-- R/
 |-- data/
@@ -93,7 +93,7 @@ proj/
 |-- |-- figures/
 |-- doc/
 |-- analysis.R
-```
+~~~
 
 For very simple projects, you might drop the R directory, perhaps
 replacing it with a single file `analysis-functions.R` which you
@@ -101,12 +101,12 @@ replacing it with a single file `analysis-functions.R` which you
 
 The top of the analysis file usually looks something like
 
-```r
+~~~r
 library(some_package)
 library(some_other_package)
 source("R/functions.R")
 source("R/utilities.R")
-```
+~~~
 
 ...followed by the code that loads the data, cleans it up, runs the
 analysis and generates the figures.

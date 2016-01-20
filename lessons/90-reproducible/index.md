@@ -90,21 +90,21 @@ Saving tables is relatively straight forward using `write.csv`.
 
 Let's say we have a table of values from
 
-```coffee
+~~~coffee
 library(plyr)
 source("R/functions.R")
 data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 
 # For each year, fit linear model to life expectancy vs gdp by continent
 model.data <- ddply(data, .(continent,year), fit.model, x="lifeExp", y="gdpPercap")
-```
+~~~
 
 Now we just want to write this table to file:
 
-```coffee
+~~~coffee
 dir.create("output")
 write.csv(model.data, file="output/table1.csv")
-```
+~~~
 
 This is good, but there's a couple of problems:
 
@@ -114,9 +114,9 @@ This is good, but there's a couple of problems:
 
 So here's a better version:
 
-```coffee
+~~~coffee
 write.csv(format(model.data, digits=2, trim=TRUE), file="output/table1.csv", row.names=FALSE, quote=FALSE)
-```
+~~~
 
 ### Plots
 
@@ -124,30 +124,30 @@ One way of plotting to a file is to open a plotting device (such
 as `pdf` or `png`) run a series of commands that generate plotting
 output, and then close the device with `dev.off()`, e.g.
 
-```
+~~~
 pdf("my-plot.pdf", width=6, height=4)
   # ...my figure here
 dev.off()
-```
+~~~
 
 
 Hopefully your figure code is stored as a function, so that you can type something like
 
-```
+~~~
 library(plyr)
 source("R/functions.R")
 data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 data.1982 <- data[data$year == 1982,]
 myplot(data.1982,"gdpPercap","lifeExp", main =1982)
-```
+~~~
 
 to make your figure.  Now you can type
 
-```
+~~~
 pdf("output/my-plot.pdf", width=6, height=4)
 myplot(data.1982,"gdpPercap","lifeExp", main =1982)
 dev.off()
-```
+~~~
 
 However, this still gets a bit unweildly when you have a large number
 of figures to make (especially for talks where you might make 20 or 30
@@ -155,7 +155,7 @@ figures).
 
 A better approach [proposed by Rich](http://nicercode.github.io/blog/2013-07-09-figure-functions/) is to use a little function called `to.pdf`:
 
-```coffee
+~~~coffee
 to.pdf <- function(expr, filename, ..., verbose=TRUE) {
   if ( verbose )
     cat(sprintf("Creating %s\n", filename))
@@ -163,14 +163,14 @@ to.pdf <- function(expr, filename, ..., verbose=TRUE) {
   on.exit(dev.off())
   eval.parent(substitute(expr))
 }
-```
+~~~
 
 Which can be used like so:
 
 
-```coffee
+~~~coffee
 to.pdf(myplot(data.1982,"gdpPercap","lifeExp", main=1982), "output/1982.pdf", width=6, height=4)
-```
+~~~
 
 A couple of nice things about this approach:
 
@@ -190,7 +190,7 @@ A couple of nice things about this approach:
 For talks, I often build up figures piece-by-piece.  This can be done
 by adding an option to your function (for a two-part figure)
 
-```coffee
+~~~coffee
 fig.progressive <- function(with.trend=FALSE) {
   set.seed(10)
   x <- runif(100)
@@ -204,35 +204,35 @@ fig.progressive <- function(with.trend=FALSE) {
            pch=c(1, NA), lty=c(NA, 1), col=c("black", "red"), bty="n")
   }
 }
-```
+~~~
 
 Now -- if run with as
 
-```coffee
+~~~coffee
 fig.progressive(FALSE)
-```
+~~~
 
 just the data are plotted, and if run as
 
 
-```coffee
+~~~coffee
 fig.progressive(TRUE)
-```
+~~~
 
 the trend line and legend are included.  Then with the `to.pdf`
 function, we can do:
 
 
-```coffee
+~~~coffee
 to.pdf(fig.progressive(TRUE),  "output/progressive-1.pdf", width=6, height=4)
 to.pdf(fig.progressive(FALSE), "output/progressive-2.pdf", width=6, height=4)
-```
+~~~
 
 which will generate the two figures. The general idea can be expanded to more devices, such as png (see this [blog post](http://nicercode.github.io/blog/2013-07-09-figure-functions/) for details).
 
 We can use a similar approach to export figures in png format
 
-```coffee
+~~~coffee
 
 to.dev <- function(expr, dev, filename, ..., verbose=TRUE) {
   if ( verbose )
@@ -244,7 +244,7 @@ to.dev <- function(expr, dev, filename, ..., verbose=TRUE) {
 
 to.dev(myplot(data.1982, "gdpPercap","lifeExp", main=1982), png, "output/1982.png", width=600, height=400)
 
-```
+~~~
 
 
 ## Reproducible reports with knitr

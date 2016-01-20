@@ -111,18 +111,18 @@ workflow.
 The command `git branch` lists the branches git knows about.  By
 default, there is only one branch and it is called `master`.
 
-```
+~~~
 git branch
 * master
-```
+~~~
 
 The asterisk next to this indicates that this is the *current* branch.
 If you pass in the `-v` argument (for **verbose**), you get
 
-```
+~~~
 git branch -v
 * master a0f9f69 Added RStudio files
-```
+~~~
 
 which adds the shortened version of the SHA hash and the last commit
 message.
@@ -132,17 +132,17 @@ message.
 There are two ways of creating branches in git.  The first is to use
 `git branch`.  The command 
 
-```
+~~~
 git branch new_idea
-```
+~~~
 
 creates a new branch called `new_idea`, but does not change to it.
 Rerunning `git branch -v`:
 
-```
+~~~
 * master   a0f9f69 Added RStudio files
   new_idea a0f9f69 Added RStudio files
-```
+~~~
 
 We now have two branches, both at the same point on the tree.  The
 asterisk indicates that we are on the branch `master`.
@@ -150,49 +150,49 @@ asterisk indicates that we are on the branch `master`.
 You can change to a branch by using `git checkout`.  So to switch to
 the `new_idea` branch, you would do:
 
-```
+~~~
 git checkout new_idea
-```
+~~~
 
 which lets you know that it worked
 
-```
+~~~
 Switched to branch 'new_idea'
-```
+~~~
 
 You can switch back to master by doing
 
-```
+~~~
 git checkout master
 Switched to branch 'master'
-```
+~~~
 
 and can delete branches by passing `-d` to `git branch`
 
-```
+~~~
 git branch -d new_idea
-```
+~~~
 
 which prints
 
-```
+~~~
 Deleted branch new_idea (was a0f9f69).
-```
+~~~
 
 The other way of creating a branch and switching to it is to pass `-b`
 as an argument to checkout:
 
-```
+~~~
 git checkout -b new_idea
 Switched to a new branch 'new_idea'
-```
+~~~
 
 Now `git branch` shows:
 
-```
+~~~
   master
 * new_idea
-```
+~~~
 
 as we both *created* and *switched to* the new branch `new_idea`.
 
@@ -202,11 +202,11 @@ New work is commited to the current active branch (the one with the
 asterisk next to it in `git branch` (at the moment this is the branch
 `new_idea`.  So if we edit a file and do `git commit`.
 
-```
+~~~
 # ...edit file...
 git add script.R
 git commit -m "Modified function to make NA treatment optional"
-```
+~~~
 
 The history is now equivalent to this picture from before:
 
@@ -214,12 +214,12 @@ The history is now equivalent to this picture from before:
 
 You can also see a picture of this with some arguments to `git log`:
 
-```
+~~~
 git log --graph --decorate --pretty=oneline --abbrev-commit
 * 37485b1 (HEAD, new_idea) Modified function to make NA treatment optional
 * a0f9f69 (master) Added RStudio files
 * 9b5f828 Added function that computes standard error of the mean
-```
+~~~
 
 (which will even be in colour if you [set that up](setup.html#Colour))
 
@@ -230,30 +230,30 @@ merge them into your `master` branch.
 
 To do the merge, you first check the `master` branch back out:
 
-```
+~~~
 git checkout master
-```
+~~~
 
 which will output
 
-```
+~~~
 Switched to branch 'master'
-```
+~~~
 
 then
 
-```
+~~~
 git merge new_idea
-```
+~~~
 
 which will output
 
-```
+~~~
 Updating a0f9f69..37485b1
 Fast-forward
  script.R | 3 +-
  1 file changed, 3 insertions(+), 2 deletions(-)
-```
+~~~
 
 telling you that `master` was "fast-forwarded" from `a0f9f69` to
 `37485b1`, changing one file (`script.R`) by inserting three lines and
@@ -262,9 +262,9 @@ deleting two.
 The tree now has two branches that "point" at the last commit:
 `master` and `new_idea`.  We can delete the `new_idea` branch with
 
-```
+~~~
 git branch -d new_idea
-```
+~~~
 
 (the `-d` argument stands for **delete**).
 
@@ -278,25 +278,25 @@ as noted above you have two choices -- you can **merge** or you can
 **rebase**.  Suppose for now that we have checked out `experiment`.
 You would switch to to branch `master` by running
 
-```
+~~~
 git checkout master
-```
+~~~
 
 and then merge the experiment in with
 
-```
+~~~
 git merge experiment
-```
+~~~
 
 which gives a history like this:
 
 ![](img/pro-git-branch-merge.png)
 
 The alternative would be to run 
-```
+~~~
 git checkout master
 git rebase experiment
-```
+~~~
 
 which results in a history like this:
 
@@ -304,9 +304,9 @@ which results in a history like this:
 
 In both cases, you could delete the experiment branch with
 
-```
+~~~
 git branch -d experiment
-```
+~~~
 
 What you chose is often mostly a matter of taste (and there are a
 diversity of opinions on this).  For a single-user workflow it often
@@ -323,13 +323,13 @@ reordered linearly.  In that case, `rebase` is often the best bet.
 Suppose that you want to look an old version (say, `C2` in the graphs
 above).  You can simply do to
 
-```
+~~~
 git checkout C2
-```
+~~~
 
 which will produce the rather scary message:
 
-```
+~~~
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
 state without impacting any branches by performing another checkout.
@@ -340,7 +340,7 @@ do so (now or later) by using -b with the checkout command again. Example:
   git checkout -b new_branch_name
 
 HEAD is now at 5d522e6... Added RStudio files
-```
+~~~
 
 ![](img/headless-mode.jpg)
 
@@ -350,9 +350,9 @@ What this means:
  
 If you did want to start a branch here, you can do 
 
-```
+~~~
 git checkout -b revisit_old_analysis
-```
+~~~
 
 which will start a new branch at the point `C2`.  You can then
 continue adding to that branch with `git commit`, or just easily
@@ -360,9 +360,9 @@ switch back to it.
 
 You could also have done both things in one step, from `master`:
 
-```
+~~~
 git checkout -b revisit_old_analysis C2
-```
+~~~
 
 which would start a new branch called `revisit_old_analysis` at the
 point in history `C2`.

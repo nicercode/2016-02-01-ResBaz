@@ -43,11 +43,11 @@ Most ecologists we know have adopted at least one of these techniques for doing 
 
 In addition, you'll often see people suggesting putting headers like this in your code file:
 
-```
+~~~
   ## My file (c) Rich FitzJohn
   ## Created: 2012/10/04
   ## Modified: 2013/04/04
-```
+~~~
 
 Sometimes you'll even see changelogs embedded in these.
 

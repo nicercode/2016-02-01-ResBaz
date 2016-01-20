@@ -5,7 +5,7 @@ title: Some really horrible code (of mine, when I was young and naive)
 tutor: Daniel Falster
 ---
 
-```coffee
+~~~coffee
   for(n in 1:n.spp)
     {
     Ind = unique(Raw[Raw$SPP==as.character(sp.list$SPP[n]), "INDIV"]);
@@ -33,4 +33,4 @@ tutor: Daniel Falster
    mtext(as.character(sp.list$Species[n]), side = 3, line = 2, outer = T, adj = 0.5, cex =1.5)
    }
 rm(R, Ind, I, i, X, X_ax, X_ax2, Y_ax, Y_ax2, Y, Xout, Dat)
-```
+~~~

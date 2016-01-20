@@ -24,17 +24,17 @@ Go into the Console, where we interact directly with the R kernel.
 
 Make an assignment and then inspect the object you just created.
 
-```coffee
+~~~coffee
 x <- 3 * 4
 x
-```
+~~~
 
 All R statements where you create objects -- "assignments" -- have this
 form:
 
-```coffee
+~~~coffee
 objectName <- value
-```
+~~~
 
 You will make lots of assignments and the operator `<-` is a pain to
 type. Don't be lazy and use `=`, although it would work, because it
@@ -55,18 +55,18 @@ RStudio offers many handy [keyboard shortcuts](http://www.rstudio.com/ide/docs/u
 Object names cannot start with a digit and cannot contain certain
 other characters such as a comma or a space. You will be wise to adopt a convention for demarcating words in names.
 
-```coffee
+~~~coffee
 i.use.periods
 otherPeopleUseCamelCase
 even_others_use_underscores
-```
+~~~
 
 R has a mind-blowing collection of built-in functions that are
 accessed like so
 
-```coffee
+~~~coffee
 functionName(arg1 = val1, arg2 = val2, and so on)
-```
+~~~
 
 Let's try using `seq()` which helps make regular sequences of numbers
 and, while we're at it, demo more helpful features of RStudio.
@@ -75,9 +75,9 @@ Type `se` and hit TAB. A pop up shows you possible completions. Specify `seq()` 
 return. RStudio also exits the parenthetical expression for you.  IDEs
 are great.
 
-```coffee
+~~~coffee
 seq(1, 10)
-```
+~~~
 
 The above also demonstrates something about how R resolves function
 arguments. You can always specify in `name = value` form. But if you
@@ -92,55 +92,55 @@ value`.
 
 Make this assignment and notice similar help with quotation marks.
 
-```coffee
+~~~coffee
 yo <- "hello world"
-```
+~~~
 
 If you just make an assignment, you don't get to see the value, so
 then you're tempted to immediately inspect.
 
-```coffee
+~~~coffee
 y <- seq(1, 10)
 y
-```
+~~~
 
 This common action can be shortened by surrounding the assignment with
 parentheses, which causes assignment and "print to screen" to happen.
 
-```coffee
+~~~coffee
 (y <- seq(1, 10))
-```
+~~~
 
 Not all functions have (or require) arguments:  
 
-```coffee
+~~~coffee
 date()
 # see list of files in your current directory
 dir() 
 # or 
 file.list()
-```
+~~~
 
 Now look at your workspace -- in the upper right pane. The workspace is
 where user-defined objects accumulate. You can also get a listing of
 these objects with commands:
 
-```coffee
+~~~coffee
 objects()
 ls()
-```
+~~~
 
 If you want to remove something you can do this
 
-```coffee
+~~~coffee
 rm(y)
-```
+~~~
 
 To remove everything:
 
-```coffee
+~~~coffee
 rm(list = ls())
-```
+~~~
 
 or click the broom in the workspace pane.
 
@@ -195,9 +195,9 @@ and verify there is a file named `.RData`. You will also see a file
 
 Restart RStudio. In the Console you will see a line like this:
 
-```coffee
+~~~coffee
 [Workspace loaded from ~/.RData]
-```
+~~~
 
 indicating that your workspace has been restored. Look in the Workspace pane and you'll see the same objects as before. In the History tab of the same pane, you should also see your command history.You're back in business. This way of starting and stopping analytical work will not serve you well for long but it's a start.
 
@@ -206,11 +206,11 @@ indicating that your workspace has been restored. Look in the Workspace pane and
 Any process running on your computer has a notion of its "working directory". In R, this is where R will look, by default, for files you ask it to load. It also where, by default, any files you write to disk will go. Chances are your current working directory is the directory we inspected above, i.e. the one where RStudio wanted to save the workspace.
 
 You can explicitly check your working directory with:
-```coffee
+~~~coffee
 getwd()
 # then you can change it with:
 setwd("~/Documents/project-name/")
-```
+~~~
 
 It is also displayed at the top of the RStudio console.
 
@@ -235,21 +235,21 @@ You can create a directory and, therefore RStudio project, called `tgac-bootcamp
 
 <!-- https://github.com/yihui/knitr/issues/277 -->
 
-```coffee
+~~~coffee
 setwd("~/tgac-bootcamp/")
 getwd()
-```
+~~~
 
 Now check that the "home" directory for your project is the working directory of our current R process:
 
-```coffee
+~~~coffee
 getwd()
-```
+~~~
 _I can't print my output here because this document itself does not reside in the RStudio Project we just created._
 
 Let's enter a few commands in the Console, as if we are just beginning an analytical project:
 
-```coffee
+~~~coffee
 a <- 2
 b <- -3
 sigSq <- 0.5
@@ -260,7 +260,7 @@ write(avgX, "avgX.txt")
 plot(x, y)
 abline(a, b, col = "purple")
 dev.print(pdf, "myPlot.pdf")
-```
+~~~
 
 Let's say this is a good start of an analysis and your ready to start preserving the logic and code. Visit the History tab of the upper right pane. Select these commands. Click "To Source". Now you have a new pane containing a nascent R script. Click on the floppy disk to save. Give it a name ending in `.R`, I used `projectStartDemo.R` and note that, by default, it will go in the directory associated with your project.
 

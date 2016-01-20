@@ -14,7 +14,7 @@ Things to cue up:
 
 Copy to the etherpad:
 
-```
+~~~
 # Enter these three lines at the console, but replace the dummy name/email with yours.
 
 git config --global user.name "Apprentice carpenter"
@@ -29,4 +29,4 @@ git config --list
 
 # Mac users: please run
 git config --global core.editor "nano --tempfile"
-```
+~~~

@@ -70,16 +70,16 @@ Not sure exactly what we want to cover here; we could work through how to get th
 * Basically a folder in time to organise similar thoughts.
 * Creating branches is easy:
 
-```
+~~~
 git branch new_idea
 git checkout new_idea
-```
+~~~
 
 or
 
-```
+~~~
 git checkout -b new_idea
-```
+~~~
 
 * Do a series of commmits
 * Merge back into your main branch

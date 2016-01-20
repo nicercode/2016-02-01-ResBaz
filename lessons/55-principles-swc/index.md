@@ -28,9 +28,9 @@ Our recommendation for writing nice R code is that in most cases, you
 should put your functions into a file
 with an intuitive name, like `analysis-fun.R` and read these into memory by calling:
 
-```
+~~~
 source("analysis-fun.R")
-```
+~~~
 
 From the point of view of writing nice code, this approach is nice
 because it leaves you with an uncluttered analysis script, and a

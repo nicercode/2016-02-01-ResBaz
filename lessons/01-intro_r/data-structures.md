@@ -20,13 +20,13 @@ tutor: Rich
 * character (e.g, "a", "swc")
 
 
-```coffee
+~~~coffee
 typeof() # what is it?
 class() # what is it? (sorry)
 storage.mode() # what is it? (very sorry)
 length() # how long is it? What about two dimensional objects?
 attributes() # does it have any metadata?
-```
+~~~
 
 R also has many data structures. These include
 
@@ -49,7 +49,7 @@ A vector can be a vector of characters, logical, integers or numeric.
 
 Create an empty vector with `vector()`
 
-```
+~~~
 x <- vector()
 # with a pre-defined length
 x <- vector(length = 10)
@@ -58,89 +58,89 @@ vector("character", length = 10)
 vector("numeric", length = 10)
 vector("integer", length = 10)
 vector("logical", length = 10)
-```
+~~~
 The general pattern is `vector(class of object, length)`.  You can also create vectors by concatenating them using the `c()` function.
 
 Various examples:
 
-```
+~~~
 x <- c(1, 2, 3)
-```
+~~~
 
 x is a numeric vector. These are the most common kind. They are numeric objects and are treated as double precision real numbers. To explicitly create integers, add a `L` at the end.
 
-```
+~~~
 x1 <- c(1L, 2L, 3L)
-```
+~~~
 
 You can also have logical vectors.
 
-```
+~~~
 y <- c(TRUE, TRUE, FALSE, FALSE)
-```
+~~~
 
 (Don't use `T` and `F`!)
 
 Finally you can have character vectors:
 
-```coffee
+~~~coffee
 z <- c("Alec", "Dan", "Rob", "Rich")
-```
+~~~
 
 **Examine your vector**
 
-```
+~~~
 typeof(z)
 length(z)
 class(z)
 str(z)
-```
+~~~
 
 Question: Do you see property that's common to all these vectors above?
 
 **Add elements**
 
-```
+~~~
 z <- c(z, "Annette")
 z
-```
+~~~
 
 More examples of vectors
 
-```
+~~~
 x <- c(0.5, 0.7)
 x <- c(TRUE, FALSE)
 x <- c("a", "b", "c", "d", "e")
 x <- 9:100
 x <- c(i+0i, 2+4i)
-```
+~~~
 
 You can also create vectors as sequence of numbers
 
-```
+~~~
 series <- 1:10
 seq(10)
 seq(1, 10, by = 0.1)
-```
+~~~
 
 **Other objects**
 
 `Inf` is infinity. You can have positive or negative infinity.
 
-```
+~~~
  1/0
 # [1] Inf
  1/Inf
 # [1] 0
-```
+~~~
 
 
 `NaN` means Not a number. it's an undefined value.
 
-```
+~~~
 0/0
 NaN.
-```
+~~~
 
 Each object has an attribute. Attributes can be part of an object of R. These include
 
@@ -159,11 +159,11 @@ R will create a resulting vector that is the least common denominator. The coerc
 
 **Guess what the following do without running them first**
 
-```
+~~~
 xx <- c(1.7, "a")
 xx <- c(TRUE, 2)
 xx <- c("a", TRUE)
-```
+~~~
 
 This is called implicit coercion.
 
@@ -171,78 +171,78 @@ The coersion rule goes `logical` -> `integer` -> `numeric` -> `complex` -> `char
 
 You can also coerce vectors explicitly using the `as.<class_name>`. Example
 
-```
+~~~
 as.numeric()
 as.character()
-```
+~~~
 
 When you coerce an existing numeric vector with `as.numeric()`, it does nothing.
 
-```
+~~~
 x <- 0:6
 as.numeric(x)
 as.logical(x)
 as.character(x)
 as.complex(x)
-```
+~~~
 
 Sometimes coercions, especially nonsensical ones won't work.
 
-```
+~~~
 x <- c("a", "b", "c")
 as.numeric(x)
 as.logical(x)
 # both don't work
-```
+~~~
 
 **Sometimes there is implicit conversion**
 
-```
+~~~
 1 < "2"
 # TRUE
 "1" > 2
 # FALSE
 1 < "a"
 # TRUE
-```
+~~~
 
 ## Matrix
 
 Matrices are a special vector in R. They are not a separate class of object but simply a vector but now with dimensions added on to it. Matrices have rows and columns.
 
-```
+~~~
 m <- matrix(nrow = 2, ncol = 2)
 m
 dim(m)
 same as
 attributes(m)
-```
+~~~
 
 Matrices are constructed columnwise.
 
-```
+~~~
 m <- matrix(1:6, nrow=2, ncol =3)
-```
+~~~
 
 Other ways to construct a matrix
 
-```
+~~~
 m <- 1:10
 dim(m) <- c(2,5)
-```
+~~~
 
 This takes a vector and transform into a matrix with 2 rows and 5 columns.
 
 
 Another way is to bind columns or rows using `cbind()` and `rbind()`.
 
-```
+~~~
 x <- 1:3
 y <- 10:12
 cbind(x,y)
 # or
 rbind(x,y)
-```
+~~~
 
 ---
 
@@ -257,33 +257,33 @@ List is a special vector. Each element can be a different class.
 Create lists using `list` or coerce other objects using `as.list()`
 
 
-```
+~~~
 x <- list(1, "a", TRUE, 1+4i)
-```
+~~~
 
-```
+~~~
 x <- 1:10
 x <- as.list(x)
 length(x)
-```
+~~~
 
 What is the class of `x[1]`?
 how about `x[[1]]`?
 
-```
+~~~
 xlist <- list(a = "Rich FitzJohn", b = 1:10, data = head(iris))
-```
+~~~
 
 what is the length of this object?
 what about its structure?
 
 List can contain as many lists nested inside.
 
-```
+~~~
 temp <- list(list(list(list())))
 temp
 is.recursive(temp)
-```
+~~~
 
 Lists are extremely useful inside functions. You can "staple" together lots of different kinds of results into a single object that a function can return.
 
@@ -316,10 +316,10 @@ Which is male? 1 or 2? You wouldn't be able to tell with just integer data. Fact
 
 Factors can be created with `factor()`. Input is a character vector.
 
-```
+~~~
 x <- factor(c("yes", "no", "no", "yes", "yes"))
 x
-```
+~~~
 
 `table(x)` will return a frequency table.
 
@@ -328,9 +328,9 @@ x
 In modelling functions, important to know what baseline levels is.
 This is the first factor but by default the ordering is determined by alphabetical order of words entered. You can change this by specifying the levels.
 
-```
+~~~
 x <- factor(c("yes", "no", "yes"), levels = c("yes", "no"))
-```
+~~~
 ## Data frame
 
 A data frame is a very important data type in R. It's pretty much the de facto data structure for most tabular data and what we use for statistics.
@@ -355,7 +355,7 @@ rownames are usually 1..n.
 
 **Combining data frames**
 
-```
+~~~
 df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
 > df
    id  x          y
@@ -369,7 +369,7 @@ df <- data.frame(id = letters[1:10], x = 1:10, y = rnorm(10))
 8   h  8 -0.5992272
 9   i  9  0.3203085
 10  j 10  0.2901185
-```
+~~~
 
 `cbind(df, data.frame(z = 4))`
 
@@ -399,28 +399,28 @@ See that it is actually a special list:
 
 Other R objects can also have names not just true for data.frames. Adding names is helpful since it's useful for readable code and self describing objects.
 
-```
+~~~
 x <- 1:3
 names(x) <- c("rich", "daniel", "diego")
 x
-```
+~~~
 
 Lists can also have names.
 
-```
+~~~
 x <- as.list(1:10)
 names(x) <- letters[seq(x)]
 x
-```
+~~~
 
 Finally matrices can have names and these are called `dimnames`
 
-```
+~~~
 m <- matrix(1:4, nrow = 2)
 dimnames(m) <- list(c("a", "b"), c("c", "d"))
 # first element = rownames
 # second element = colnames
-```
+~~~
 
 ---
 
@@ -429,10 +429,10 @@ dimnames(m) <- list(c("a", "b"), c("c", "d"))
 
 denoted by `NA` and/or `NaN` for undefined mathematical operations.
 
-```
+~~~
 is.na()
 is.nan()
-```
+~~~
 
 check for both.
 
@@ -440,9 +440,9 @@ NA values have a class. So you can have both an integer NA and a missing charact
 
 NaN is also NA. But not the other way around.
 
-```
+~~~
 x <- c(1,2, NA, 4, 5)
-```
+~~~
 
 `is.na(x)` returns logical.
 shows third
@@ -450,9 +450,9 @@ shows third
 `is.nan(x)`
  # none are NaN.
 
-```
+~~~
 x <- c(1,2, NA, NaN, 4, 5)
-```
+~~~
 
 `is.na(x)` shows 2 TRUE.
 `is.nan(x)` shows 1 TRUE
@@ -460,10 +460,10 @@ x <- c(1,2, NA, NaN, 4, 5)
 Missing values are very important in R, but can be very frustrating for new users.
 
 What do these do?  What should they do?
-```
+~~~
 1 == NA
 NA == NA
-```
+~~~
 
 How can we do that sort of comparison?
 
@@ -485,9 +485,9 @@ How can we do that sort of comparison?
 
 `str` is short for structure. You can use it on any object. Try the following:
 
-```coffee
+~~~coffee
 x <- 1:10
 class(x)
 mode(x)
 str(x)
-```
+~~~
