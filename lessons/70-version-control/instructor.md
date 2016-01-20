@@ -10,7 +10,7 @@ Things to cue up:
 * [why version control](http://www.phdcomics.com/comics/archive.php?comicid=1531)
 * [git's places](git-info.png)
 * [git branching](http://pcottle.github.io/learnGitBranching/?NODEMO)
-
+* [xkcd comic about git commit messages](http://xkcd.com/1296/)
 
 Copy to the etherpad:
 

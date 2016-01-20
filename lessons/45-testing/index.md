@@ -5,6 +5,9 @@ title: Testing your code
 tutor: Rich FitzJohn
 ---
 
+**Materials**: If you have not already done so, please [download the lesson materials for this bootcamp](https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip), unzip, then go to the directory `testing`, and open (double click) on the file `testing.Rproj` to open Rstudio.
+
+
 > Unless you are going to write code without testing it, you are always going to incur the cost of testing.
 
 > The difference between having unit tests and not having them is the difference between the cost of writing the test and the cost of running it compared to the cost of testing by hand.

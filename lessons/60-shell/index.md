@@ -6,6 +6,8 @@ bootcamp_slug: gapminder
 Title: The Unix Shell
 tutor: Diego Barneche
 ---
+**Materials**: If you have not already done so, please [download the lesson materials for this bootcamp](https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip), unzip it, then go to the directory `shell`, and open (double click) on the file `shell.Rproj` to open Rstudio.
+
 
 ## Initial setup (for Windows users only):
 
@@ -15,7 +17,7 @@ Open your Terminal and type the following command:
 echo "export TERM=msys" >> ~/.bashrc
 ```
 
-then restart your machine.  
+then restart your machine.
 
 ## What is the shell and how do I access it?
 
@@ -114,8 +116,8 @@ You can change the working directory at any time using the `cd` command.
 
 ```
 cd
-cd /usr/bin 
-pwd 
+cd /usr/bin
+pwd
 ls
 ```
 Now change back to your home again
@@ -263,7 +265,7 @@ $ man ls
 
 This will open the manual page for `ls`. Use the space key to go forward and b to go backwards. When you are done reading, just hit `q` to exit.
 
-Unfortunately GitBash for Windows does not have the `man` command. Instead, try using the `--help` flag after the command you want to learn about. For internal bahs commands such as `cd` and  `pwd` you will be able to access the help file by typing `help function`.  
+Unfortunately GitBash for Windows does not have the `man` command. Instead, try using the `--help` flag after the command you want to learn about. For internal bahs commands such as `cd` and  `pwd` you will be able to access the help file by typing `help function`.
 
 ```
 ls --help
@@ -330,16 +332,16 @@ Notice that the function `file` is unfortunately not defined in GitBash. Alterna
 head <filename>
 ```
 
-you can also fully examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit. 
+you can also fully examine files with the `less` command. Keeps the content from scrolling of the screen. You can also use the arrow keys to navigate up or down. Press enter or return to keep scrolling down and the `q` key to quit.
 
-**Quick exercise 01**
+## Exercise 01
 
-Change into your home directory;  
-Then go to Desktop and then to the shell material folder;  
-Then into `data`;  
-List the contents of this directory;  
-Choose one file to examine with the function `head`;  
-Then change back into your home directory again.  
+Change into your home directory;
+Then go to Desktop and then to the shell material folder;
+Then into `data`;
+List the contents of this directory;
+Choose one file to examine with the function `head`;
+Then change back into your home directory again.
 
 ---
 
@@ -422,14 +424,14 @@ $ ls 3901.txt 7901.txt 9901.txt
 ```
 are exactly identical. The `ls` command cannot tell the difference between these two things.
 
-## Short exercise 01
+## Exercise 02
 
-Got to your home directory: `cd`  
-Do each of the following using a single ls command without navigating to a different directory;  
-List all of the files in shell material folder that start with the number 4;  
-List all of the files in shell material folder that contain the number 01 (together and in this order);  
-List all of the files in  in shell material folder that end with the number 0;  
-BONUS: List all of the files in  in shell material folder that contain the number 2 or the number 3.  
+Got to your home directory: `cd`
+Do each of the following using a single ls command without navigating to a different directory;
+List all of the files in shell material folder that start with the number 4;
+List all of the files in shell material folder that contain the number 01 (together and in this order);
+List all of the files in  in shell material folder that end with the number 0;
+BONUS: List all of the files in  in shell material folder that contain the number 2 or the number 3.
 
 ## Manipulating the file system
 
@@ -508,14 +510,14 @@ rm -r test_project/
 
 This will create a project called `test_project` with the following structure:
 
-|-- R/  
-|-- data/  
-|-- output/  
-|-- |-- data/  
-|-- |-- figures/  
-|-- doc/  
+|-- R/
+|-- data/
+|-- output/
+|-- |-- data/
+|-- |-- figures/
+|-- doc/
 
-One could also create lots of subdirectories at once using curly brackets expansions.  
+One could also create lots of subdirectories at once using curly brackets expansions.
 
 ```
 echo Experiment-{A,B,C}-master
@@ -524,7 +526,7 @@ echo {01..15}
 echo a{A{1,2},B{3,4}}b
 ```
 
-Notice that this shortcut using curly brackets does not work in GitBash. 
+Notice that this shortcut using curly brackets does not work in GitBash.
 
 ```
 mkdir temp
@@ -540,10 +542,10 @@ rm -r temp
 
 You can easily access previous commands.  Hit the up arrow. Hit it again.  You can step backwards through your command history. The down arrow takes your forwards in the command history.
 
-* ^-C will cancel the command you are writing, and give you a fresh prompt;  
-* ^-R will do a reverse-search through your command history. This is very useful.  
+* ^-C will cancel the command you are writing, and give you a fresh prompt;
+* ^-R will do a reverse-search through your command history. This is very useful.
 
-You can also review your recent commands with the `history` command. Just enter:  
+You can also review your recent commands with the `history` command. Just enter:
 
 ```
 history
@@ -579,13 +581,13 @@ e.g.
 which git
 ```
 
-## Short exercise 2
+## Exercise 03
 
-Go to your shell material directory;  
-Move all files in directory `data` to a subdirectory `data/exercise`;  
-Back in your shell material directory create the following folders: `docs`, `output/data`, `output/figures` and `R`;  
-From within your shell material directory, move the respective file types into their matching directory type following the ([project setup](http://nicercode.github.io/2014-02-13-UNSW/lessons/30-projects/)) lesson;  
+Go to your shell material directory;
+Move all files in directory `data` to a subdirectory `data/exercise`;
+Back in your shell material directory create the following folders: `docs`, `output/data`, `output/figures` and `R`;
+From within your shell material directory, move the respective file types into their matching directory type following the ([project setup](http://nicercode.github.io/2014-02-13-UNSW/lessons/30-projects/)) lesson;
 
-Hints: You can combine several steps into one. Tab completion and wildcards are your friends.  
+Hints: You can combine several steps into one. Tab completion and wildcards are your friends.
 
-**Acknowledgements:** This material was developed by  Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.  
+**Acknowledgements:** This material was developed by  Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.

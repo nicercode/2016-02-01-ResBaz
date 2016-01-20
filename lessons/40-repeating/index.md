@@ -12,6 +12,9 @@ tutor: Daniel Falster
 - split apply combine strategy for data analysis
  -->
 
+**Materials**: If you have not already done so, please [download the lesson materials for this bootcamp](https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip), unzip, then go to the folder `repeating`, and open (double click) on the file `repeating.Rproj` to open Rstudio.
+
+
 Previously we looked at how you can use functions to simplify your
 code. Ideally you have a function that performs a single
 operation, and now you want to use it many times to do the same operation on

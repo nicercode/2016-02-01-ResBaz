@@ -5,6 +5,7 @@ Title: How to organize your project directories
 tutor: Diego Barneche
 ---
 
+**Materials**: If you have not already done so, please [download the lesson materials for this bootcamp](https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip), unzip, then go to the directory `projects`, and open (double click) on the file `projects.Rproj` to open Rstudio.
 
 The scientific process is naturally incremental, and many projects
 start life as random notes, some code, then a manuscript, and
