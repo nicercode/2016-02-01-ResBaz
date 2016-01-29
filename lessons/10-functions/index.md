@@ -31,9 +31,9 @@ double <- function(number) {
 }
 ~~~
 
-This function takes `number` as an argument and returns twice `number` as a value (i.e., it doubles a number.
+This function takes `number` as an argument and returns twice `number` as a value (i.e., it doubles a number).
 
-The bit in the brackets is the "body" of the function; it is evaluted every time that the function is called.  The body of the function can contain any valid R expression.
+The bit in the brackets is the "body" of the function; it is evaluated every time that the function is called.  The body of the function can contain any valid R expression.
 
 Whatever is used as an *argument* to this  function becomes `value` within the body of the function.  So
 
@@ -76,7 +76,7 @@ As a simple starting point, let's re-implement some functions that are already i
 We're going to use some data from gapminder - this is available in the lesson material (see top of page), alternatively you can download from [here](https://github.com/nicercode/gapminder/archive/d4f943d8ca15c2f6572ec52c74987e0f1971e64c.zip) and unzip into the directory that you are using.
 
 ~~~
-data <- read.csv(gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 ~~~
 
 This is pretty big, so grab just the data from 1982:
@@ -154,28 +154,12 @@ plot(lifeExp ~ gdpPercap, data.1982, log="x")
 ![plot of chunk plain](figure/plain.png)
 
 
-Plot the points so that their radius is proportional to population size:
-
-
-~~~r
-## Scale on to [0,1]
-p <- (data.1982$pop - min(data.1982$pop)) /
-  (max(data.1982$pop) - min(data.1982$pop))
-## Convert to [0.2, 10]
-cex <- 0.2 + p * (10 - 0.2)
-plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex)
-~~~
-
-![plot of chunk scaled_manually](figure/scaled_manually.png)
-
-
-It might be nicer if we scaled against square-root of population size, so that area became proportional to population size:
+Plot the points so that their area is proportional to population size, which implies radius scales against square-root of population size:
 
 
 ~~~r
 tmp <- sqrt(data.1982$pop)
-p <- (tmp - min(tmp)) /
-  (max(tmp) - min(tmp))
+p <- (tmp - min(tmp)) / (max(tmp) - min(tmp))
 cex <- 0.2 + p * (10 - 0.2)
 plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex)
 ~~~
@@ -222,12 +206,11 @@ There are at least two ways of doing the map:
 
 
 ~~~r
-cols <- unname(col.table[match(data.1982$continent, names(col.table))])
-cols <- unname(col.table[data.1982$continent])
+cols <- col.table[match(data.1982$continent, names(col.table))]
+cols <- col.table[data.1982$continent]
 ~~~
 
-
-(the `unname` bit removes extraneous continent names from the resulting vector).  We can wrap this up nicely:
+We can wrap this up nicely:
 
 
 ~~~r
@@ -235,6 +218,8 @@ colour.by.category <- function(x, table) {
   unname(table[x])
 }
 ~~~
+
+(if we wanted,the `unname` bit removes extraneous continent names from the resulting vector).
 
 
 Note that this is longer than the function definition!  But it
@@ -372,9 +357,9 @@ pop.by.country.relative <- function(country, data, base.year=1952) {
 Can use this to plot relative growth trajectories over time:
 
 ~~~r
-plot(pop.rel ~ year, pop.by.country.relative("India", dat), type="o")
-lines(pop.rel ~ year, pop.by.country.relative("Australia", dat), type="o", col="green4")
-lines(pop.rel ~ year, pop.by.country.relative("China", dat), type="o", col="red")
+plot(pop.rel ~ year, pop.by.country.relative("India", data), type="o")
+lines(pop.rel ~ year, pop.by.country.relative("Australia", data), type="o", col="green4")
+lines(pop.rel ~ year, pop.by.country.relative("China", data), type="o", col="red")
 ~~~
 
 ![plot of chunk growth1](figure/growth1.png)
