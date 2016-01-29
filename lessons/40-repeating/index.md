@@ -109,13 +109,13 @@ table)
 Each of the xxply functions (`daply`, `ddply`, `llply`, `laply`,...) has the same structure and has 4 key features and structure:
 
 ~~~coffee
-xxply(.data, .variables, .fun)
+xxply(data, variables, fun)
 ~~~
 
 * The first letter of the function name gives the input type and the second gives the output type.
-* .data - gives the data object to be processed
-* .variables - identifies the splitting variables
-* .fun - gives the function to be called on each piece
+* `data` - gives the data object to be processed
+* `variables` - identifies the splitting variables
+* `fun` - gives the function to be called on each piece
 
 ### Example
 
@@ -125,32 +125,45 @@ For an example, let's pull up gapminder dataset as before
 data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
 ~~~
 
-Now, what is we want to know is the number of countries by continent. So let's make a function that takes a dataframe as input and returns the number of countries.
+And while we're at it, we'll also load into memory the functions we wrote previously
+and define the variable `col.table`:
+
+~~~coffee
+source("R/functions.R")
+col.table <- c(Asia="tomato",
+               Europe="chocolate4",
+               Africa="dodgerblue2",
+               Americas="darkgoldenrod1",
+               Oceania="green4")
+~~~
+
+
+Now, what is we want to know is the number of countries by continent. So let's make a function that takes a variable as input (e.g. list of countries) and returns the number of unique values.
 
 **Why don't you try - hint, function unique**
 
 ~~~coffee
-get.n.countries <- function(x) length(unique(x$country))
-get.n.countries(data)
+n.unique <- function(x) length(unique(x))
+n.unique(data$country)
 ~~~
 
 So first do it hard way:
 
 ~~~coffee
 data.new <- data[data$continent == "Asia",]
-Asia.n <- get.n.countries(data.new)
+Asia.n <- n.unique(data.new$country)
 
 data.new <- data[data$continent == "Africa",]
-Africa.n <- get.n.countries(data.new)
+Africa.n <- n.unique(data.new$country)
 
 data.new <- data[data$continent == "Europe",]
-Europe.n <- get.n.countries(data.new)
+Europe.n <- n.unique(data.new$country)
 
 data.new <- data[data$continent == "Oceania",]
-Oceania.n <- get.n.countries(data.new)
+Oceania.n <- n.unique(data.new$country)
 
 data.new <- data[data$continent == "Americas",]
-Americas.n <- get.n.countries(data.new)
+Americas.n <- n.unique(data.new$country)
 
 n.countries <- c(Africa.n, Asia.n, Americas.n, Europe.n, Oceania.n)
 ~~~
@@ -158,59 +171,102 @@ n.countries <- c(Africa.n, Asia.n, Americas.n, Europe.n, Oceania.n)
 Now here's the equivalent in plyr:
 
 ~~~coffee
-daply(data, .(continent), get.n.countries)
+ddply(data, "continent", summarise,  n=n.unique(country))
 ~~~
 
 Isn't that nice? A single line of code, easy to read.
 
 Let's look at what happened here
 
-- The `daply` function feeds in a `data.frame` (function starts with **d**) and returns an `array` (2nd letter is an **a**)
+- The `ddply` function feeds in a `data.frame` (function starts with **d**) and returns an `dataframe` (2nd letter is an **d**)
 - the first argument is the data we are operating on: `data`
 - the second argument indicates our split criteria `continent`
-- the third is the function to apply `get.n.countries`
+- the third argument tells plyr what were going to do. In this case we're going to `summarise`, which tells plyr to create a new data frame.
+- the fourth argument is the function to apply `n.unique`, with argument `country` being one of the variables in the `data.frame`
 
-Instead of `daply` we could also use `ddply` of `dlply`. Which to use? You need to decide which type of output is most useful to you, i.e. a `list`, `array` or `data.frame`
 
-It's also possible to define the function in place as an [anonymous function](http://adv-r.had.co.nz/Functional-programming.html):
-
-~~~coffee
-ddply(data, .(continent), function(x) length(unique(x$country)) )
-~~~
+Instead of `ddply` we could also use `daply` of `dlply`. Which to use? You need to decide which type of output is most useful to you, i.e. a `list`, `array` or `data.frame`
 
 Finally, there's several ways we can represent the split argument:
 
-- using the funky plyr notation: `daply(data, .(continent), get.n.countries)`
-- as a character: `daply(data, "continent", get.n.countries)`
-- or as a formula: `daply(data, ~continent, get.n.countries)`.
-~~~
+- as a character: `ddply(data, "continent", summarise, n=n.unique(country))`
+- using the funky plyr notation: `ddply(data, .(continent), summarise, n=n.unique(country))`
+- or as a formula: `ddply(data, ~continent, summarise, n=n.unique(country))`.
+
 
 **Now let's try another example**.
 
-We want to sum total population in a dataframe.
-
-First write the function:
+We want to sum total population in a dataframe. Try writing this using the builtin `sum` function:
 
 ~~~coffee
-get.total.pop <- function(x) sum(x$pop)
+ddply(data, "continent", summarise, Tot=sum(pop))
 ~~~
-Then apply it using `daply`, `ddply` and `dlaply`:
 
-~~~coffee
-ddply(data, .(continent), get.total.pop)
-~~~
 Anyone notice a problem here? Yes, the total population of the world is about 10 times to big because it's repeated every 5 years. So we need to add `year` to our list of splitting criteria
 
 ~~~coffee
-ddply(data, .(continent, year), get.total.pop)
+ddply(data, c("continent", "year"), summarise,  Tot=sum(pop))
 ~~~
 
 **You try**
 Next we want the maximum `gdpPercap` on each continent.
 
 ~~~coffee
-ddply(data, .(continent, year), function(x) max(x$gdpPercap))
+ddply(data, c("continent", "year"), summarise, gdpPercap = max(gdpPercap))
 ~~~
+
+### Summarise
+
+The above example uses plyrs inbuilt `summarise` function. One of the nice things about summarise is that you can apply a whole bunch of functions simultaneously. For example, what if you want to find the `min`, `max`, `mean`, and `var` of each group and the entire dataset.
+
+For summaries of the whole dataset you can call summarise directly:
+
+~~~coffee
+summarise(data, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+~~~
+
+But if you want to split by groups, simply combine with `ddply`. All the functions you want to call are simply listed at the end as extra arguments:
+
+~~~coffee
+ddply(data, c("continent", "year"), summarise, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
+~~~
+
+### Mutate
+
+Instead of summarise, we could instead use the `mutate` function, to modify the existing dataframe.
+
+~~~coffee
+tmp <- ddply(data, "continent", mutate,  n.c=n.unique(country))
+head(tmp)
+~~~
+(The output is big so doesn't print nicely. So to get something better nicer, I save the output as tmp, then used the function `head` to checkout the first few rows.)
+
+
+### Using dplyr without `summarise` and `mutate`
+
+The strategy above using either `summarise` and `mutate` is useful is you want to create a new or modify a dataframe. But there are other options you might like to repeat.
+
+We can also write functions returning our own dataframes, arrays or lists and feed these into plyr.  For example, the following function returns the number of unique countries
+
+~~~coffee
+n.unique.countries <- function(x) length(unique(x$country))
+~~~
+
+Note it's like `n.unique` about but now takes a dataframe and specifies the variable to use, as part of the function. Of course they should give the same result:
+
+~~~coffee
+n.unique.countries(data) == n.unique(data$country)
+~~~
+
+daply(data, "continent", get.n.countries)
+
+
+It's also possible to define the function in place as an [anonymous function](http://adv-r.had.co.nz/Functional-programming.html):
+
+~~~coffee
+daply(data, "continent", function(x) length(unique(x$country)) )
+~~~
+
 
 ### An example returning a list
 
@@ -219,7 +275,7 @@ Sometimes we want to return something that doesn't fit into a dataframe or vecto
 See if you can write a function that given a dataframe, returns a vector of countries.
 
 ~~~coffee
-get.countries <- function(x) unique(x$country))
+get.countries <- function(x) unique(x$country)
 ~~~
 
 Now let's apply it to the whole dataset
@@ -231,7 +287,7 @@ get.countries(data)
 And then apply to each continent using `dlpy`
 
 ~~~coffee
-countries <- dlply(data, .(continent), function(x) unique(x$country))
+countries <- dlply(data, "continent", function(x) unique(x$country))
 ~~~
 
 ### Feed data into model one-by-one returning fits to a list of models
@@ -256,7 +312,7 @@ fit <- model(data[data$year==1982 & data$continent =="Asia" ,])
 Ok, so let's apply it to all continents in all years:
 
 ~~~coffee
-fitted.linear.model <- dlply(data, .(continent, year), model)
+fitted.linear.model <- dlply(data, c("continent", "year"), model)
 ~~~
 
 The output `fitted.linear.model` is a list of fitted models, with same structure as `fit`. We can use the `coef` function to extract coefficients of a model :
@@ -279,7 +335,7 @@ model <- function(x){
   fit <- lm(lifeExp ~ log10(gdpPercap), data=x)
   data.frame(n=length(x$lifeExp), r2=summary(fit)$r.squared, a=coef(fit)[[1]], b=coef(fit)[[2]])
 }
-ddply(data, .(continent,year), model)
+ddply(data, c("continent", "year"), model)
 ~~~
 
 As a final extension, we could add the variables we want to fit to the function definition, so that we could fit other combinations.
@@ -287,10 +343,10 @@ As a final extension, we could add the variables we want to fit to the function 
 ~~~coffee
 model <- function(d, x, y) {
   fit <- lm( d[[y]] ~ log10(d[[x]]) )
-  data.frame((n=length(d[[y]]), r2=summary(fit)$r.squared,a=coef(fit)[1],b=coef(fit)[2])
+  data.frame(n=length(d[[y]]), r2=summary(fit)$r.squared,a=coef(fit)[1],b=coef(fit)[2])
 }
-ddply(data, .(continent,year), model, y="lifeExp", x="gdpPercap")
-ddply(data, .(continent,year), model, y="lifeExp", x="pop")
+ddply(data, c("continent", "year"), model, y="lifeExp", x="gdpPercap")
+ddply(data, c("continent", "year"), model, y="lifeExp", x="pop")
 ~~~
 
 So there you have it - in just 6 lines we can fit about 120 linear models and return two tables summarising these models. That's why plyr rocks!
@@ -311,8 +367,6 @@ But we still had to run all this code to fit lines to each continent:
 ~~~coffee
 data.1982 <- data[data$year == 1982,]
 
-col.table <- c(Asia="tomato", Europe="chocolate4", Africa="dodgerblue2", Americas="darkgoldenrod1", Oceania="green4")
-
 plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=rescale(sqrt(data.1982$pop), c(0.2, 10)), col= colour.by.category(data.1982$continent, col.table), pch=21)
 plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
 add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Asia",], col=col.table["Asia"])
@@ -322,7 +376,7 @@ add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "America
 add.trend.line("gdpPercap", "lifeExp", data.1982[data.1982$continent == "Oceania",], col=col.table["Oceania"])
 ~~~
 
-That's a lot of typing that is really very similar, and the sort of thing that is (a) boring to type, (b) prone to errorsm, and (c) hard to change (e.g. if we wanted to run it on a different data set, or change which continents we ran it over etc).
+That's a lot of typing that is really very similar, and the sort of thing that is (a) boring to type, (b) prone to errors, and (c) hard to change (e.g. if we wanted to run it on a different data set, or change which continents we ran it over etc).
 
 ![plot of chunk repeating_manual](figure/repeating_manual.png)
 
@@ -331,7 +385,7 @@ One way to avoid repetition is to pass the `add.trend.line` function into `d_ply
 
 ~~~coffee
 plot(lifeExp ~ gdpPercap, data.1982, log="x", cex=cex, col=col, pch=21)
-d_ply(data.1982, .(continent), function(x) add.trend.line("gdpPercap", "lifeExp", x, col=col.table[x$continent]))
+d_ply(data.1982, "continent", function(x) add.trend.line("gdpPercap", "lifeExp", x, col=col.table[x$continent]))
 ~~~
 
 ![plot of chunk repeating_ply](figure/repeating_plyr.png)
@@ -362,7 +416,7 @@ We can then feed this into `d_ply` to generate  a plot for all countries
 
 ~~~coffee
 plot(NA, type="n", xlim=range(data$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
-d_ply( data[data$continent =="Asia" ,], .(country), function(x) add.growth.line(x, 1952))
+d_ply( data[data$continent =="Asia" ,], c("country"), function(x) add.growth.line(x, 1952))
 ~~~
 ![plot of chunk growth_ply](figure/growth_ply.png)
 
@@ -370,41 +424,11 @@ And we could use the same approach to make plots for the entire world, colouring
 
 ~~~coffee
 plot(NA, type="n", xlim=range(data$year), ylim=c(1, 6), xlab="Year", ylab="Relative population size")
-d_ply(data, .(country), function(x) add.growth.line(x, 1952, col=col.table[x$continent]))
+d_ply(data, c("country"), function(x) add.growth.line(x, 1952, col=col.table[x$continent]))
 ~~~
 
 ![plot of chunk growth_world](figure/growth_world.png)
 
-### Summarise
-
-Above we showed you how you can apply a function to your dataframe using the plyr package. But what if you want to apply a whole bunch of functions? For example, what if you want to find the `min`, `max`, `mean`, and `var` of each group - surely we don't have to run each one of these separately?
-
-There are two options for running multiple functions on a data frame:
-
-1. The first is to write your own "wrapper" function returning multiple outputs as a data frame, like we did in the the above section fitting models.
-2. The other option is to use the summarise function.
-
-Like `ddply`, `summarise` can be used to create a new data frame from another data frame. It's particularly useful when you want multiple outputs.
-
-For summaries of the whole dataset you can call summarise directly:
-
-~~~coffee
-summarise(data, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
-~~~
-
-But if you want to split by groups, need to combine with `ddply`. All the functions you want to call are simply listed at the end as extra arguments:
-
-~~~coffee
-ddply(data, .(continent, year), summarise, pop.mean=sum(pop), pop.var=var(pop), pop.max=max(pop))
-~~~
-
-However, notice that the format of the functions is slightly different to if we were calling each directly with ddply:
-
-~~~coffee
-ddply(data, .(continent, year),  function(x) sum(x$pop))
-ddply(data, .(continent, year),  function(x) var(x$pop))
-ddply(data, .(continent, year),  function(x) max(x$pop))
-~~~
 
 ## For loops - when the order of operation is important
 
