@@ -13,8 +13,6 @@ tutor: Daniel Falster
 - **Who we are:** Software Carpentry is a volunteer organization supported by the Alfred P. Sloan Foundation and the Mozilla Foundation.
 - **Boot camps:** Our boot camps cover the core skills every scientist needs to get more done in less time: program construction, version control, testing, the command line, and data management. Short lessons alternate with hands-on practical sessions for two full days
 
-This boot camp was organised by Andrew Letten and sponsored by Richard Kingsford, thanks Andrew and Richard!
-
 ## The problem
 
 Writing code is fast becoming a key - if not the most important - skill for doing research in the 21st century. As scientists, we live in extraordinary times. The amount of data (information) available to us is increasing exponentially, allowing for rapid advances in our understanding of the world around us. This information is driving many researchers to start coding.
@@ -66,7 +64,7 @@ Going to use R language
 - Work in pairs
 	- why?
 	- help each other: Peer to peer is most efficient way of learning.
-- Etherpad to share notes: [https://etherpad.mozilla.org/SWC-Syd](https://etherpad.mozilla.org/SWC-Syd) (check with sticky notes)
+- Etherpad to share notes (check with sticky notes)
 
 Use Rstudio
 
