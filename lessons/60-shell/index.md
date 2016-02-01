@@ -296,7 +296,6 @@ The `rm` command can be used to remove files. The `-i` adds the "are you sure?" 
 
 ***Warning: The shell does not have a recycling bin / trash can. So any file removed with `rm` is gone forever. Use with caution. Remember the -i argument***
 
----
 ## Exploring your file system
 
 Other really important commands
