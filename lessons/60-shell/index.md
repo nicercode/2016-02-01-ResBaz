@@ -239,15 +239,15 @@ What's happened now? (The `t` options sorts by time.)
 
 Try the following:
 
-`-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;
-`-F`  All a trailing slash to help identify folders;
-`-l`  Long format;
-`-lh` Make file sizes human readable;
-`-S`  Sort by file size;
-`-t`  Sort by modification time.
-`-F`  List the files in a way that shows their file type.
-`-G` (Mac) 
-`--color` (Windows)
+- `-a`  List all files even those that are hidden. Files starting with a `.` are considered hidden;
+- `-F`  All a trailing slash to help identify folders;
+- `-l`  Long format;
+- `-lh` Make file sizes human readable;
+- `-S`  Sort by file size;
+- `-t`  Sort by modification time.
+- `-F`  List the files in a way that shows their file type.
+- `-G` (Mac) 
+- `--color` (Windows)
 
 Notice that you can even combine several of these options in a single command.
 
