@@ -17,7 +17,7 @@ Open your Terminal and type the following command:
 echo "export TERM=msys" >> ~/.bashrc
 ~~~
 
-then restart your machine.
+Then restart your machine.
 
 ## What is the shell and how do I access it?
 
@@ -540,8 +540,9 @@ then you could repeat command 260 by simply entering:
 - Create the following folders: `docs`, `output/data`, `output/figures` and `R`.
 - From within your shell material directory, move the respective file types into their matching directory type following the ([project setup](http://nicercode.github.io/2016-02-01-ResBaz/lessons/30-projects/)) lesson.
 
+## Demonstration 1 - Multiple R sessions
 
-## Demonstration - Remote server
+## Demonstration 2 - Remote server
 
 
 **Acknowledgements:** This material was developed by Joshua Madin and Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.
