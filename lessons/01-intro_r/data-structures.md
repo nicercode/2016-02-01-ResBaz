@@ -7,7 +7,7 @@ tutor: Joshua Madin
 
 * To make the best of the R language, you'll need a strong understanding of the basic data types and data structures and how to operate on those.
 
-* **Very Important** to understand because these are the things you will manipulate on a day-to-day basis in R. Most common source of frustration among beginners.
+* **Very Important** to understand, because these are the things you will manipulate on a day-to-day basis in R. Most common source of frustration among beginners.
 
 * Everything in `R` is an object.
 
