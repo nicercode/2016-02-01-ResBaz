@@ -5,6 +5,7 @@ title: Understanding basic data types in R
 tutor: Joshua Madin
 ---
 
+  
 * To make the best of the R language, you'll need a strong understanding of the basic data types and data structures and how to operate on those.
 
 * **Very Important** to understand, because these are the things you will manipulate on a day-to-day basis in R. Most common source of frustration among beginners.
@@ -19,7 +20,6 @@ tutor: Joshua Madin
 * complex (e.g, 1 + 0i, 1 + 4i)
 * character (e.g, "a", "swc")
 
-
 ~~~coffee
 typeof() # what is it?
 class() # what is it? (sorry)
@@ -28,7 +28,7 @@ length() # how long is it? What about two dimensional objects?
 attributes() # does it have any metadata?
 ~~~
 
-R also has many data structures. These include
+R also has many data structures. These include:
 
 * vector
 * list
@@ -36,7 +36,6 @@ R also has many data structures. These include
 * data frame
 * factors (we will avoid these, but they have their uses)
 * tables
-
 
 ### Vectors
 A vector is the most common and basic data structure in `R` and is pretty much the workhorse of R. Vectors can be of two types:

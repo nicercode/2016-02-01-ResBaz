@@ -105,10 +105,10 @@ Most operating systems have a hierarchical directory structure. The very top is 
 
 ~~~
 $ pwd
-/Users/barneche
+/Users/jmadin
 ~~~
 
-Note that I'm in my *home* directory. Whenever you start up a terminal, you will start in the home directory. Every user has their own home directory where they have full access to do whatever they want. For example, my user ID is `barneche`, the `pwd` command tells me that I am in the `/Users/barneche` directory. This is the home directory for the `barneche` user. Yours should (hopefully) look different.
+Note that I'm in my *home* directory. Whenever you start up a terminal, you will start in the home directory. Every user has their own home directory where they have full access to do whatever they want. For example, my user ID is `jmadin`, the `pwd` command tells me that I am in the `/Users/jmadin` directory. This is the home directory for the `barneche` user. Yours should (hopefully) look different.
 
 **Changing Directories**
 
@@ -126,9 +126,9 @@ Now change back to your home again
 cd ~
 ~~~
 
-Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/barneche` and I can get there three ways:
+Tip: `~` is a shortcut for the HOME directory for any user. My home is `/Users/jmadin` and I can get there three ways:
 
-`cd /Users/barneche` OR `cd ~` OR `cd`.
+`cd /Users/jmadin` OR `cd ~` OR `cd`.
 
 You might be wondering why there is a **standard** shortcut for the home directory. It provides a convenient way of giving a point of access which is independent of machine and username. For instance, `~/Downloads` should work for all Mac users.
 
