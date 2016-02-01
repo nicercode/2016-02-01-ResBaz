@@ -542,7 +542,10 @@ then you could repeat command 260 by simply entering:
 
 ## Demonstration 1 - Multiple R sessions
 
+Typing `R` in the shell will open an instance of R, which is no different to what's running in RStudio. You can open another shell, type `R`, and run another instance. You can run as many as you like; however, things will slow down as more strain is placed on your computer's processors.  The point is that using shell, you don't have to wait for one script to finish before starting another.
+
 ## Demonstration 2 - Remote server
 
+This demonstration will show you how to run an instance of R on a remote server.
 
 **Acknowledgements:** This material was developed by Joshua Madin and Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.
