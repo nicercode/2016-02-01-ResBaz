@@ -548,5 +548,6 @@ Typing `R` in the shell will open an instance of R, which is no different to wha
 
 This demonstration will show you how to run an instance of R on a remote server. This demonstration uses secure shell `ssh` to login to a server and secure copy `scp` to move a project and results between machines. Note that there is a much more desirable way of moving project between machines and collaborators (i.e., using version control and `git`). You'll be covering this next.
 
+---
 
 **Acknowledgements:** This material was developed by Joshua Madin and Diego Barneche, drawing heavily on material presented previously by Milad Fatenejad, Sasha Wood, Radhika Khetani, Karthik Ram, Emily Davenport and John Blischak.
