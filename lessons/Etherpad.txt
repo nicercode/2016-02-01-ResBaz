@@ -1,0 +1,588 @@
+ping
+cd Welcome to ResBaz!
+
+Llew Mills USyd School of Psych
+Charlie Ludowici USyd, School of Psych
+Kim Ransley Usyd School of Psychology
+Charmaine Tam, USYD, School of Biological Sciences
+Stephanie Quail USYD School of Psych
+Thomas Tarento, University of Sydney, School of Chemical & Biomolecular Engineering
+Rachel Mak (Usyd, Chemistry)
+Fonti Kar, Macquarie University, Biological Sciences
+Jessica Lee, Usyd, School of Psychology
+Ann Burgess, Usyd, School of Psychology
+Qandeel Hussain (Linguistics, Macquarie University)
+Carmen Kung, Macquarie University, Linguistics
+Jon Brock, Macquarie University, Cognitive Science
+Stefanie Mueller, UTS, Technical Services
+Rachael Woods - Macquarie University, Biological Sciences
+Osmar Luiz, Macquarie University
+Department od Biological Sciences
+Jenny Plath (MQ, Department of Biology)
+Alan Malecki UTS, Statistics
+Joris Bertrand (France)
+Regina Ryan (UNSW, medicine)
+Fiona Clissold (USyd, SoLES, Biol Sci)
+Vince Polito, Macquarie University, Cognitive Science
+
+0pm NerdNite in Courtyard Bar, Holme Bldg
+NerdNite will feature 3 fun 15-min talks by researchers about some fascinating work.
+
+Day 2: 5:30pm Hacky Hour! Hermann's Bar
+Corner of Butlin Ave and City RoadWentworth Building
+http://www.hermannsbar.com/Getting-Here.aspx
+Sit around with a beverage while helping and getting help with code.
+
+
+
+Twitter:  #ResBazSyd,  #ResBaz, #NerdNite
+
+This pad text is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents!
+
+
+
+Homepage: http://nicercode.github.io/2016-02-01-ResBaz/
+
+https://public.etherpad-mozilla.org/p/2016-02-01-ResBaz
+Lesson materials: https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip
+Pre survey: https://www.surveymonkey.com/r/swc_pre_workshop_v1?workshop_id=2016-02-01-ResBaz-IntermediateR
+
+SydneyUni-Guest
+Username: resbaz
+Password: 41408095
+
+
+Lesson 1 - R introduction
+
+Data types:
+numeric
+integer
+character
+logical
+complex
+
+Data structures:
+list
+data.frame
+matrix
+vector
+factor
+table
+
+Order of coersion:
+logical -> integer -> numeric -> complex -> character
+
+
+Some other ways to create a vector:
+
+x <- rep(1, 10)
+x <- 1:10
+x <- seq(1, 10, by=1)
+
+How to avoid factors when loading data:
+
+option 1. read.csv(..., stingsAsFactors=FALSE)
+option 2. using the package `readr` use the function `read_csv` which includes this as default (and is 10 times faster than `read.csv`
+
+Exercises:
+
+1. Fix each of the following common data frame subsetting errors:
+
+  # Extract cases where cyl is 4
+  mtcars[mtcars$cyl = 4, ]
+
+  # Exclude only rows 1 through 4
+  mtcars[-1:4, ]
+
+  # Return only rows for cylinders less than 5
+  mtcars[mtcars$cyl <= 5]
+
+  # Return only rows for cylinders that are 4 or 6.
+  mtcars[mtcars$cyl == 4 | 6, ]
+
+2. Why does mtcars[1:20] return a error? How does it differ from the similar mtcars[1:20, ]?
+
+3. R comes with a data set called iris;
+How big is this dataset (number of rows and columns)?
+Create a new data.frame called small_diamonds that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.
+
+4. Given a linear model
+  mod <- lm(mpg ~ wt, data = mtcars)
+
+  # Extract the residual degrees of freedom.
+
+Lesson 2 - Functions
+
+https://github.com/nicercode/2014-02-18-UTS/raw/gh-pages/data/lessons.zip
+
+ data <- read.csv("gapminder-FiveYearData.csv", stringsAsFactors = FALSE)
+
+
+Create a function that takes mean of data$pop
+
+hint: use the functions sum and length
+
+data.1982 <- subset(data, data$year==1982)
+plot(lifeExp ~gdpPercap, data=data.1982)
+
+tmp <- sqrt(data.1982$pop)
+p <- (tmp - min(tmp)) /
+  (max(tmp) - min(tmp))
+cex <- 0.2 +x) p *(10 - 0.2)
+plot(lifeExp ~gdpPercap, data=data.1982, log="xy" , cex=ce
+
+
+rescale <- function(x, range=c(0.2,10)) {
+  x <- sqrt(x)
+  p <- (x - min(x)) / (max(x) - min(x))
+  range[1] + p *(range[2] - range[1])
+}
+
+plot(lifeExp ~gdpPercap, data=data.1982, log="xy" ,
+     cex=rescale(data$pop, c(0.2, 5)))
+
+
+
+
+
+add.trend.line <- function(xvar, yvar, data, ...) {
+  y <- log10(data[[yvar]])
+  x <- log10(data[[xvar]])
+  fit <- lm(y ~ x)
+  abline(fit, ...)
+}
+
+plot(lifeExp ~gdpPercap, data=data.1982, log="xy" ,
+     cex=rescale(data$pop, c(0.2, 5)))
+add.trend.line("gdpPercap", "lifeExp", data.1982)
+add.trend.line("gdpPercap", "lifeExp", data.1982, lwd=2, col="red")
+
+
+
+line.le.gdp <- function(continent, col, data) {
+  add.trend.line("gdpPercap", "lifeExp", lwd=2,
+                 data[data$continent == continent,],
+                 col=col)
+}
+
+plot(lifeExp ~gdpPercap, data=data.1982, log="xy" ,
+     cex=rescale(data$pop, c(0.2, 5)))
+line.le.gdp("Africa", "red", data.1982)
+line.le.gdp("Asia", "blue", data.1982)
+line.le.gdp("Oceania", "green", data.1982)
+
+
+line.le.gdp <- function(cont, col, data) {
+  add.trend.line("gdpPercap", "lifeExp", subset(data, data$continent == cont), lwd=1, col=col, lty="dashed")
+}
+
+
+
+
+Lesson 3, Projects
+
+project
+
+  - data
+  - R
+  - manuscript
+  - figures
+  - pdfs
+  main.R
+
+Links about project organisation:
+
+1. http://carlboettiger.info/2012/05/06/research-workflow.html
+2. http://www.ploscompbiol.org/article/info%3Adoi%2F10.1371%2Fjournal.pcbi.1000424
+
+proj/
+|-- R/
+|-- data/
+|-- output/
+|-- |-- data/
+|-- |-- figures/
+|-- doc/
+|-- analysis.R
+|-- my_project.Rproj
+
+
+data <- read.csv("hardrive/users/jmadin/projects/project_name/data/corals.csv") [Mac]
+data <- read.csv("C://...../users/jmadin/projects/project_name/data/corals/csv") [Windows]
+
+setwd("harddrive/users/jmadin/projects/project_name")
+
+data <- read.csv("data/corals.csv")
+
+Exercise:
+
+1. In your project lesson folder, create 6 new folders: R, data, output (data, figures), docs
+
+2. Drag your gapminder-FiveYearData.csv file to the folder data
+
+3. In the project folder, create a new empty file: figures.R
+
+4. In the R folder, create two new files: functions.R, figures_functions.R
+
+5. From your file analysis.R drag all the 'analytical functions' into R/functions.R
+
+6. From your file analysis.R drag all the 'plotting functions' into R/figures_functions.R
+
+7. At the very beginning of your analysis.R file, source the new files with functions that you just created in the R folder and add the necessary libraries for it to work (in this case it's only plyr)
+
+8. Remove any other library() lines from your analysis.R file
+
+9. Make sure you adjust the file path to your data in order to read it: data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+
+10. Drag the last part of your analysis.R file (making plot) to the figures.R file
+
+11. In figures.R file, make sure you source the functions files the same way you just did in your analysis.R file. Also make sure you clean the console on your first line using: rm(list=ls())
+
+12. Create two new lines between the sourced files and the actual code in order to read and modify your data: data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE) and data.1982 <- data[data$year == 1982, ]
+
+13. Finally, quit RStudio and reopen it from the projects.Rproj file in your project root directory
+
+14. Open analysis.R and figures.R and run each script entirely at once
+
+
+Lesson 4, Repeating stuff
+
+library(plyr)
+
+data <- read.csv("data/gapminder-FiveYearData.csv", stringsAsFactors=FALSE)
+source("R/functions.R")
+col.table <- c(Asia="tomato",
+               Europe="chocolate4",
+               Africa="dodgerblue2",
+               Americas="darkgoldenrod1",
+               Oceania="green4")
+
+Challenge 1: write a function that counts the number of unique values in a vector
+
+n.unique <- function(x) {
+length(unique(x))
+    }
+
+The ugly way
+
+b
+The nice way:
+
+ddply(data, "continent", summarise, n=n.unique(country))
+
+
+Answer:
+
+ddply(data, "continent", summarise,
+      n=n.unique(country),
+      meanLE=mean(lifeExp), maxLE=max(lifeExp),
+      meanGDP=mean(gdpPercap), varGDP=var(gdpPercap))
+
+x <- ddply(data, "continent", mutate,
+      n=n.unique(country),
+      meanLE=mean(lifeExp), maxLE=max(lifeExp),
+      meanGDP=mean(gdpPercap), varGDP=var(gdpPercap))
+
+head(x)
+
+Challnge 2: Write a function that takes a dataframe x and returns the number of unique values in the variable country
+
+
+get.countries <- function(x) {
+  unique(x$country)
+}
+
+countries <- dlply(data, "continent", get.countries)
+
+Challenge 3: total population size by continenet and year, using an in place function
+
+population <- ddply(data, c("continent", "year"), function (x) sum(x$pop ))
+
+ddply(data, c("continent", "year"),
+      function (x) data.frame(Pop= sum(x$pop ), MeanPop = mean(x$pop)))
+
+
+
+fit.model <- function(x) {
+  lm(lifeExp ~ log10(gdpPercap), data=x)
+}
+
+data.1982.asia <- data[data$year==1982 & data$continent == "Asia",]
+fit <- fit.model(data.1982.asia)
+
+models <- dlply(data, c("continent", "year"), fit.model)
+
+ldply(models, coef)
+
+
+fit.model <- function(x) {
+  fit <- lm(lifeExp ~ log10(gdpPercap), data=x)
+  data.frame(n=nrow(x), a= coef(fit)[1], b= coef(fit)[2], r2 = summary(fit)$r.squared)
+}
+
+models <- ddply(data, c("continent", "year"), fit.model)
+
+Lesson 5, Shell
+
+Windows users:
+Open your Terminal and type the following command:
+
+  echo "export TERM=msys" >> ~/.bashrc
+
+Then restart your machine. (I believe?)
+
+Solving problems with backspace for windows users??:
+
+http://stackoverflow.com/questions/9438665/windows-version-of-rxvt-backspace-key-doesnt-work-as-expected
+
+Start a git bash shell
+cd ~ (your home directory)
+Create a new file called .inputrc and fill it with the following:
+"\e[3~": delete-char# this is actually equivalent to "\C-?": delete-char# VT"\e[1~": beginning-of-line"\e[4~": end-of-line# kvt"\e[H":beginning-of-line"\e[F":end-of-line# rxvt and  konsole (i.e. the KDE-app...)"\e[7~":beginning-of-line"\e[8~":end-of-line
+Save the file and exit, you should be able to restart with your original command, "C:\Program Files\Git\bin\rxvt.exe" -e /usr/bin/bash --login -i and use the backspace!
+
+List
+
+ls -l
+
+Try these options with the ls command:
+    -lt
+    -a
+    -F
+    -lh
+    -S
+    -t
+    -G (Mac)
+    --color (PC)
+
+Exercise 01
+Change into your home directory.
+Go to the shell lesson directory.
+Go into data.
+List the contents of this directory.
+Choose one file to examine with the function head.
+Then change back into your home directory again.
+
+Exercise 02
+Got to your home directory: cd ~
+Do each of the following using a single ls command without navigating to a different directory:
+List all of the files in shell material folder that start with the number 4;
+List all of the files in shell material folder that contain the number 01 (together and in this order);
+List alR of the files in in shell material folder that end with the number 0;
+BONUS: List all of the files in in shell material folder that contain the number 2 or the number 3.
+
+
+Exercise 03
+Go to your lessons/60-shell directory.
+Create the following folders: docs, output/data, output/figures and R.
+From within your shell material directory, move the respective file types into their matching directory type following the (project setup) lesson.
+
+
+Day 2: 5:30pm Hacky Hour! Hermann's Bar
+Corner of Butlin Ave and City RoadWentworth Building
+http://www.hermannsbar.com/Getting-Here.aspx
+Sit around with a beverage while helping and getting help with code.
+
+
+
+Lesson 6, Git
+
+
+1) Create a .gitignore
+2) Create an output/  folder
+3) Add the output/ folder to the .gitignore file
+4) Add the .gitignore file
+5) Commit .gitignore file
+6) Practice!
+
+
+
+
+Setting up - http://swcarpentry.github.io/git-novice/02-setup.html
+
+https://education.github.com/
+
+github.com
+
+Pushing changes to github
+
+1. change file
+2. git add filename
+3. git commit -m "My change"
+4. git push
+
+Stephs GitHub:
+https://github.com/stephquail/trial
+
+Git Shortcuts will appear here:
+---------------
+Content's of Daniel's .gitignore_global file
+```
+# Sublime text projects#
+###################
+*.sublime*
+
+# Specific folders #
+###################
+ignore/
+x_archive/
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# LaTeX #
+#########
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fff
+*.lof
+*.lot
+*.out
+*.toc
+*.ttt
+*.mtc*
+
+# Beamer #
+#########
+*.snm
+*.nav
+*.fdb_latexmk
+*.fls
+*.vrb
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+
+# R
+.Rhistory
+.Rapp.history
+..Rcheck
+
+# Nicer code blog
+.preview-mode
+
+*attributes.JSON
+
+.remake
+
+*.mp3
+*.mp4
+*.mov
+```
+---------------
+Content's of Daniel's .gitconfig file
+```
+[user]
+    name = Daniel Falster
+    email = daniel.falster@mq.edu.au
+[core]
+    excludesfile = /Users/dfalster/.gitignore_global
+  editor = subl -n --wait
+    autocrlf = input
+[color]
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
+    ui = auto
+[alias]
+    dfc = diff --color-words
+    dfcc = diff --color-words --cached
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    topo = log --graph --simplify-by-decoration --pretty=format:'%d' --all
+    ff = merge --ff-only
+    ffom = merge --ff-only origin/master
+    rom = rebase origin/master
+    rh = reset HEAD
+    undo-commit = reset --soft HEAD^
+    root = rev-parse --show-toplevel
+    sha = rev-parse --short HEAD
+[log]
+    date = iso
+[push]
+    default = simple
+```
+---------------
+
+Final lesson
+
+git clone https://github.com/nicercode/2016-02-01-ResBaz-reproducible
+cd 2016-02-01-ResBaz-reproducible/1-standard
+open reproducible_research.Rproj
+
+remake
+
+install.packages(c("R6", "yaml", "digest", "crayon", "optparse", "storr", "devtools", "downloader"))
+devtools::install_github("richfitz/remake")
+
+install.packages("memoise")
+
+
+
+WORKED WELL
+Learning about functions worked well
+I liked the remake stuff (will be good to get used to it as I go)
+Intermediate level was appropriate
+functions for graphing
+Git/github
+Project organisation was useful
+day 1 went really well - easy to follow and the R functions were great
+Etherpad for sharing urls etc
+The sticky notes and helpers
+Good pace
+Live illustration of push-pull with GitHub
+Shell explanation very didatic and easy to follow
+format was great - coloured notes and using etherpad
+written online instructions are very well done!
+Having info about what to install before coming to workshop helped me
+I found the RStudio interface really helpful
+Also browser() function
+It was very  handy the way you showed us multiple methods of plotting
+Github and version control is very useful and easy to follow
+Food was great!!!
+The breaks came just in time most of the time.
+
+DIDN'T WORK
+Install issues, lost time, then github stuff was then rushed (needed more info on etherpad to help?)
+remake was a bit lost on me (but might be because of the kind of analyses I run, its not that relevant)
+using lots of programs and experiencing lots of errors made it hard to follow.
+remake went through really quickly - har to integrate into what we already know as its all very new
+In the very beggining much time was lost with basic R stuff, then need to rush at the end with more interesting stuff.
+Trying out code on windows pcs before would be handy (text editor)
+Maybe need some info on git issues (eg people over writing other builds - or is that a non-issue?)
+Remake could be introduced before getting into git, since it's not really
+connected and might be confusing
+Would cygwin be better for Windows, or potentially worse?
+Would have been nice to know that we need RStudio a bit earlier than Sunday night...
+It would have made it a biteasier to sign in GitHub.com before starting the course.
